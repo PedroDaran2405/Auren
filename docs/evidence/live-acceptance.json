@@ -1,0 +1,57 @@
+{
+  "student_id": 592,
+  "ui_complete": true,
+  "reload_retains_completion": true,
+  "first_progress": {
+    "completed": 1,
+    "total": 7,
+    "percent": 14
+  },
+  "second_progress": {
+    "completed": 1,
+    "total": 7,
+    "percent": 14
+  },
+  "native_learndash_status": 200,
+  "native_learndash_progress": {
+    "course": 1010,
+    "last_step": 1015,
+    "steps_total": 7,
+    "steps_completed": 1,
+    "date_started_gmt": "2026-10-18T11:09:12",
+    "date_started": "2026-10-18T05:09:12",
+    "date_completed_gmt": "",
+    "date_completed": "",
+    "progress_status": "in_progress",
+    "_links": {
+      "self": [
+        {
+          "href": "https://www.aurenfx.com/wp-json/ldlms/v2/users/592/course-progress/1010"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://www.aurenfx.com/wp-json/ldlms/v2/users/592/course-progress"
+        }
+      ],
+      "steps": [
+        {
+          "href": "https://www.aurenfx.com/wp-json/ldlms/v2/users/592/course-progress/1010/steps",
+          "embeddable": true
+        }
+      ],
+      "progress_status": [
+        {
+          "href": "https://www.aurenfx.com/wp-json/ldlms/v2/progress-status/in-progress",
+          "embeddable": false
+        }
+      ]
+    }
+  },
+  "repeated_status": 200,
+  "repeated_progress": {
+    "completed": 1,
+    "total": 7,
+    "percent": 14
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "identity": {
+    "status": 200,
+    "code": null,
+    "id": 592,
+    "progress": null,
+    "cache": "no-cache, must-revalidate, max-age=0, no-store, private"
+  },
+  "intro": {
+    "status": 200,
+    "code": null,
+    "id": 1010,
+    "progress": {
+      "completed": 2,
+      "total": 7,
+      "percent": 28
+    },
+    "cache": "no-cache, must-revalidate, max-age=0, no-store, private"
+  },
+  "pro": {
+    "status": 403,
+    "code": "course_forbidden",
+    "id": null,
+    "progress": null,
+    "cache": "no-cache, must-revalidate, max-age=0, no-store, private"
+  },
+  "pro_lesson": {
+    "status": 403,
+    "code": "course_forbidden",
+    "id": null,
+    "progress": null,
+    "cache": "no-cache, must-revalidate, max-age=0, no-store, private"
+  },
+  "another_user": {
+    "status": 400,
+    "code": "invalid_target",
+    "id": null,
+    "progress": null,
+    "cache": "no-cache, must-revalidate, max-age=0, no-store, private"
+  },
+  "canonical_other_progress": {
+    "status": 403,
+    "code": "ld_rest_cannot_view",
+    "id": null,
+    "progress": null,
+    "cache": "no-cache, must-revalidate, max-age=0, no-store, private"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "accounts": [
+    {
+      "id": 592,
+      "username": "auren-app-qa-20261018-a",
+      "role": "subscriber"
+    },
+    {
+      "id": 593,
+      "username": "auren-app-qa-20261018-b",
+      "role": "subscriber"
+    }
+  ],
+  "purpose": "Auren app integration QA only",
+  "credentials": "Not stored in repository; reset through WordPress when needed"
+}

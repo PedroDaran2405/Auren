@@ -17,6 +17,7 @@ function auren_app_course_access($course_id) {
     $ready = auren_app_lms_ready();
     if (is_wp_error($ready)) { return $ready; }
     if (get_post_type($course_id) !== 'sfwd-courses' || get_post_status($course_id) !== 'publish') { return auren_app_error('not_found','Este curso no está disponible.',404); }
+    if (post_password_required($course_id)) { return auren_app_error('password_required','Abre este contenido protegido desde la academia.',403); }
     if (!sfwd_lms_has_access($course_id,get_current_user_id())) { return auren_app_error('course_forbidden','Tu cuenta no tiene acceso a este curso.',403); }
     if (!learndash_is_course_prerequities_completed($course_id,get_current_user_id())) { return auren_app_error('prerequisites','Completa los requisitos anteriores del curso.',403); }
     return true;
@@ -70,6 +71,7 @@ function auren_app_lesson_access($course_id,$lesson_id) {
     $ids = array_map(fn($p)=>(int)$p->ID,$lessons);
     $position = array_search($lesson_id,$ids,true);
     if ($position === false || get_post_type($lesson_id) !== 'sfwd-lessons') { return auren_app_error('not_found','No se encontró esta lección en el curso.',404); }
+    if (post_password_required($lesson_id)) { return auren_app_error('password_required','Abre este contenido protegido desde la academia.',403); }
     $available_from = ld_lesson_access_from($lesson_id,get_current_user_id(),$course_id,true);
     if ($available_from && (int)$available_from > time()) { return auren_app_error('lesson_scheduled','Esta lección todavía no está disponible.',403); }
     if (function_exists('learndash_lesson_progression_enabled') ? learndash_lesson_progression_enabled($course_id) : !learndash_get_setting($course_id,'course_disable_lesson_progression')) {

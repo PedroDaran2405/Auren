@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-10-18",
+  "public_site": "https://www.aurenfx.com",
+  "theme_membership_sha256": "c53a53888eb965514ae670b911cfcf99d7ce2716e6137608ded0086fffd21883",
+  "theme_matches_backup": true,
+  "plugins": {
+    "BuddyBoss Platform": "3.4.3",
+    "BuddyBoss Platform Pro": "3.0.2",
+    "LearnDash": "5.1.9",
+    "WooCommerce": "11.2.1",
+    "WooCommerce Subscriptions": "9.3.0",
+    "GamiPress": "8.0.6",
+    "Cowboy MCP": "1.7.3"
+  },
+  "intro_course": {
+    "id": 1010,
+    "price_type": "open",
+    "progression_disabled": true,
+    "lesson_ids": [
+      1015,
+      1017,
+      1019,
+      1021,
+      1187,
+      1023,
+      1025
+    ],
+    "video_lessons": [
+      1015
+    ],
+    "text_only_lessons": [
+      1017
+    ],
+    "empty_lessons": [
+      1019,
+      1021,
+      1187,
+      1023,
+      1025
+    ]
+  },
+  "source_hashes": {
+    "ld-course-navigation.php": "50c4c0389a0bdabd03a0b2eccd47f3a8f000d7ee31a665534d7233ce8e1fd8af",
+    "ld-misc-functions.php": "7893fbe04a317ac6b4d00b152b844ccec33f0d6bce03d25962a913c257775bf2",
+    "ld-users.php": "47a0dde1bb32f3932ce08d7a9bca6d23725d8225907ef8cf634e68328095a8ff",
+    "ld-course-progress.php": "300b5511361c59ac8f1d58f96fadd865b12a48db251a6ba4250a8311eb2e3275"
+  }
+}

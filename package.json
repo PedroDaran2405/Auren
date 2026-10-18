@@ -17,10 +17,11 @@
     "test:browser": "playwright test",
     "build:web": "npm run export:web --workspace @auren/mobile && node scripts/package-web.mjs",
     "build:native-js": "npm run export:native --workspace @auren/mobile",
-    "audit:site": "node scripts/audit-site.mjs",
+    "audit:site": "node --use-env-proxy scripts/audit-site.mjs",
     "local:up": "bash scripts/local-up.sh",
     "local:down": "docker compose -f compose.test.yml down",
-    "test:wordpress": "bash scripts/test-wordpress.sh"
+    "test:wordpress": "bash scripts/test-wordpress.sh",
+    "package:plugin": "python3 scripts/package-plugin.py"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

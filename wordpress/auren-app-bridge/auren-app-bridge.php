@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Auren App Bridge
  * Description: API privada y acceso móvil para la app propia de Auren. No modifica el tema.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Requires PHP: 8.1
  * License: GPL-2.0-or-later
  */

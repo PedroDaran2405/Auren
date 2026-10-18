@@ -13,6 +13,8 @@ wp_set_current_user($a);check(auren_app_permission()===true,'real WordPress subs
 check(code(auren_app_course($pro),'course_forbidden'),'PRO course denied');
 check(code(auren_app_lesson($pro,$l1),'course_forbidden'),'PRO lesson denied before content lookup');
 check(code(auren_app_lesson($course,$pro),'not_found'),'lesson/course association enforced');
+wp_update_post(array('ID'=>$course,'post_password'=>'fixture-protected'));check(code(auren_app_course($course),'password_required'),'WordPress password protected course denied');wp_update_post(array('ID'=>$course,'post_password'=>''));
+wp_update_post(array('ID'=>$l1,'post_password'=>'fixture-protected'));check(code(auren_app_lesson($course,$l1),'password_required'),'WordPress password protected lesson denied');check(code(auren_app_complete($course,$l1),'password_required'),'protected lesson progress denied');wp_update_post(array('ID'=>$l1,'post_password'=>''));
 check(code(auren_app_lesson($course,$l2),'lesson_locked'),'linear progression enforced');
 update_post_meta($l1,'fixture_available_from',time()+3600);check(code(auren_app_lesson($course,$l1),'lesson_scheduled'),'drip release enforced');delete_post_meta($l1,'fixture_available_from');
 update_post_meta($course,'fixture_prerequisite_blocked',1);check(code(auren_app_course($course),'prerequisites'),'course prerequisites enforced');delete_post_meta($course,'fixture_prerequisite_blocked');
