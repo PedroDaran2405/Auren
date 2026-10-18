@@ -1,0 +1,11 @@
+{
+  "student_id": 593,
+  "consent": true,
+  "pkce_wrong_rejected": true,
+  "exchange_once": true,
+  "replay_rejected": true,
+  "authenticated_bearer": true,
+  "outside_namespace_rejected": true,
+  "revocation": true,
+  "device_build_tested": false
+}

@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-18",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "python": "3.12.14",
+    "chromium": "154.0.8037.57",
+    "wordpress_local": "7.1.3",
+    "php_local": "8.3.35"
+  },
+  "commands": {
+    "npm ci --no-audit --loglevel error": "passed; lockfile installation",
+    "npm run typecheck": "passed",
+    "npm test": "6 passed, 0 failed, 0 skipped",
+    "npm run test:wordpress": "34 passed; actual WordPress/MariaDB, isolated LearnDash fixture and BuddyBoss private REST regression",
+    "npm run test:browser": "2 passed, 0 failed, 0 skipped; Chromium 390x844",
+    "npm run build:web": "passed; web assets packaged in own plugin",
+    "npm run build:native-js": "passed; Android and iOS Hermes bundles only",
+    "npm run package:plugin": "passed; repeated packaging produced the same SHA-256",
+    "npm run audit:site": "passed; 52 namespaces and 528 relevant routes",
+    "npm run local:up": "passed on repeat invocation; isolated local accounts preserved"
+  },
+  "not_executed": [
+    "APK or IPA build",
+    "native simulator or physical device",
+    "installed PWA",
+    "app store publication"
+  ]
+}

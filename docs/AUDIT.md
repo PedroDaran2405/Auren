@@ -58,3 +58,7 @@ No se modificaron títulos, contenidos, slugs ni precios para completar una demo
 - No se han demostrado pagos; no se muestran precios inventados ni acciones de compra en esta primera versión.
 
 El estado final de pruebas y despliegue se registra en `STATUS.md`.
+
+## Hallazgo de aceptación: REST privado de BuddyBoss
+
+El inicio anónimo de autorización devolvía `401 bb_rest_authorization_required`, aunque la ruta propia fuese pública. El código **instalado** de BuddyBoss 3.4.3 confirma el filtro `bb_exclude_endpoints_from_restriction` con comparación exacta. Bridge 0.1.2 añade solo los dos endpoints de código/PKCE. No se deshabilitó la privacidad REST del sitio. Se añadió una regresión local antes de actualizar el piloto.

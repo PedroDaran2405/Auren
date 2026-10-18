@@ -14,6 +14,8 @@ Nativo abre el navegador del sistema para el login existente y consentimiento. U
 
 El bearer es una sesión **marcada para Auren** administrada por `WP_Session_Tokens`, de una hora. Se acepta solo dentro de `auren/v1`. Se almacena en SecureStore nativo y se revoca en logout; WordPress conserva la capacidad de destruir sesiones. La renovación inicial requiere repetir autorización en el navegador (que puede tener SSO); no se ha implementado un refresh token de larga duración. La cookie de navegador y la sesión de dispositivo son independientes. El cierre global y las protecciones concretas de cuentas deben probarse en la instalación real.
 
+BuddyBoss tiene activado el bloqueo REST para anónimos. Se usa su filtro oficial `bb_exclude_endpoints_from_restriction` únicamente para `/auren/v1/auth/start` y `/auren/v1/auth/exchange`; no se altera la configuración de privacidad global. El intercambio todavía exige código, caducidad y PKCE. Se comprobó este filtro en el código de BuddyBoss 3.4.3 instalado.
+
 No hay autenticación con una clave administrativa compartida, una application password de todos los alumnos ni captura de contraseñas en la app. No se deshabilitan 2FA, verificación o CAPTCHA.
 
 ## Permisos y aprendizaje

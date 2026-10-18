@@ -43,6 +43,8 @@
     "ld-course-navigation.php": "50c4c0389a0bdabd03a0b2eccd47f3a8f000d7ee31a665534d7233ce8e1fd8af",
     "ld-misc-functions.php": "7893fbe04a317ac6b4d00b152b844ccec33f0d6bce03d25962a913c257775bf2",
     "ld-users.php": "47a0dde1bb32f3932ce08d7a9bca6d23725d8225907ef8cf634e68328095a8ff",
-    "ld-course-progress.php": "300b5511361c59ac8f1d58f96fadd865b12a48db251a6ba4250a8311eb2e3275"
-  }
+    "ld-course-progress.php": "300b5511361c59ac8f1d58f96fadd865b12a48db251a6ba4250a8311eb2e3275",
+    "bb-core-functions.php": "e84e38986ecdada70bed9ee56644fb89105c0f7203d7522655edc65bc19a3afd"
+  },
+  "buddyboss_private_rest": true
 }

@@ -4,7 +4,7 @@ App propia para la academia de Auren: Expo / React Native / TypeScript y un plug
 
 ## Desarrollo
 
-Node 24.x y Docker con Compose. El checkout de cada tarea cloud ya está aislado; usa este checkout, sin crear worktrees salvo petición explícita.
+Node 24.x, Python 3, Chromium y Docker con Compose. Ver [configuración cloud](docs/ENVIRONMENT.md). El checkout de cada tarea cloud ya está aislado; usa este checkout, sin crear worktrees salvo petición explícita.
 
 ```sh
 npm ci
@@ -24,6 +24,8 @@ Para desarrollo móvil: `npm start`. Para empaquetar JavaScript nativo: `npm run
 ## Integración WordPress
 
 El plugin está en `wordpress/auren-app-bridge`. `build:web` incorpora una exportación web generada dentro del plugin, excluida de Git. La ruta de entrada es `?auren_app=1`; no reemplaza páginas ni menús del sitio.
+
+Piloto real: https://www.aurenfx.com/?auren_app=1 (administradores y cuentas QA habilitadas). El acceso público general sigue cerrado. Para generar el ZIP reproducible después de `build:web`: `npm run package:plugin`.
 
 En Ajustes → Auren App se configura la versión de LearnDash verificada, IDs de alumnos del piloto y escritura de progreso. Por defecto el acceso de alumnos y la escritura están cerrados. La app usa el login existente y conserva sus protecciones.
 
