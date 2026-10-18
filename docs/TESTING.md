@@ -17,3 +17,7 @@ Capturas de comprobación en `artifacts/` (no Git). Traces de navegador desactiv
 ## Aceptación en Auren
 
 Se conserva evidencia de operaciones reales en `docs/evidence/live-acceptance.json` y se reflejarán resultados y pendientes en STATUS. Deben distinguirse inicio de sesión administrativo, alumno real, guardado de progreso, reproducción de video y compilación nativa. No son pruebas intercambiables.
+
+La aceptación real confirmó app→LearnDash (1/7), recarga, repetición y web→app (2/7); el segundo alumno permanece en 0/7. Las rutas propias y las originales de LearnDash rechazan PRO. El protocolo nativo pasó contra producción tras corregir el bloqueo REST de BuddyBoss. Ver `live-native-auth.json`.
+
+Video: se cargó el reproductor y los metadatos reales, pero `currentTime` no avanzó. Las solicitudes a dos hosts de `googlevideo.com` fallaron con `ERR_TUNNEL_CONNECTION_FAILED` en el proxy cloud. `live-video.json` conserva hosts/errores sin URLs firmadas ni credenciales. Se guardaron los dominios necesarios en el borrador de red; su guardado no prueba aplicación en runtime. Reproducción en teléfono real pendiente.

@@ -1,14 +1,14 @@
 [
   {
-    "file": "artifacts/live-lesson-completed.png",
-    "sha256": "e15aba6bf4f013bb78b6ed68a6f92812fa16e1e227b1683c087ba8b2772d4736"
+    "file": "docs/evidence/screenshots/course-verified.png",
+    "sha256": "7127dc0a44ffeb1004be2d23a3c834b41fc67e47352501c80dd0fa0a5cdfd7ac"
   },
   {
-    "file": "artifacts/live-home-before.png",
+    "file": "docs/evidence/screenshots/home-verified.png",
     "sha256": "40fe51918ea0393a0dec37ef21315c01be988fcd6277256828886d5f5bd61b8f"
   },
   {
-    "file": "artifacts/live-course-before.png",
-    "sha256": "7127dc0a44ffeb1004be2d23a3c834b41fc67e47352501c80dd0fa0a5cdfd7ac"
+    "file": "docs/evidence/screenshots/lesson-completed.png",
+    "sha256": "e15aba6bf4f013bb78b6ed68a6f92812fa16e1e227b1683c087ba8b2772d4736"
   }
 ]

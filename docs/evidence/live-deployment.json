@@ -1,0 +1,13 @@
+{
+  "notices_status": 200,
+  "font_license_included": true,
+  "plugin_version": "0.1.3",
+  "plugin_status": "active",
+  "course_read_status": 200,
+  "owner_progress_unchanged": true,
+  "owner_steps_completed": 1,
+  "pilot_user_ids": [
+    592,
+    593
+  ]
+}

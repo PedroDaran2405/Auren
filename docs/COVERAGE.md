@@ -4,10 +4,10 @@ Esta tabla describe implementación, no equivale a aceptación en producción. V
 
 | Función | Estado / endpoint | Dependencia, prueba y limitación | Fase |
 |---|---|---|---|
-| Identidad y logout | Implementados /me, /logout, auth/* | WP real local; sesión nativa probada por protocolo, no en dispositivo | 1 |
+| Identidad y logout | Implementados /me, /logout, auth/* | WordPress local y Auren real; sesión nativa probada por protocolo, no en dispositivo | 1 |
 | Curso y lecciones | Implementados /courses | Adaptador LearnDash con revisión del código real; solo autorizados | 1 |
-| Progreso | Implementado /complete, gate por versión | Prueba local y aceptación real separadas; reglas avanzadas van a web | 1 |
-| Video | expo-video + YouTube oficial | Proveedor detectado; no declarar reproducción sin prueba real | 1 |
+| Progreso | Implementado /complete, gate por versión | App→WordPress y web→app comprobados en Auren; reglas avanzadas van a web | 1 |
+| Video | expo-video + YouTube oficial | YouTube real detectado; CDN bloqueada por túnel del proxy, reproducción sin verificar | 1 |
 | Inicio y perfil | Datos de cuenta y cursos | No se inventan matrícula ni plan | 1 |
 | Registro y recuperación | Enlaces al flujo WordPress | Requieren la configuración existente, sin perfiles paralelos | 1 |
 | Membresías y precios | Sin UI de compra | WooCommerce real; checkout y vencimientos por auditar | 2 |

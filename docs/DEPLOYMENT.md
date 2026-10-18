@@ -2,7 +2,7 @@
 
 El propietario autorizó desarrollo y cambios prudentes en su academia, conservando apariencia y funcionamiento. La instalación es producción, no staging. Se prueba primero el código en WordPress aislado.
 
-## Cambios previstos
+## Cambios del piloto
 
 - Añadir `wp-content/plugins/auren-app-bridge/` con el código y exportación web de este repositorio.
 - Activar únicamente ese plugin; crea la tabla `{prefijo}auren_app_codes` para solicitudes/códigos efímeros.
@@ -17,7 +17,15 @@ No se cambian tema, CSS del sitio, slugs, lecciones, precios, pedidos, suscripci
 1. Desactivar **Auren App Bridge** en Plugins. La app/API dejan de estar disponibles; la web original continúa con su tema y plugins originales.
 2. No restaurar toda la base de datos. No borrar usuarios, pedidos o avances de alumnos existentes.
 3. Si se retira definitivamente, eliminar únicamente el directorio de este plugin tras comprobar que no hay cambios posteriores que conservar. Las opciones/tabla propias pueden conservarse para análisis; su retirada posterior debe limitarse a los nombres indicados.
-4. Las cuentas de QA y sus IDs se registrarán en la evidencia. Su eliminación o reinicio debe limitarse a esas cuentas verificadas y no es necesario para desactivar la app.
+4. Las cuentas QA 592 y 593 están registradas en `docs/evidence/pilot-accounts.json`. Su eliminación o reinicio debe limitarse a esas cuentas verificadas y no es necesario para desactivar la app.
 5. Las sesiones de dispositivo duran una hora; cerrar sesión las revoca. El administrador puede cerrar sesiones de los usuarios de QA desde WordPress.
 
 Para actualizar, regenerar el ZIP solo desde el árbol del plugin. No incluir `.local`, archivos de sesiones, fixtures ni plugins comerciales. Verificar la versión real de LearnDash después de cada actualización: el gate cierra el adaptador cuando cambia.
+
+## Registro de instalación
+
+Se instaló y activó 0.1.0; después se actualizaron únicamente archivos del bridge a 0.1.1 (contraseñas de contenido), 0.1.2 (compatibilidad con REST privado de BuddyBoss) y 0.1.3 (avisos de licencias empaquetados). El ZIP 0.1.0 original se conserva en artifacts como punto de retorno; no hay migraciones de datos entre estas versiones. El estado final activo se registra en `live-deployment.json`. Ajustes: LearnDash verificado 5.1.9, piloto 592/593, escritura de progreso activada para el piloto.
+
+Durante la instalación inicial, WordPress ejecutó automáticamente una actualización de traducción es_ES de WooCommerce Subscriptions. No se solicitó actualizar su código ni se cambiaron sus ajustes. Se registra este efecto incidental para no afirmar que la instalación solo escribió archivos propios.
+
+Comprobación visual: portada y página pública de trading devolvieron 200; conservaron título y 60/63 hojas de estilo respectivamente. Las capturas antes/después de 1280×900 son idénticas píxel a píxel; se guardan hashes y capturas en `visual-comparison.json`. La portada ya mostraba solo su título, navegación y pie en la observación previa; no se modificó su contenido. Esto no sustituye pruebas de todas las páginas ni de dispositivos reales.

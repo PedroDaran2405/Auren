@@ -1,0 +1,23 @@
+{
+  "home": {
+    "before_sha256": "40fe51918ea0393a0dec37ef21315c01be988fcd6277256828886d5f5bd61b8f",
+    "after_sha256": "40fe51918ea0393a0dec37ef21315c01be988fcd6277256828886d5f5bd61b8f",
+    "same_pixels": true,
+    "viewport": [
+      1280,
+      900
+    ],
+    "screenshot": "docs/evidence/screenshots/home-verified.png"
+  },
+  "course": {
+    "before_sha256": "7127dc0a44ffeb1004be2d23a3c834b41fc67e47352501c80dd0fa0a5cdfd7ac",
+    "after_sha256": "7127dc0a44ffeb1004be2d23a3c834b41fc67e47352501c80dd0fa0a5cdfd7ac",
+    "same_pixels": true,
+    "viewport": [
+      1280,
+      900
+    ],
+    "screenshot": "docs/evidence/screenshots/course-verified.png"
+  },
+  "scope": "Anonymous homepage and trading course, captured viewport only; no claim of exhaustive site regression coverage."
+}
