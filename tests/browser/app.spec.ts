@@ -1,0 +1,50 @@
+import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+import { createHash, randomBytes } from 'node:crypto';
+const password=readFileSync('.local/compose.env','utf8').match(/^AUREN_TEST_PASSWORD=(.+)$/m)![1]!;
+const ids=JSON.parse(readFileSync('.local/test-state.json','utf8'));
+async function login(page:import('@playwright/test').Page,user='alumno-a'){
+ await page.goto('/wp-login.php?redirect_to='+encodeURIComponent('http://localhost:8080/?auren_app=1'));
+ await page.locator('#user_login').fill(user);await page.locator('#user_pass').fill(password);await page.locator('#wp-submit').click();
+ await expect(page.getByRole('tab',{name:'Academia'})).toBeVisible();
+}
+test('student enters, opens lesson, completes, reloads, signs out, another student stays separate',async({page})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/?auren_app=1');await expect(page.getByRole('button',{name:/Entrar a mi academia/})).toBeVisible();
+ await page.screenshot({path:'artifacts/welcome-mobile.png',fullPage:true});
+ await login(page);
+ await page.getByRole('button',{name:'Abrir Curso de integración · fixture'}).click();
+ await page.getByRole('button',{name:/Lección 1: Lección 1/}).click();
+ await page.getByRole('button',{name:'Marcar como completada'}).click();
+ await expect(page.getByText('Tu avance se guardó en la academia.')).toBeVisible();
+ await page.reload();await page.getByRole('button',{name:'Abrir Curso de integración · fixture'}).click();
+ await expect(page.getByRole('button',{name:/Lección 1:.*completada/})).toBeVisible();
+ await page.screenshot({path:'artifacts/course-mobile.png',fullPage:true});
+ await page.getByRole('tab',{name:'Perfil'}).click();await page.getByRole('button',{name:'Cerrar sesión'}).click();
+ await expect(page.getByRole('button',{name:/Entrar a mi academia/})).toBeVisible();await expect(page.getByText('Curso de integración · fixture')).toHaveCount(0);
+ const privateResponse=await page.request.get('/wp-json/auren/v1/courses');expect(privateResponse.status()).toBe(401);
+ await login(page,'alumno-b');await page.getByRole('button',{name:'Abrir Curso de integración · fixture'}).click();
+ await expect(page.getByText('0 de 2 actividades')).toBeVisible();
+ expect(errors).toEqual([]);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+});
+test('native authorization code requires consent, PKCE, one use and revocation',async({page})=>{
+ await login(page);
+ const verifier=randomBytes(32).toString('hex');const state=randomBytes(32).toString('hex');const challenge=createHash('sha256').update(verifier).digest('base64url');
+ const start=await page.request.post('/wp-json/auren/v1/auth/start',{data:{challenge,state}});expect(start.status()).toBe(200);const pending=await start.json();
+ await page.goto(pending.authorize_url);await expect(page.getByText('Conecta tu academia')).toBeVisible();
+ const nonce=await page.locator('[name=_wpnonce]').inputValue();
+ const consent=await page.request.post(pending.authorize_url,{form:{_wpnonce:nonce},maxRedirects:0});expect(consent.status()).toBe(302);
+ const location=new URL(consent.headers().location!);expect(location.protocol).toBe('auren:');expect(location.searchParams.get('state')).toBe(state);
+ const body={request_id:pending.request_id,code:location.searchParams.get('code'),verifier};
+ const wrong=await page.request.post('/wp-json/auren/v1/auth/exchange',{data:{...body,verifier:'a'.repeat(64)}});expect(wrong.status()).toBe(401);
+ const exchange=await page.request.post('/wp-json/auren/v1/auth/exchange',{data:body});expect(exchange.status()).toBe(200);const token=(await exchange.json()).access_token;
+ const replay=await page.request.post('/wp-json/auren/v1/auth/exchange',{data:body});expect(replay.status()).toBe(401);
+ const headers={Authorization:`Bearer ${token}`};
+ expect((await page.request.get('/wp-json/auren/v1/me',{headers})).status()).toBe(200);
+ expect((await page.request.get(`/wp-json/auren/v1/courses/${ids.pro}`,{headers})).status()).toBe(403);
+ expect((await page.request.get(`/wp-json/auren/v1/me?user_id=${ids['alumno-b']}`,{headers})).status()).toBe(400);
+ expect((await page.request.get('/wp-json/wp/v2/users/me',{headers})).status()).toBe(401);
+ expect((await page.request.post('/wp-json/auren/v1/logout',{headers,data:{}})).status()).toBe(200);
+ expect((await page.request.get('/wp-json/auren/v1/me',{headers})).status()).toBe(401);
+});

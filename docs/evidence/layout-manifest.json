@@ -1,0 +1,72 @@
+{
+  "version": "auren-course-conversion-v2-2026-10-18",
+  "site": "https://www.aurenfx.com",
+  "course_url": "https://www.aurenfx.com/courses/curso-1-trading-desde-cero/",
+  "backup_library_id": "libfile_1d6331a49d0c8191ba4f6763337cad48",
+  "changed_files": [
+    "themes/buddyboss-theme-child/assets/css/auren-membership.css",
+    "themes/buddyboss-theme-child/assets/js/auren-membership.js",
+    "themes/buddyboss-theme-child/inc/auren-membership.php"
+  ],
+  "unchanged_backup_only": [
+    "themes/buddyboss-theme-child/learndash/ld30/template-single-course-sidebar.php"
+  ],
+  "product_ids": {
+    "parent": 1684,
+    "monthly": 1685,
+    "annual": 1686
+  },
+  "before": {
+    "monthly_usd": 14.99,
+    "annual_usd": 129,
+    "default_plan": "Anual",
+    "trial_days": 3
+  },
+  "after": {
+    "monthly_usd": 15,
+    "annual_usd": 150,
+    "default_plan": "Mensual",
+    "trial_days": 3
+  },
+  "undo_change_ids": [
+    145,
+    144,
+    143,
+    142,
+    141,
+    140,
+    138,
+    137,
+    136,
+    135,
+    134
+  ],
+  "verification": {
+    "php_lint": "ok",
+    "javascript_syntax": "ok",
+    "wp_cli_membership_check": "all checks true",
+    "checkout_ready": false,
+    "recurring_gateway_available": false,
+    "product_prices_verified": true,
+    "access_logic_preserved": true,
+    "ui_monthly_annual_selection": "passed",
+    "ui_course_details": "passed",
+    "ui_broker_details": "passed",
+    "ui_free_course": "passed",
+    "desktop_viewport": {
+      "width": 1363,
+      "height": 936,
+      "cta_initial_y": 505.5
+    },
+    "horizontal_overflow": false,
+    "mobile_visual_check": "not performed; responsive CSS provided"
+  },
+  "broker_offer": {
+    "days": 30,
+    "minimum_deposit_usd": 100,
+    "broker": "VT Markets",
+    "validation": "manual; consultation via existing public support email",
+    "automated_activation": false
+  },
+  "restore_notes": "Undo only this version. Compare current file hashes with after/ before restoring; preserve any later unrelated changes. Restore Woo prices, subscription meta, parent copy/default and invalidate product caches via Woo CRUD. Do not restore entire database."
+}

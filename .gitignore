@@ -1,0 +1,17 @@
+node_modules/
+.expo/
+dist/
+dist-native/
+coverage/
+test-results/
+playwright-report/
+.env
+.env.*
+!.env.example
+.local/
+*.log
+*.keystore
+*.jks
+*.p12
+wordpress/auren-app-bridge/web/
+artifacts/

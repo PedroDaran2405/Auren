@@ -1,0 +1,38 @@
+name: auren-local
+services:
+  db:
+    image: mariadb:11.4@sha256:250e1609e93c0e6aecf64bfbab2d84d5e89d2481540fe77447ff6c855c3b1873
+    env_file: .local/compose.env
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+    volumes: [database:/var/lib/mysql]
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 3s
+      retries: 30
+  wp:
+    image: wordpress:php8.3-apache@sha256:81a34254acaa6ff3b9a67268c2745e9a041c4094cbe5ccd35b75ed3bbdc033b5
+    depends_on:
+      db: {condition: service_healthy}
+    ports: ["127.0.0.1:8080:80"]
+    env_file: .local/compose.env
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_ENVIRONMENT_TYPE', 'local');
+        define('AUREN_TEST_FIXTURES', true);
+        define('AUREN_APP_ALLOW_PROGRESS_WRITES', true);
+        define('WP_HOME', 'http://localhost:8080');
+        define('WP_SITEURL', 'http://localhost:8080');
+        define('WP_DEBUG_DISPLAY', false);
+    volumes:
+      - wordpress:/var/www/html
+      - ./wordpress/auren-app-bridge:/var/www/html/wp-content/plugins/auren-app-bridge:ro
+      - ./tests/fixtures/learndash.php:/var/www/html/wp-content/mu-plugins/auren-test-fixture.php:ro
+      - ./tests/wordpress:/opt/auren-tests:ro
+volumes:
+  database:
+  wordpress:

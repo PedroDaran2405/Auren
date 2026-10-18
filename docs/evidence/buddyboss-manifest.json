@@ -1,0 +1,56 @@
+{
+  "downloaded_at_utc": "2026-10-18T08:59:16.214914+00:00",
+  "source_organization": "https://github.com/buddyboss",
+  "repositories": [
+    {
+      "name": "buddyboss-platform",
+      "branch": "release",
+      "source_url": "https://github.com/buddyboss/buddyboss-platform",
+      "download_url": "https://github.com/buddyboss/buddyboss-platform/archive/refs/heads/release.zip",
+      "file": "buddyboss-platform.zip",
+      "bytes": 25626606,
+      "sha256": "7be3adfa2190c2419a2cd768902ee2d4b7749d394a2eb2817d27921b8b831b56",
+      "git_archive_comment": "5e6da3e7d753e36cfa33f9af68262e73b76beb00"
+    },
+    {
+      "name": "buddyboss-app-custom-code-template",
+      "branch": "master",
+      "source_url": "https://github.com/buddyboss/buddyboss-app-custom-code-template",
+      "download_url": "https://github.com/buddyboss/buddyboss-app-custom-code-template/archive/refs/heads/master.zip",
+      "file": "buddyboss-app-custom-code-template.zip",
+      "bytes": 15982,
+      "sha256": "5cd44bece10d3e124164c0470db016d07ef2becfd9b58227e68fd5418568b2c7",
+      "git_archive_comment": "e8ea5dd7ae28e78aed1172bff7b32445e5425b47"
+    },
+    {
+      "name": "bb-app-ui-tokens",
+      "branch": "master",
+      "source_url": "https://github.com/buddyboss/bb-app-ui-tokens",
+      "download_url": "https://github.com/buddyboss/bb-app-ui-tokens/archive/refs/heads/master.zip",
+      "file": "bb-app-ui-tokens.zip",
+      "bytes": 57502,
+      "sha256": "c19aa91200a53ffe40eb3722517e51f70e0b20327d9f5361126725938f468303",
+      "git_archive_comment": "94cfcfcfaf99b997f675a8cc9d3873e46d138621"
+    },
+    {
+      "name": "storybook-bb-app-theming",
+      "branch": "main",
+      "source_url": "https://github.com/buddyboss/storybook-bb-app-theming",
+      "download_url": "https://github.com/buddyboss/storybook-bb-app-theming/archive/refs/heads/main.zip",
+      "file": "storybook-bb-app-theming.zip",
+      "bytes": 1360956,
+      "sha256": "89e130b2e6b37fe057ee1b1cef02ee00a4d737d66be83f291d1a28f8fe76bf6e",
+      "git_archive_comment": "a0b131489e1ef262b120f54d2242691c00c26036"
+    },
+    {
+      "name": "buddyboss-platform-addon",
+      "branch": "master",
+      "source_url": "https://github.com/buddyboss/buddyboss-platform-addon",
+      "download_url": "https://github.com/buddyboss/buddyboss-platform-addon/archive/refs/heads/master.zip",
+      "file": "buddyboss-platform-addon.zip",
+      "bytes": 107218,
+      "sha256": "729a297ec0bbb0f6490d91b4cafac0fc35e05975ab584a5ea8d8be07c22b007c",
+      "git_archive_comment": "00fe403edc3252bfd02ede5869edf3d89257ee43"
+    }
+  ]
+}

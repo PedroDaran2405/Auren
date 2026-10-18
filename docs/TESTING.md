@@ -1,0 +1,19 @@
+# Pruebas
+
+## Reproducibles localmente
+
+- `npm test`: transporte, origen HTTPS, nonce/cookie, caducidad, no reintentar POST, respuestas tardías después de logout y URLs de video.
+- `npm run typecheck`: TypeScript de la app y el cliente.
+- `npm run local:up`: WordPress y MariaDB reales; fixtures separadas de LearnDash; repetible sin sustituir usuarios existentes.
+- `npm run test:wordpress`: permisos, aislamiento, pertenencia de lección, prerrequisitos, drip, temporizador, veto de LMS, repetición, caché, token ordinario frente a token de app, expiración/revocación, gate por versión y piloto. 27 comprobaciones al checkpoint inicial.
+- `npm run test:browser`: Chromium, viewport 390×844. Login real de WordPress local, curso, lección, progreso, recarga, logout, segundo alumno. Consentimiento y PKCE, intercambio único y bearer limitado al namespace. 2 recorridos.
+- `npm run build:web`: exportación Metro y empaquetado del plugin.
+- `npm run build:native-js`: paquetes Hermes Android/iOS; no equivale a build de tiendas ni a prueba en simulador.
+
+Las fixtures viven en `tests/fixtures` y solo se cargan con `WP_ENVIRONMENT_TYPE=local` y `AUREN_TEST_FIXTURES`. No se incluyen en el ZIP del plugin. No se reemplazó una prueba real de LearnDash por una fixture declarada como producción.
+
+Capturas de comprobación en `artifacts/` (no Git). Traces de navegador desactivadas para no registrar credenciales. Los scripts nunca imprimen contraseñas generadas.
+
+## Aceptación en Auren
+
+Se añadirá evidencia de cada operación real a `docs/evidence/live-acceptance.json` y se reflejarán resultados y pendientes en STATUS. Deben distinguirse inicio de sesión administrativo, alumno real, guardado de progreso, reproducción de video y compilación nativa. No son pruebas intercambiables.

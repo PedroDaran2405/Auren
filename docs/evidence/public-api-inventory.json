@@ -1,0 +1,4100 @@
+{
+  "observed_at": "2026-10-18",
+  "site": "https://www.aurenfx.com",
+  "authentication": [
+    "application-passwords"
+  ],
+  "namespaces": [
+    "wp/v2",
+    "oembed/1.0",
+    "rankmath/v1",
+    "rankmath/v1/setupWizard",
+    "rankmath/v1/an",
+    "uap/v2",
+    "automator/v1",
+    "wc/v3",
+    "wc/v1",
+    "wc/pos/v1/catalog",
+    "elementor-mcp-composer/v1.0.19",
+    "elementor-one/v1",
+    "ldlms/v1",
+    "ldlms/v2",
+    "learndash/v1",
+    "liquidweb/harbor/v1",
+    "jetpack/v4",
+    "uap/blocks/v1",
+    "buddyboss/v1",
+    "bb-social-login/v1",
+    "cowboy-mcp/v1",
+    "elementor/v1",
+    "elementor-pro/v1",
+    "wc-admin",
+    "wc-analytics",
+    "wc/store",
+    "wc/store/v1",
+    "wc/private",
+    "wp-mail-smtp/v1",
+    "wc/v2",
+    "uncanny-page-builder/v1",
+    "rankmath/v1/ai-visibility",
+    "rankmath/v1/ca",
+    "rankmath/v1/in",
+    "rankmath/v1/status",
+    "rankmath/v1/link-genius",
+    "google-site-kit/v1",
+    "elementor/v1/documents",
+    "elementor-ai/v1",
+    "elementor/v1/feedback",
+    "learndashCourseReviews/v1",
+    "wc-admin-email",
+    "wc-push-notifications",
+    "wc-telemetry",
+    "wccom-site/v3",
+    "ld-propanel/v1",
+    "rankmath-marketplace/v1",
+    "wp-abilities/v1",
+    "mcp",
+    "wp-site-health/v1",
+    "wp-block-editor/v1"
+  ],
+  "routes": {
+    "/ldlms/v2": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "namespace",
+          "context"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-courses": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "menu_order",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "tax_relation",
+          "ld_course_category",
+          "ld_course_category_exclude",
+          "ld_course_tag",
+          "ld_course_tag_exclude"
+        ],
+        [
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "ld_course_category",
+          "ld_course_tag",
+          "price_type",
+          "price_type_paynow_price",
+          "price_type_paynow_enrollment_url",
+          "price_type_subscribe_price",
+          "trial_price",
+          "price_type_subscribe_enrollment_url",
+          "price_type_closed_price",
+          "price_type_closed_custom_button_url",
+          "materials_enabled",
+          "materials",
+          "exam_challenge",
+          "disable_content_table",
+          "lessons_per_page",
+          "lesson_per_page_custom",
+          "topic_per_page_custom",
+          "requirements_for_enrollment",
+          "prerequisite_compare",
+          "prerequisites",
+          "points_enabled",
+          "points_access",
+          "expire_access",
+          "expire_access_days",
+          "expire_access_delete_progress",
+          "course_start_date",
+          "course_end_date",
+          "course_seats_limit",
+          "certificate",
+          "points_amount",
+          "progression_disabled"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-courses/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "ld_course_category",
+          "ld_course_tag",
+          "price_type",
+          "price_type_paynow_price",
+          "price_type_paynow_enrollment_url",
+          "price_type_subscribe_price",
+          "trial_price",
+          "price_type_subscribe_enrollment_url",
+          "price_type_closed_price",
+          "price_type_closed_custom_button_url",
+          "materials_enabled",
+          "materials",
+          "exam_challenge",
+          "disable_content_table",
+          "lessons_per_page",
+          "lesson_per_page_custom",
+          "topic_per_page_custom",
+          "requirements_for_enrollment",
+          "prerequisite_compare",
+          "prerequisites",
+          "points_enabled",
+          "points_access",
+          "expire_access",
+          "expire_access_days",
+          "expire_access_delete_progress",
+          "course_start_date",
+          "course_end_date",
+          "course_seats_limit",
+          "certificate",
+          "points_amount",
+          "progression_disabled"
+        ],
+        [
+          "id",
+          "force"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-courses/(?P<id>[\\d]+)/steps": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "type"
+        ],
+        [
+          "id",
+          "sfwd-lessons",
+          "sfwd-quiz"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-courses/(?P<id>[\\d]+)/prerequisites": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "menu_order",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "tax_relation",
+          "ld_course_category",
+          "ld_course_category_exclude",
+          "ld_course_tag",
+          "ld_course_tag_exclude"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-courses/(?P<id>[\\d]+)/users": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "exclude",
+          "include",
+          "offset",
+          "order",
+          "orderby",
+          "slug",
+          "roles",
+          "capabilities",
+          "who",
+          "has_published_posts",
+          "search_columns"
+        ],
+        [
+          "id",
+          "user_ids"
+        ],
+        [
+          "id",
+          "user_ids"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-courses/(?P<id>[\\d]+)/groups": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "tax_relation",
+          "categories",
+          "categories_exclude",
+          "tags",
+          "tags_exclude",
+          "ld_group_category",
+          "ld_group_category_exclude",
+          "ld_group_tag",
+          "ld_group_tag_exclude"
+        ],
+        [
+          "id",
+          "group_ids"
+        ],
+        [
+          "id",
+          "group_ids"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-lessons": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "menu_order",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "tax_relation",
+          "ld_lesson_category",
+          "ld_lesson_category_exclude",
+          "ld_lesson_tag",
+          "ld_lesson_tag_exclude",
+          "course"
+        ],
+        [
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "ld_lesson_category",
+          "ld_lesson_tag",
+          "materials_enabled",
+          "materials",
+          "video_enabled",
+          "video_url",
+          "video_shown",
+          "video_auto_complete",
+          "video_auto_complete_delay",
+          "video_show_complete_button",
+          "video_auto_start",
+          "video_show_controls",
+          "video_focus_pause",
+          "video_resume",
+          "assignment_upload_enabled",
+          "assignment_upload_limit_extensions",
+          "assignment_upload_limit_size",
+          "assignment_points_enabled",
+          "assignment_points_amount",
+          "assignment_auto_approve",
+          "assignment_upload_limit_count",
+          "assignment_deletion_enabled",
+          "forced_timer_enabled",
+          "forced_timer_amount",
+          "course",
+          "is_sample",
+          "visible_type",
+          "visible_after",
+          "visible_after_specific_date",
+          "is_external",
+          "external_type",
+          "external_require_attendance"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-lessons/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "ld_lesson_category",
+          "ld_lesson_tag",
+          "materials_enabled",
+          "materials",
+          "video_enabled",
+          "video_url",
+          "video_shown",
+          "video_auto_complete",
+          "video_auto_complete_delay",
+          "video_show_complete_button",
+          "video_auto_start",
+          "video_show_controls",
+          "video_focus_pause",
+          "video_resume",
+          "assignment_upload_enabled",
+          "assignment_upload_limit_extensions",
+          "assignment_upload_limit_size",
+          "assignment_points_enabled",
+          "assignment_points_amount",
+          "assignment_auto_approve",
+          "assignment_upload_limit_count",
+          "assignment_deletion_enabled",
+          "forced_timer_enabled",
+          "forced_timer_amount",
+          "course",
+          "is_sample",
+          "visible_type",
+          "visible_after",
+          "visible_after_specific_date",
+          "is_external",
+          "external_type",
+          "external_require_attendance"
+        ],
+        [
+          "id",
+          "force"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-topic": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "menu_order",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "tax_relation",
+          "ld_topic_category",
+          "ld_topic_category_exclude",
+          "ld_topic_tag",
+          "ld_topic_tag_exclude",
+          "course",
+          "lesson"
+        ],
+        [
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "ld_topic_category",
+          "ld_topic_tag",
+          "materials_enabled",
+          "materials",
+          "video_enabled",
+          "video_url",
+          "video_shown",
+          "video_auto_complete",
+          "video_auto_complete_delay",
+          "video_show_complete_button",
+          "video_auto_start",
+          "video_show_controls",
+          "video_focus_pause",
+          "video_resume",
+          "assignment_upload_enabled",
+          "assignment_upload_limit_extensions",
+          "assignment_upload_limit_size",
+          "assignment_points_enabled",
+          "assignment_points_amount",
+          "assignment_auto_approve",
+          "assignment_upload_limit_count",
+          "assignment_deletion_enabled",
+          "forced_timer_enabled",
+          "forced_timer_amount",
+          "course",
+          "lesson",
+          "visible_type",
+          "visible_after",
+          "visible_after_specific_date",
+          "is_external",
+          "external_type",
+          "external_require_attendance"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-topic/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "ld_topic_category",
+          "ld_topic_tag",
+          "materials_enabled",
+          "materials",
+          "video_enabled",
+          "video_url",
+          "video_shown",
+          "video_auto_complete",
+          "video_auto_complete_delay",
+          "video_show_complete_button",
+          "video_auto_start",
+          "video_show_controls",
+          "video_focus_pause",
+          "video_resume",
+          "assignment_upload_enabled",
+          "assignment_upload_limit_extensions",
+          "assignment_upload_limit_size",
+          "assignment_points_enabled",
+          "assignment_points_amount",
+          "assignment_auto_approve",
+          "assignment_upload_limit_count",
+          "assignment_deletion_enabled",
+          "forced_timer_enabled",
+          "forced_timer_amount",
+          "course",
+          "lesson",
+          "visible_type",
+          "visible_after",
+          "visible_after_specific_date",
+          "is_external",
+          "external_type",
+          "external_require_attendance"
+        ],
+        [
+          "id",
+          "force"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-quiz": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "menu_order",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "course",
+          "lesson",
+          "topic"
+        ],
+        [
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "visible_type",
+          "visible_after",
+          "visible_after_specific_date",
+          "is_external",
+          "external_type",
+          "external_require_attendance",
+          "prerequisites",
+          "registered_users_only",
+          "passing_percentage",
+          "certificate",
+          "certificate_award_threshold",
+          "quiz_resume",
+          "quiz_resume_cookie_send_timer",
+          "retry_restrictions_enabled",
+          "retry_repeats",
+          "answer_all_questions_enabled",
+          "time_limit_enabled",
+          "time_limit_time",
+          "materials_enabled",
+          "materials",
+          "auto_start",
+          "quiz_modus",
+          "review_table_enabled",
+          "summary_hide",
+          "skip_question_disabled",
+          "custom_sorting",
+          "sort_categories",
+          "question_random",
+          "show_max_question",
+          "show_points",
+          "show_category",
+          "hide_question_position_overview",
+          "hide_question_numbering",
+          "numbered_answer",
+          "answer_random",
+          "title_hidden",
+          "restart_button_hide",
+          "show_average_result",
+          "show_category_score",
+          "hide_result_points",
+          "hide_result_correct_question",
+          "hide_result_quiz_time",
+          "custom_answer_feedback",
+          "hide_answer_message_box",
+          "disabled_answer_mark",
+          "view_question_button_hidden",
+          "toplist_enabled",
+          "toplist_data_add_permissions",
+          "toplist_data_add_multiple",
+          "toplist_data_add_automatic",
+          "toplist_data_show_limit",
+          "toplist_data_sort",
+          "toplist_data_showin_enabled",
+          "statistics_enabled",
+          "view_profile_statistics_enabled",
+          "statistics_ip_lock_enabled",
+          "email_enabled",
+          "email_admin_enabled",
+          "email_user_enabled",
+          "toplist_data_add_delay",
+          "toplist_data_shown",
+          "statistics_ip_lock",
+          "email_notification"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-quiz/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "visible_type",
+          "visible_after",
+          "visible_after_specific_date",
+          "is_external",
+          "external_type",
+          "external_require_attendance",
+          "prerequisites",
+          "registered_users_only",
+          "passing_percentage",
+          "certificate",
+          "certificate_award_threshold",
+          "quiz_resume",
+          "quiz_resume_cookie_send_timer",
+          "retry_restrictions_enabled",
+          "retry_repeats",
+          "answer_all_questions_enabled",
+          "time_limit_enabled",
+          "time_limit_time",
+          "materials_enabled",
+          "materials",
+          "auto_start",
+          "quiz_modus",
+          "review_table_enabled",
+          "summary_hide",
+          "skip_question_disabled",
+          "custom_sorting",
+          "sort_categories",
+          "question_random",
+          "show_max_question",
+          "show_points",
+          "show_category",
+          "hide_question_position_overview",
+          "hide_question_numbering",
+          "numbered_answer",
+          "answer_random",
+          "title_hidden",
+          "restart_button_hide",
+          "show_average_result",
+          "show_category_score",
+          "hide_result_points",
+          "hide_result_correct_question",
+          "hide_result_quiz_time",
+          "custom_answer_feedback",
+          "hide_answer_message_box",
+          "disabled_answer_mark",
+          "view_question_button_hidden",
+          "toplist_enabled",
+          "toplist_data_add_permissions",
+          "toplist_data_add_multiple",
+          "toplist_data_add_automatic",
+          "toplist_data_show_limit",
+          "toplist_data_sort",
+          "toplist_data_showin_enabled",
+          "statistics_enabled",
+          "view_profile_statistics_enabled",
+          "statistics_ip_lock_enabled",
+          "email_enabled",
+          "email_admin_enabled",
+          "email_user_enabled",
+          "toplist_data_add_delay",
+          "toplist_data_shown",
+          "statistics_ip_lock",
+          "email_notification"
+        ],
+        [
+          "id",
+          "force"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-essays": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "course",
+          "lesson",
+          "topic"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-essays/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "comment_status",
+          "ping_status",
+          "template",
+          "course",
+          "lesson",
+          "topic",
+          "points_max",
+          "points_awarded"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-question": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "menu_order",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status"
+        ],
+        [
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "quiz",
+          "question_type",
+          "points_total",
+          "points_per_answer",
+          "points_show_in_message",
+          "points_diff_modus",
+          "disable_correct",
+          "correct_message",
+          "incorrect_message",
+          "correct_same",
+          "hints_enabled",
+          "hints_message",
+          "answers"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-question/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "menu_order",
+          "template",
+          "quiz",
+          "question_type",
+          "points_total",
+          "points_per_answer",
+          "points_show_in_message",
+          "points_diff_modus",
+          "disable_correct",
+          "correct_message",
+          "incorrect_message",
+          "correct_same",
+          "hints_enabled",
+          "hints_message",
+          "answers"
+        ],
+        [
+          "id",
+          "force"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-assignment": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "course",
+          "lesson",
+          "topic",
+          "approved_status"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-assignment/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "author",
+          "comment_status",
+          "ping_status",
+          "template",
+          "course",
+          "lesson",
+          "topic",
+          "approved_status",
+          "points_enabled",
+          "points_max",
+          "points_awarded"
+        ]
+      ]
+    },
+    "/ldlms/v2/groups": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "tax_relation",
+          "categories",
+          "categories_exclude",
+          "tags",
+          "tags_exclude",
+          "ld_group_category",
+          "ld_group_category_exclude",
+          "ld_group_tag",
+          "ld_group_tag_exclude"
+        ],
+        [
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "template",
+          "categories",
+          "tags",
+          "ld_group_category",
+          "ld_group_tag",
+          "materials_enabled",
+          "materials",
+          "certificate",
+          "disable_content_table",
+          "courses_per_page_enabled",
+          "courses_per_page_custom",
+          "group_courses_order_enabled",
+          "courses_orderby",
+          "courses_order",
+          "price_type",
+          "price_type_paynow_price",
+          "group_price_type_paynow_enrollment_url",
+          "price_type_subscribe_price",
+          "trial_price",
+          "group_price_type_subscribe_enrollment_url",
+          "price_type_closed_price",
+          "price_type_closed_custom_button_url",
+          "group_start_date",
+          "group_end_date",
+          "group_seats_limit"
+        ]
+      ]
+    },
+    "/ldlms/v2/groups/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "author",
+          "featured_media",
+          "template",
+          "categories",
+          "tags",
+          "ld_group_category",
+          "ld_group_tag",
+          "materials_enabled",
+          "materials",
+          "certificate",
+          "disable_content_table",
+          "courses_per_page_enabled",
+          "courses_per_page_custom",
+          "group_courses_order_enabled",
+          "courses_orderby",
+          "courses_order",
+          "price_type",
+          "price_type_paynow_price",
+          "group_price_type_paynow_enrollment_url",
+          "price_type_subscribe_price",
+          "trial_price",
+          "group_price_type_subscribe_enrollment_url",
+          "price_type_closed_price",
+          "price_type_closed_custom_button_url",
+          "group_start_date",
+          "group_end_date",
+          "group_seats_limit"
+        ],
+        [
+          "id",
+          "force"
+        ]
+      ]
+    },
+    "/ldlms/v2/groups/(?P<id>[\\d]+)/courses": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "menu_order",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "tax_relation",
+          "ld_course_category",
+          "ld_course_category_exclude",
+          "ld_course_tag",
+          "ld_course_tag_exclude"
+        ],
+        [
+          "id",
+          "course_ids"
+        ],
+        [
+          "id",
+          "course_ids"
+        ]
+      ]
+    },
+    "/ldlms/v2/groups/(?P<id>[\\d]+)/leaders": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "exclude",
+          "include",
+          "offset",
+          "order",
+          "orderby",
+          "slug",
+          "roles",
+          "capabilities",
+          "who",
+          "has_published_posts",
+          "search_columns"
+        ],
+        [
+          "id",
+          "user_ids"
+        ],
+        [
+          "id",
+          "user_ids"
+        ]
+      ]
+    },
+    "/ldlms/v2/groups/(?P<id>[\\d]+)/users": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "exclude",
+          "include",
+          "offset",
+          "order",
+          "orderby",
+          "slug",
+          "roles",
+          "capabilities",
+          "who",
+          "has_published_posts",
+          "search_columns"
+        ],
+        [
+          "id",
+          "user_ids"
+        ],
+        [
+          "id",
+          "user_ids"
+        ]
+      ]
+    },
+    "/ldlms/v2/users/(?P<id>[\\d]+)/courses": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "menu_order",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "tax_relation",
+          "ld_course_category",
+          "ld_course_category_exclude",
+          "ld_course_tag",
+          "ld_course_tag_exclude"
+        ],
+        [
+          "id",
+          "course_ids"
+        ],
+        [
+          "id",
+          "course_ids"
+        ]
+      ]
+    },
+    "/ldlms/v2/users/(?P<id>[\\d]+)/courses/(?P<course>[\\d]+)": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id",
+          "course",
+          "enrolled_at"
+        ]
+      ]
+    },
+    "/ldlms/v2/users/(?P<id>[\\d]+)/groups": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "author",
+          "author_exclude",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status",
+          "tax_relation",
+          "categories",
+          "categories_exclude",
+          "tags",
+          "tags_exclude",
+          "ld_group_category",
+          "ld_group_category_exclude",
+          "ld_group_tag",
+          "ld_group_tag_exclude"
+        ],
+        [
+          "id",
+          "group_ids"
+        ],
+        [
+          "id",
+          "group_ids"
+        ]
+      ]
+    },
+    "/ldlms/v2/users/(?P<id>[\\d]+)/course-progress": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id",
+          "context",
+          "exclude",
+          "include",
+          "per_page",
+          "page"
+        ]
+      ]
+    },
+    "/ldlms/v2/users/(?P<id>[\\d]+)/course-progress/(?P<course>[\\d]+)": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id",
+          "course"
+        ]
+      ]
+    },
+    "/ldlms/v2/users/(?P<id>[\\d]+)/course-progress/(?P<course>[\\d]+)/steps": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id",
+          "course",
+          "exclude",
+          "include",
+          "per_page",
+          "page"
+        ]
+      ]
+    },
+    "/ldlms/v2/users/(?P<id>[\\d]+)/course-progress/(?P<course>[\\d]+)/exam": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id",
+          "course"
+        ]
+      ]
+    },
+    "/ldlms/v2/users/(?P<id>[\\d]+)/quiz-progress": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id",
+          "quiz",
+          "course",
+          "lesson",
+          "topic",
+          "context",
+          "orderby",
+          "offset",
+          "order",
+          "per_page",
+          "page"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-quiz/(?P<quiz>[\\d]+)/statistics": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "quiz",
+          "context",
+          "page",
+          "per_page",
+          "order",
+          "orderby",
+          "user",
+          "after",
+          "before"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-quiz/(?P<quiz>[\\d]+)/statistics/(?P<statistic>[\\d]+)": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "quiz",
+          "statistic"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-quiz/(?P<quiz>[\\d]+)/statistics/(?P<statistic>[\\d]+)/questions": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "quiz",
+          "statistic",
+          "context",
+          "page",
+          "per_page"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-quiz/(?P<quiz>[\\d]+)/statistics/(?P<statistic>[\\d]+)/questions/(?P<id>[\\w-]+)": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "quiz",
+          "statistic",
+          "id"
+        ]
+      ]
+    },
+    "/ldlms/v2/sfwd-quiz/(?P<quiz>[\\d]+)/form-entries": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context",
+          "user",
+          "quiz",
+          "order",
+          "orderby"
+        ]
+      ]
+    },
+    "/ldlms/v2/echo": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [],
+        [],
+        []
+      ]
+    },
+    "/ldlms/v2/price-types": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context"
+        ]
+      ]
+    },
+    "/ldlms/v2/price-types/(?P<slug>[\\w-]+)": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "slug",
+          "context"
+        ]
+      ]
+    },
+    "/ldlms/v2/question-types": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context"
+        ]
+      ]
+    },
+    "/ldlms/v2/question-types/(?P<slug>[\\w-]+)": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "slug",
+          "context"
+        ]
+      ]
+    },
+    "/ldlms/v2/progress-status": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context"
+        ]
+      ]
+    },
+    "/ldlms/v2/progress-status/(?P<slug>[\\w-]+)": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "slug",
+          "context"
+        ]
+      ]
+    },
+    "/ldlms/v2/exams": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "after",
+          "modified_after",
+          "before",
+          "modified_before",
+          "exclude",
+          "include",
+          "search_semantics",
+          "offset",
+          "order",
+          "orderby",
+          "search_columns",
+          "slug",
+          "status"
+        ],
+        [
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "featured_media",
+          "meta",
+          "template"
+        ]
+      ]
+    },
+    "/ldlms/v2/exams/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "date",
+          "date_gmt",
+          "slug",
+          "status",
+          "password",
+          "title",
+          "content",
+          "featured_media",
+          "meta",
+          "template"
+        ],
+        [
+          "id",
+          "force"
+        ]
+      ]
+    },
+    "/buddyboss/v1": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "namespace",
+          "context"
+        ]
+      ]
+    },
+    "/buddyboss/v1/help-content/proxy": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "url"
+        ]
+      ]
+    },
+    "/buddyboss/v1/integrations/proxy": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "url"
+        ]
+      ]
+    },
+    "/cowboy-mcp/v1": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "namespace",
+          "context"
+        ]
+      ]
+    },
+    "/cowboy-mcp/v1/endpoint": {
+      "methods": [
+        "POST",
+        "GET",
+        "DELETE"
+      ],
+      "args": [
+        [],
+        [],
+        []
+      ]
+    },
+    "/cowboy-mcp/v1/oauth/register": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/cowboy-mcp/v1/oauth/token": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/bb-topics": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "per_page",
+          "page",
+          "orderby",
+          "order",
+          "item_id",
+          "item_type",
+          "filter_query"
+        ],
+        [
+          "title",
+          "item_type",
+          "permission_type"
+        ]
+      ]
+    },
+    "/buddyboss/v1/bb-topics/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "title",
+          "item_type"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/bb-topics/order": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "item_type",
+          "topics"
+        ]
+      ]
+    },
+    "/buddyboss/v1/moderation": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "item_id",
+          "order",
+          "order_by",
+          "exclude",
+          "include",
+          "reporters",
+          "status",
+          "blog_id"
+        ],
+        [
+          "item_id",
+          "type"
+        ]
+      ]
+    },
+    "/buddyboss/v1/moderation/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/moderation/report": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context"
+        ],
+        [
+          "context",
+          "report_category",
+          "note",
+          "item_id",
+          "item_type"
+        ]
+      ]
+    },
+    "/buddyboss/v1/components": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "status",
+          "type"
+        ],
+        [
+          "name",
+          "action"
+        ]
+      ]
+    },
+    "/buddyboss/v1/settings": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context"
+        ],
+        [
+          "name",
+          "status",
+          "title",
+          "description"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "type",
+          "user_id",
+          "user_ids",
+          "include",
+          "exclude",
+          "member_type",
+          "xprofile",
+          "bp_ps_search",
+          "scope"
+        ],
+        [
+          "name",
+          "user_login",
+          "password",
+          "roles",
+          "types",
+          "email"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "name",
+          "roles",
+          "types"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members/me": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "context"
+        ],
+        [
+          "name",
+          "roles",
+          "types"
+        ],
+        [
+          "force",
+          "reassign"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members/me/permissions": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/members/action/(?P<id>[\\d]+)": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id",
+          "action"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members/presence": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "ids"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members/details": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/members/(?P<id>[\\d]+)/detail": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members/profile-dropdown": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "default"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members/(?P<id>[\\d]+)/info": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members/(?P<user_id>[\\d]+)/avatar": {
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "user_id",
+          "context",
+          "html",
+          "alt",
+          "no_gravatar"
+        ],
+        [
+          "user_id"
+        ],
+        [
+          "user_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/subscriptions": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "exclude",
+          "include",
+          "order",
+          "order_by",
+          "blog_id",
+          "type",
+          "item_id",
+          "secondary_id",
+          "status"
+        ],
+        [
+          "blog_id",
+          "user_id",
+          "type",
+          "item_id",
+          "secondary_item_id",
+          "status"
+        ]
+      ]
+    },
+    "/buddyboss/v1/subscriptions/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "blog_id",
+          "user_id",
+          "type",
+          "item_id",
+          "secondary_item_id",
+          "status"
+        ]
+      ]
+    },
+    "/buddyboss/v1/subscription-types": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/mention": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "term",
+          "only_friends",
+          "group_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/members/(?P<user_id>[\\d]+)/cover": {
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "user_id"
+        ],
+        [
+          "user_id"
+        ],
+        [
+          "user_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/signup/form": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/signup": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "number",
+          "offset",
+          "include",
+          "order",
+          "orderby",
+          "user_login"
+        ],
+        [
+          "signup_email",
+          "signup_password"
+        ]
+      ]
+    },
+    "/buddyboss/v1/signup/(?P<id>[\\w-]+)": {
+      "methods": [
+        "GET",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "context"
+        ]
+      ]
+    },
+    "/buddyboss/v1/signup/activate/(?P<activation_key>[\\w-]+)": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "activation_key",
+          "context"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/fields": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "profile_group_id",
+          "hide_empty_groups",
+          "user_id",
+          "member_type",
+          "hide_empty_fields",
+          "fetch_field_data",
+          "fetch_visibility_level",
+          "exclude_groups",
+          "exclude_fields",
+          "update_meta_cache"
+        ],
+        [
+          "group_id",
+          "parent_id",
+          "type",
+          "name",
+          "alternate_name",
+          "description",
+          "is_required",
+          "can_delete",
+          "field_order",
+          "option_order",
+          "order_by",
+          "is_default_option",
+          "default_visibility",
+          "allow_custom_visibility",
+          "do_autolink"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/fields/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "user_id",
+          "fetch_field_data"
+        ],
+        [
+          "id",
+          "group_id",
+          "parent_id",
+          "type",
+          "name",
+          "alternate_name",
+          "description",
+          "is_required",
+          "can_delete",
+          "field_order",
+          "option_order",
+          "order_by",
+          "is_default_option",
+          "default_visibility",
+          "allow_custom_visibility",
+          "do_autolink"
+        ],
+        [
+          "id",
+          "delete_data"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/groups": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "profile_group_id",
+          "hide_empty_groups",
+          "user_id",
+          "member_type",
+          "hide_empty_fields",
+          "fetch_fields",
+          "fetch_field_data",
+          "fetch_visibility_level",
+          "exclude_groups",
+          "exclude_fields",
+          "update_meta_cache"
+        ],
+        [
+          "name",
+          "description",
+          "can_delete",
+          "repeater_enabled"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/groups/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "name",
+          "description",
+          "group_order",
+          "can_delete",
+          "repeater_enabled"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/(?P<field_id>[\\d]+)/data/(?P<user_id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "field_id",
+          "user_id"
+        ],
+        [
+          "field_id",
+          "user_id",
+          "value"
+        ],
+        [
+          "field_id",
+          "user_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/update": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "fields",
+          "profile_group_id",
+          "hide_empty_groups",
+          "member_type",
+          "hide_empty_fields",
+          "fetch_fields",
+          "fetch_field_data",
+          "fetch_visibility_level",
+          "exclude_groups",
+          "exclude_fields",
+          "update_meta_cache"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/repeater/(?P<id>[\\d]+)": {
+      "methods": [
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "context",
+          "id",
+          "fetch_fields",
+          "fetch_field_data",
+          "fetch_visibility_level"
+        ],
+        [
+          "context",
+          "id",
+          "fetch_fields",
+          "fetch_field_data",
+          "fetch_visibility_level",
+          "fields"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/repeater/order/(?P<id>[\\d]+)": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "context",
+          "id",
+          "fetch_fields",
+          "fetch_field_data",
+          "fetch_visibility_level",
+          "fields"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/search": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "form_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/xprofile/types": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context"
+        ]
+      ]
+    },
+    "/buddyboss/v1/video/upload": {
+      "methods": [
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [],
+        []
+      ]
+    },
+    "/buddyboss/v1/video": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "order",
+          "orderby",
+          "user_id",
+          "max",
+          "album_id",
+          "group_id",
+          "activity_id",
+          "privacy",
+          "scope",
+          "include",
+          "exclude",
+          "count_total"
+        ],
+        [
+          "upload_ids",
+          "activity_id",
+          "group_id",
+          "album_id",
+          "privacy"
+        ]
+      ]
+    },
+    "/buddyboss/v1/video/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "group_id",
+          "album_id",
+          "privacy"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/video/(?P<id>[\\d]+)/upload_poster": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/video/(?P<id>[\\d]+)/poster": {
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "attachment_id",
+          "file"
+        ],
+        [
+          "id",
+          "attachment_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/video/details": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/media": {
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "order",
+          "orderby",
+          "user_id",
+          "max",
+          "album_id",
+          "group_id",
+          "activity_id",
+          "privacy",
+          "scope",
+          "include",
+          "exclude",
+          "count_total"
+        ],
+        [
+          "upload_ids",
+          "activity_id",
+          "group_id",
+          "album_id",
+          "privacy"
+        ],
+        [
+          "media_ids"
+        ]
+      ]
+    },
+    "/buddyboss/v1/media/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "group_id",
+          "album_id",
+          "privacy"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/media/upload": {
+      "methods": [
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [],
+        []
+      ]
+    },
+    "/buddyboss/v1/media/albums": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "order",
+          "orderby",
+          "max",
+          "user_id",
+          "group_id",
+          "privacy",
+          "include",
+          "exclude",
+          "count_total"
+        ],
+        [
+          "title",
+          "privacy",
+          "group_id",
+          "user_id",
+          "upload_ids"
+        ]
+      ]
+    },
+    "/buddyboss/v1/media/albums/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "media_page",
+          "media_per_page"
+        ],
+        [
+          "id",
+          "title",
+          "privacy"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/media/details": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/media/move": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "media_ids",
+          "group_id",
+          "album_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/document/upload": {
+      "methods": [
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [],
+        []
+      ]
+    },
+    "/buddyboss/v1/document": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "order",
+          "orderby",
+          "max",
+          "scope",
+          "user_id",
+          "folder_id",
+          "group_id",
+          "activity_id",
+          "privacy",
+          "include",
+          "exclude",
+          "count_total",
+          "type"
+        ],
+        [
+          "document_ids",
+          "activity_id",
+          "content",
+          "group_id",
+          "folder_id",
+          "privacy"
+        ]
+      ]
+    },
+    "/buddyboss/v1/document/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "content",
+          "group_id",
+          "folder_id",
+          "privacy"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/document/folder": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "order",
+          "orderby",
+          "max",
+          "user_id",
+          "parent",
+          "group_id",
+          "privacy",
+          "include",
+          "exclude",
+          "count_total"
+        ],
+        [
+          "title",
+          "parent",
+          "group_id",
+          "privacy"
+        ]
+      ]
+    },
+    "/buddyboss/v1/document/folder/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "title",
+          "parent",
+          "group_id",
+          "privacy"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/document/folder/tree": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "group_id",
+          "hierarchical"
+        ]
+      ]
+    },
+    "/buddyboss/v1/document/details": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/account-settings": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context"
+        ]
+      ]
+    },
+    "/buddyboss/v1/account-settings/(?P<nav>[\\w-]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "nav",
+          "context"
+        ],
+        [
+          "nav",
+          "fields"
+        ]
+      ]
+    },
+    "/buddyboss/v1/notifications": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "order_by",
+          "sort_order",
+          "component_name",
+          "component_action",
+          "user_id",
+          "item_id",
+          "secondary_item_id",
+          "is_new"
+        ],
+        [
+          "user_id",
+          "item_id",
+          "secondary_item_id",
+          "component",
+          "action",
+          "date",
+          "is_new"
+        ]
+      ]
+    },
+    "/buddyboss/v1/notifications/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "is_new"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/notifications/bulk/read": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "per_page"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "type",
+          "order",
+          "orderby",
+          "status",
+          "user_id",
+          "parent_id",
+          "meta",
+          "include",
+          "exclude",
+          "group_type",
+          "enable_forum",
+          "show_hidden",
+          "scope",
+          "can_post"
+        ],
+        [
+          "creator_id",
+          "name",
+          "slug",
+          "description",
+          "status",
+          "enable_forum",
+          "parent_id",
+          "types"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "creator_id",
+          "name",
+          "description",
+          "status",
+          "enable_forum",
+          "parent_id",
+          "types",
+          "append_types",
+          "remove_types"
+        ],
+        [
+          "id",
+          "delete_group_forum"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/details": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "type"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/(?P<id>[\\d]+)/detail": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/(?P<id>[\\d]+)/info": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/(?P<group_id>[\\d]+)/members": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "group_id",
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "status",
+          "roles",
+          "exclude",
+          "exclude_admins",
+          "exclude_banned",
+          "scope"
+        ],
+        [
+          "group_id",
+          "context",
+          "role",
+          "user_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/(?P<group_id>[\\d]+)/members/(?P<user_id>[\\d]+)": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "group_id",
+          "user_id",
+          "context",
+          "role",
+          "action"
+        ],
+        [
+          "group_id",
+          "user_id",
+          "context"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/(?P<id>[\\d]+)/settings": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id",
+          "nav"
+        ],
+        [
+          "id",
+          "nav",
+          "fields"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/invites": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "group_id",
+          "user_id",
+          "inviter_id",
+          "invite_sent",
+          "order_by",
+          "sort_order"
+        ],
+        [
+          "user_id",
+          "inviter_id",
+          "group_id",
+          "message",
+          "send_invite"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/invites/(?P<invite_id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "invite_id",
+          "context"
+        ],
+        [
+          "invite_id"
+        ],
+        [
+          "invite_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/invites/multiple": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "user_id",
+          "inviter_id",
+          "group_id",
+          "message",
+          "send_invite"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/membership-requests": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "group_id",
+          "user_id",
+          "order_by",
+          "sort_order"
+        ],
+        [
+          "user_id",
+          "group_id",
+          "message",
+          "joined"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/membership-requests/(?P<request_id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "request_id",
+          "context"
+        ],
+        [
+          "request_id"
+        ],
+        [
+          "request_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/types": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/(?P<group_id>[\\d]+)/avatar": {
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "group_id",
+          "context",
+          "html",
+          "alt"
+        ],
+        [
+          "group_id"
+        ],
+        [
+          "group_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/groups/(?P<group_id>[\\d]+)/cover": {
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "group_id"
+        ],
+        [
+          "group_id"
+        ],
+        [
+          "group_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/forums": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "author",
+          "author_exclude",
+          "exclude",
+          "include",
+          "offset",
+          "order",
+          "orderby",
+          "status",
+          "parent",
+          "subscriptions"
+        ]
+      ]
+    },
+    "/buddyboss/v1/forums/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/forums/subscribe/(?P<id>[\\d]+)": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/topics": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "author",
+          "author_exclude",
+          "exclude",
+          "include",
+          "offset",
+          "order",
+          "orderby",
+          "status",
+          "parent",
+          "subscriptions",
+          "favorites",
+          "tag"
+        ],
+        [
+          "status",
+          "parent",
+          "sticky",
+          "title",
+          "content",
+          "short_content",
+          "group",
+          "topic_tags",
+          "bbp_media",
+          "bbp_media_gif",
+          "bbp_videos",
+          "bbp_documents"
+        ]
+      ]
+    },
+    "/buddyboss/v1/topics/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "status",
+          "parent",
+          "sticky",
+          "title",
+          "content",
+          "short_content",
+          "group",
+          "topic_tags",
+          "bbp_media",
+          "bbp_media_gif",
+          "bbp_videos",
+          "bbp_documents",
+          "reason_editing",
+          "log"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/topics/merge/(?P<id>[\\d]+)": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "id",
+          "destination_id",
+          "subscribers",
+          "favorites",
+          "tags"
+        ]
+      ]
+    },
+    "/buddyboss/v1/topics/split/(?P<id>[\\d]+)": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "id",
+          "reply_id",
+          "split_option",
+          "new_destination_title",
+          "destination_id",
+          "subscribers",
+          "favorites",
+          "tags"
+        ]
+      ]
+    },
+    "/buddyboss/v1/topics/action/(?P<id>[\\d]+)": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "id",
+          "action",
+          "value"
+        ]
+      ]
+    },
+    "/buddyboss/v1/topics/dropdown/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "id",
+          "page",
+          "per_page"
+        ]
+      ]
+    },
+    "/buddyboss/v1/reply": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "author",
+          "author_exclude",
+          "exclude",
+          "include",
+          "offset",
+          "order",
+          "orderby",
+          "parent",
+          "thread_replies"
+        ],
+        [
+          "title",
+          "content",
+          "short_content",
+          "bbp_media",
+          "bbp_media_gif",
+          "bbp_videos",
+          "bbp_documents",
+          "reply_to",
+          "topic_id",
+          "forum_id",
+          "tags",
+          "subscribe"
+        ]
+      ]
+    },
+    "/buddyboss/v1/reply/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id",
+          "title",
+          "content",
+          "short_content",
+          "bbp_media",
+          "bbp_media_gif",
+          "bbp_videos",
+          "bbp_documents",
+          "reply_to",
+          "topic_id",
+          "forum_id",
+          "tags",
+          "subscribe",
+          "reason",
+          "log"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/reply/action/(?P<id>[\\d]+)": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "id",
+          "action",
+          "value"
+        ]
+      ]
+    },
+    "/buddyboss/v1/reply/move/(?P<id>[\\d]+)": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "id",
+          "move_option",
+          "destination_topic_id",
+          "destination_topic_title"
+        ]
+      ]
+    },
+    "/buddyboss/v1/forums/link-preview": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "url"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "search",
+          "exclude",
+          "include",
+          "order",
+          "orderby",
+          "after",
+          "user_id",
+          "status",
+          "scope",
+          "group_id",
+          "site_id",
+          "primary_id",
+          "secondary_id",
+          "component",
+          "type",
+          "display_comments",
+          "privacy",
+          "activity_status"
+        ],
+        [
+          "primary_item_id",
+          "secondary_item_id",
+          "user_id",
+          "name",
+          "link",
+          "component",
+          "type",
+          "post_title",
+          "content",
+          "date",
+          "hidden",
+          "privacy",
+          "activity_data",
+          "feature_media",
+          "activity_status",
+          "bb_activity_post_feature_image",
+          "bb_activity_post_feature_image_id",
+          "bp_media_ids",
+          "media_gif",
+          "bp_videos",
+          "bp_documents"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "primary_item_id",
+          "secondary_item_id",
+          "user_id",
+          "name",
+          "link",
+          "component",
+          "type",
+          "post_title",
+          "content",
+          "date",
+          "hidden",
+          "privacy",
+          "activity_data",
+          "feature_media",
+          "activity_status",
+          "bb_activity_post_feature_image",
+          "bb_activity_post_feature_image_id",
+          "bp_media_ids",
+          "media_gif",
+          "bp_videos",
+          "bp_documents"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/(?P<id>[\\d]+)/favorite": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id",
+          "reaction_id",
+          "item_type"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/(?P<id>[\\d]+)/pin": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id",
+          "remove_pin"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/(?P<id>[\\d]+)/close-comments": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "id",
+          "turn_on_comments"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/(?P<id>[\\d]+)/notification": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "action"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/(?P<id>[\\d]+)/comment": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "id",
+          "display_comments"
+        ],
+        [
+          "context",
+          "id",
+          "display_comments",
+          "content",
+          "parent_id",
+          "bp_media_ids",
+          "media_gif",
+          "bp_videos",
+          "bp_documents"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/(?P<id>[\\d]+)/comment/(?P<comment_id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "comment_id",
+          "context"
+        ],
+        [
+          "comment_id",
+          "context",
+          "id",
+          "display_comments"
+        ],
+        [
+          "comment_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/details": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/activity/link-preview": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        [
+          "url"
+        ]
+      ]
+    },
+    "/buddyboss/v1/friends": {
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "user_id",
+          "is_confirmed",
+          "id",
+          "initiator_id",
+          "friend_id",
+          "order_by",
+          "order"
+        ],
+        [
+          "initiator_id",
+          "friend_id",
+          "force"
+        ],
+        [
+          "friend_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/friends/(?P<id>[\\w-]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "context"
+        ]
+      ]
+    },
+    "/buddyboss/v1/poll": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "item_type",
+          "secondary_item_id",
+          "user_id",
+          "question",
+          "options",
+          "status",
+          "settings_allow_multiple_options",
+          "settings_allow_new_option",
+          "settings_duration"
+        ]
+      ]
+    },
+    "/buddyboss/v1/poll/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "context"
+        ],
+        [
+          "id",
+          "item_type",
+          "secondary_item_id",
+          "user_id",
+          "question",
+          "options",
+          "status",
+          "settings_allow_multiple_options",
+          "settings_allow_new_option",
+          "settings_duration"
+        ],
+        [
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/poll/(?P<id>[\\d]+)/options": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "id",
+          "order",
+          "orderby"
+        ],
+        [
+          "user_id",
+          "option_title",
+          "option_order",
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/poll/(?P<id>[\\d]+)/options/(?P<option_id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "option_id",
+          "context"
+        ],
+        [
+          "id",
+          "option_id",
+          "user_id",
+          "option_title",
+          "option_order"
+        ],
+        [
+          "id",
+          "option_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/poll/(?P<id>[\\d]+)/options/(?P<option_id>[\\d]+)/vote": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "id",
+          "order",
+          "orderby"
+        ],
+        [
+          "option_id",
+          "user_id",
+          "id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/poll/(?P<id>[\\d]+)/options/(?P<option_id>[\\d]+)/vote/(?P<vote_id>[\\d]+)": {
+      "methods": [
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "option_id",
+          "vote_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/featured-image/upload": {
+      "methods": [
+        "POST"
+      ],
+      "args": [
+        [
+          "group_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/activity/featured-image/upload/(?P<id>\\d+)": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id",
+          "activity_id"
+        ],
+        [
+          "id",
+          "activity_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/pusher/data": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/pusher/auth": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "channel_name",
+          "socket_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/pusher/user-auth": {
+      "methods": [
+        "POST",
+        "PUT",
+        "PATCH"
+      ],
+      "args": [
+        [
+          "socket_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/reactions": {
+      "methods": [
+        "GET"
+      ],
+      "args": [
+        []
+      ]
+    },
+    "/buddyboss/v1/user-reactions": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "args": [
+        [
+          "context",
+          "page",
+          "per_page",
+          "reaction_id",
+          "item_type",
+          "item_id",
+          "user_id",
+          "order",
+          "order_by"
+        ],
+        [
+          "reaction_id",
+          "item_type",
+          "item_id",
+          "user_id"
+        ]
+      ]
+    },
+    "/buddyboss/v1/user-reactions/(?P<id>[\\d]+)": {
+      "methods": [
+        "GET",
+        "DELETE"
+      ],
+      "args": [
+        [
+          "id"
+        ],
+        [
+          "id"
+        ]
+      ]
+    }
+  }
+}

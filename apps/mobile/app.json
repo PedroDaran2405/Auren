@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "Auren",
+    "slug": "auren",
+    "version": "0.1.0",
+    "scheme": "auren",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "ios": {"bundleIdentifier":"com.aurenfx.academy","supportsTablet":true},
+    "android": {"package":"com.aurenfx.academy"},
+    "web": {"bundler":"metro","output":"single","name":"Auren"},
+    "experiments": {"baseUrl":"/wp-content/plugins/auren-app-bridge/web"},
+    "plugins": ["expo-secure-store", "expo-web-browser", "expo-font", ["expo-video", {"supportsBackgroundPlayback":false,"supportsPictureInPicture":false}]]
+  }
+}
