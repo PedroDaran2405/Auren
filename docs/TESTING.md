@@ -33,3 +33,7 @@ La revisión final conserva `student-navigation-final.json` (pestañas y retorno
 ## Instalación web y actualizaciones 0.2.1
 
 `tests/browser/install.spec.ts` verifica manifest/identidad de inicio, metadatos Apple, PNG de 180/192/512, rechazo de rutas de icono no permitidas, versión pública sin datos de cuenta, ausencia de service workers/Cache Storage, continuidad ante desconexión y aviso/recarga de un nuevo build. Son 5 recorridos de navegador en total; no equivale a instalar en dispositivos reales. La simulación del release actualizado se limita a esa prueba local.
+
+## Preparación Expo tras crear la cuenta
+
+Se instalaron `expo-updates` y `expo-dev-client` con las restricciones del SDK 58 incluidas en `bundledNativeModules.json`. Pasaron TypeScript, evaluación de `expo config --type prebuild` sin generar proyectos nativos y exportaciones Hermes Android/iOS. Ver `expo-native-preparation.json`. No hubo login remoto de Expo, vinculación del UUID, build remoto ni publicación de updates: siguen pendientes enlace completo y token seguro. No se modificó WordPress en este paso.

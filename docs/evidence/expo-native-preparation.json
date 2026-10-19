@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-10-18T21:16:23.187762-06:00",
+  "state": "native dependencies and build profiles prepared; Expo project not linked",
+  "owner_reported_expo_account_created": true,
+  "full_project_url_received": false,
+  "expo_token_available": false,
+  "sdk": "58",
+  "dependencies": {
+    "expo-updates": "~58.0.17",
+    "expo-dev-client": "~58.0.14"
+  },
+  "profiles": [
+    "development",
+    "preview",
+    "production"
+  ],
+  "typecheck": "passed",
+  "expo_prebuild_config": "evaluated successfully without generating native projects",
+  "native_exports": {
+    "android": "Hermes bundle passed",
+    "ios": "Hermes bundle passed"
+  },
+  "project_id": null,
+  "updates_url": null,
+  "remote_builds_started": false,
+  "remote_updates_published": false,
+  "wordpress_modified": false,
+  "physical_device_execution": false,
+  "remaining": [
+    "confirm full Expo project URL and UUID",
+    "authorize environment with secure EXPO_TOKEN",
+    "verify account/project before linking",
+    "configure updates URL and runtime policy",
+    "generate signed Android build using available free quota",
+    "resolve iOS signing route before physical native test"
+  ]
+}
