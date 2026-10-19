@@ -24,7 +24,7 @@ Reabrir un icono puede recuperar la ventana anterior sin recargarla: por eso exi
 
 El repositorio usa Expo/React Native con identificadores `com.aurenfx.academy` y esquema `auren://auth/callback`. El login real usa ese retorno; **Expo Go no sustituye la prueba de la app nativa**. El protocolo de autorización ya pasó en un contexto sin cookies, pero falta validación física del retorno al binario.
 
-Se necesitan cuenta/proyecto de Expo bajo propiedad de Auren y, para iPhone distribuido mediante TestFlight o ad hoc, membresía activa de Apple Developer. Android de prueba puede instalar un APK firmado sin publicar en Google Play. No introducir contraseñas Apple/Expo ni claves privadas en Git o en el chat; vincular cuentas por sus flujos oficiales. El propietario creó después una cuenta/proyecto de Expo y compartió su pantalla de onboarding. Falta recibir el enlace completo del proyecto (el UUID está cortado en la captura) y configurar `EXPO_TOKEN` como secreto del entorno. No hay token de Expo disponible en este entorno al comprobarlo. La membresía de Apple Developer continúa pendiente; crear Expo no la sustituye.
+Se necesitan cuenta/proyecto de Expo bajo propiedad de Auren y, para iPhone distribuido mediante TestFlight o ad hoc, membresía activa de Apple Developer. Android de prueba puede instalar un APK firmado sin publicar en Google Play. No introducir contraseñas Apple/Expo ni claves privadas en Git o en el chat; vincular cuentas por sus flujos oficiales. El propietario creó después una cuenta/proyecto de Expo y compartió su pantalla de onboarding. El propietario compartió el enlace completo: https://expo.dev/accounts/auren-fx/projects/auren-fx?tab=overview y confirmó que conectó el repositorio GitHub. Cuenta/slug esperados: `auren-fx/auren-fx`. Falta verificar el UUID con la API autenticada y configurar `EXPO_TOKEN` como secreto del entorno. No hay token de Expo disponible en este entorno al comprobarlo. La membresía de Apple Developer continúa pendiente; crear Expo no la sustituye.
 
 Perfiles/canales preparados en `apps/mobile/eas.json`: `development` con development client, `preview` para APK/pruebas internas y `production` para distribución; cada uno fija su EAS environment homónimo. Se añadieron `expo-updates` y `expo-dev-client` con las versiones compatibles del SDK 58. **Instalar esos módulos y definir canales no activa EAS Update.** Todavía faltan vincular el proyecto real, URL de actualizaciones y política de runtime, así como firmas/builds. No se ha iniciado una compilación remota ni se ha distribuido una app a dispositivos.
 
@@ -44,8 +44,8 @@ Revisar el diff generado, conservar la URL de WordPress, comprobar las dependenc
 
 ## Autorizar Codex en Expo
 
-1. Desde **Go to dashboard**, copiar el enlace completo del proyecto y compartirlo en el chat. El enlace público sirve para confirmar propietario, slug y UUID; el UUID parcial de una captura no es suficiente.
-2. En Expo, abrir **Account settings → Access tokens** y crear un token identificable, por ejemplo `Codex Auren`.
+1. Enlace del proyecto recibido: https://expo.dev/accounts/auren-fx/projects/auren-fx?tab=overview. Identifica cuenta/slug, pero su redirección a login sin sesión no permite verificar el UUID. Con el token se comprobará el proyecto antes de vincularlo.
+2. Crear el token desde la cuenta **personal**, no los ajustes del proyecto/organización. La documentación oficial enlaza https://expo.dev/settings/access-tokens. Ruta directa para el usuario mostrado en la captura: https://expo.dev/accounts/pedrodaran2405/settings/access-tokens. Iniciar sesión si hace falta y crear un token identificable, por ejemplo `Codex Auren`.
 3. Guardarlo en la configuración segura de Codex como **`EXPO_TOKEN`** (clave) y el token en **Valor**. No usar una variable `EXPO_PUBLIC_*`, pegarlo en el chat, escribirlo en `.env.example` o subirlo a Git.
 4. Comprobar la identidad y el proyecto con EAS antes de modificar la vinculación. Usar el repositorio existente; omitir el paso genérico de crear otro starter. No es necesario instalar paquetes de skills para conectar el proyecto.
 5. Vincular el UUID confirmado, configurar updates/runtime, comprobar la configuración nativa y generar primero el APK con la cuota gratuita disponible. Mantener las compilaciones iOS condicionadas a una vía de firma válida.
@@ -85,3 +85,5 @@ Pendiente físico: instalación real standalone, cookies y retorno desde login, 
 - [Runtime versions](https://docs.expo.dev/eas-update/runtime-versions/)
 - [Updates con EAS Build](https://docs.expo.dev/build/updates/)
 - [TestFlight](https://developer.apple.com/testflight/)
+
+Conectar GitHub a Expo no autentica este entorno en EAS. La [documentación de acceso programático](https://docs.expo.dev/accounts/programmatic-access/) confirma el uso de `EXPO_TOKEN`. La [documentación de compilación desde GitHub](https://docs.expo.dev/build/building-from-github/) exige preparar EAS y un primer build exitoso por plataforma; la conexión del repositorio por sí sola no es una app lista para instalar. Si se usa ese flujo después, la base del proyecto en este monorepo es `apps/mobile`.
