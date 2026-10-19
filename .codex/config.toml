@@ -1,0 +1,4 @@
+# Auren's Cowboy MCP endpoint. Authentication is configured separately by Codex.
+# Never place tokens, WordPress passwords or private CAPTCHA URLs in this file.
+[mcp_servers.www-aurenfx-com]
+url = "https://www.aurenfx.com/wp-json/cowboy-mcp/v1/endpoint"
