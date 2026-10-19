@@ -30,3 +30,5 @@ Para refrescar la auditoría pública: `npm run audit:site`. Usa el proxy de red
 Las pruebas locales no requieren acceso administrativo a producción. Las pruebas autorizadas en Auren usan sesiones efímeras y cuentas QA documentadas, jamás credenciales en código. Si cambia la CA del proxy y Chromium no la reconoce, registrar la CA suministrada por la plataforma en su almacén NSS con permiso de escritura; nunca desactivar TLS. No guardar cookies, contraseñas ni el enlace privado de CAPTCHA en el snapshot o repositorio.
 
 El borrador de entorno guarda instalación y arranque; guardarlo no lo ejecuta ni publica. Una nueva tarea restaurada deberá volver a superar los checks antes de afirmar que la restauración funcionó.
+
+Cowboy MCP ya dispone de una comprobación autenticada de solo lectura: `python3 scripts/check-cowboy.py`. Requiere el secreto `COWBOY_MCP_API_KEY` del entorno seguro. El cliente identifica sus solicitudes explícitamente y conserva verificación TLS. La prueba inicializa MCP y consulta `wp_site_info`; no modifica la academia. Ver COWBOY_MCP para los límites del registro global del cliente.

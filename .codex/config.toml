@@ -3,3 +3,4 @@
 [mcp_servers.www-aurenfx-com]
 url = "https://www.aurenfx.com/wp-json/cowboy-mcp/v1/endpoint"
 bearer_token_env_var = "COWBOY_MCP_API_KEY"
+http_headers = { "User-Agent" = "AurenCodexMCP/0.1 (+https://www.aurenfx.com)" }

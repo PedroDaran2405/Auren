@@ -1,55 +1,37 @@
 # Conexión Cowboy MCP
 
-Servidor: `www-aurenfx-com`. Endpoint HTTPS:
-`https://www.aurenfx.com/wp-json/cowboy-mcp/v1/endpoint`.
+**Conexión autenticada verificada.** La prueba ejecutó inicialización MCP, listado de herramientas, descubrimiento y `wp_site_info` contra Auren. WordPress respondió con nombre **Auren FX**, URL `https://www.aurenfx.com`, WordPress **7.1.3**, PHP **8.3.35** y tema **BuddyBoss Child 1.0.1**. El bridge de Auren figura activo. No se ejecutaron herramientas de escritura.
 
-El propietario pidió registrar ese endpoint con Codex. Se intentó el comando exacto:
+Evidencia sin credenciales: `docs/evidence/cowboy-connection.json`.
+
+## Repetir la comprobación
+
+Con el secreto `COWBOY_MCP_API_KEY` disponible en el entorno seguro:
 
 ```sh
-codex mcp add www-aurenfx-com --url https://www.aurenfx.com/wp-json/cowboy-mcp/v1/endpoint
+cd /workspace/Auren
+python3 scripts/check-cowboy.py
 ```
 
-En este entorno cloud falló porque `/run/codex-environment/codex-home/config.toml`
-está montado como solo lectura. No se cambió ese montaje ni la configuración global.
+El script solo llama a `initialize`, `notifications/initialized`, `tools/list`, `cowboy_discover` y `cowboy_run` con la herramienta fija `wp_site_info`, confirmada como lectura. Comprueba que el sitio de destino sea Auren. No acepta tokens como argumentos ni imprime el valor, cabeceras de autenticación, sesiones o respuesta administrativa completa. No modifica WordPress ni incluye una interfaz para ejecutar herramientas arbitrarias.
 
-Se preparó `.codex/config.toml` sin secretos. Se validó TOML y Codex reconoció la
-entrada al pasar su URL explícitamente con `-c`. `codex mcp get` sin ese argumento
-no cargó la entrada en esta sesión: el archivo preparado no demuestra registro
-global ni activación de herramientas en el chat actual.
+Endpoint: `https://www.aurenfx.com/wp-json/cowboy-mcp/v1/endpoint`.
+Transporte comprobado: HTTP MCP, protocolo negociado `2025-06-18`, servidor Cowboy `1.7.3`. Los dos puntos de entrada son `cowboy_discover` y `cowboy_run`; cada herramienta interna debe descubrirse antes de utilizarse. La comprobación HTTP demuestra acceso MCP autenticado; no implica que aparezcan alias nativos Cowboy entre las herramientas del chat.
 
-También se intentó `codex mcp login` con la configuración explícita y falló la
-conexión durante el descubrimiento de OAuth. No se completó autenticación ni una
-llamada a herramientas Cowboy. Las pruebas HTTP directas previas devolvieron 403
-del proxy antes de llegar al sitio; no es evidencia de una contraseña rechazada
-por Auren ni permite concluir qué autenticación admite Cowboy.
+## Identificación del cliente y seguridad
 
-Para usarlo en una instalación local de Codex con configuración escribible, ejecutar
-el comando anterior. Si el servidor ofrece OAuth, completar su autorización con
-`codex mcp login www-aurenfx-com`. Si requiere token, configurarlo mediante el
-almacenamiento seguro del cliente, nunca en este repositorio. Reiniciar o reconectar
-la sesión del cliente si hace falta para cargar sus herramientas. El registro en
-Codex CLI no demuestra que un chat cloud de Work reciba la misma configuración.
+Las primeras solicitudes con el cliente genérico de Python recibían un 403 de Cloudflare, código **1010** (`browser_signature_banned`), antes de validar el acceso. Se identificó el cliente explícitamente como `AurenCodexMCP/0.1 (+https://www.aurenfx.com)`. Con ese encabezado y la clave del entorno, las llamadas MCP funcionaron. No se cambió Cloudflare, no se suplantó un navegador ni se desactivó TLS o CAPTCHA.
 
-La aceptación exige una llamada real de solo lectura que identifique Auren y sus
-versiones de plugins; esa prueba sigue pendiente mediante Cowboy. La integración
-funcional anterior se verificó con las interfaces web/REST autorizadas de WordPress.
+`.codex/config.toml` contiene URL, referencia al nombre de la variable y User-Agent; no el secreto. La clave se proporciona desde la configuración segura del entorno, limitada a `www.aurenfx.com`. No pegarla en el chat, commits, comandos registrados ni archivos. Si se reemplaza o revoca una clave, actualizar el secreto y repetir la prueba.
 
-## Vía de clave API confirmada en la interfaz de Cowboy
+## Diferencia respecto a la configuración global
 
-La captura proporcionada por el propietario ofrece explícitamente una clave API
-para entornos sin navegador y muestra `--bearer-token-env-var COWBOY_MCP_API_KEY`.
-Se añadió esa referencia a la configuración del proyecto, sin ningún valor secreto.
-Se preparó en el borrador cloud el requisito secreto `COWBOY_MCP_API_KEY`, limitado
-a `www.aurenfx.com`. Todavía falta que el propietario introduzca la clave de Cowboy
-mediante la configuración segura y active el cambio de entorno.
+El comando solicitado por el propietario fue:
 
-Para la primera prueba basta una clave de **Solo lectura**, con un nombre reconocible
-como `Codex Auren - prueba`. No pegarla en el chat, commits, comandos registrados ni
-archivos de configuración. Una vez disponible, probar primero la identificación del
-sitio y el inventario de plugins mediante MCP. La clave no demuestra por sí sola
-que se haya resuelto la restricción de red o que se hayan cargado herramientas en
-esta conversación: esas comprobaciones siguen pendientes.
+```sh
+codex mcp add www-aurenfx-com --url https://www.aurenfx.com/wp-json/cowboy-mcp/v1/endpoint --bearer-token-env-var COWBOY_MCP_API_KEY
+```
 
-Guardar/publicar aquí se refiere a activar una versión de la configuración del
-entorno cloud; no publica la app ni modifica el sitio WordPress. No hace falta
-publicar el entorno por cada mensaje o cada edición de código.
+Ese registro global falló porque `/run/codex-environment/codex-home/config.toml` está montado como solo lectura. No se alteró el montaje. Se validó la configuración preparada mediante argumentos explícitos `-c`; el subcomando `codex mcp get` sin ellos no cargó la entrada en esta sesión. El script reproducible permite verificar y usar el transporte autorizado sin afirmar que se haya modificado el cliente que aloja el chat.
+
+Guardar/publicar en la configuración cloud activa una versión del entorno de trabajo; no publica la app ni modifica WordPress. No hace falta por cada mensaje o edición de código. El secreto ya estaba disponible en la ejecución que produjo la evidencia de aceptación.

@@ -34,7 +34,11 @@ Pasaron: instalación por lockfile, TypeScript, 6 pruebas de cliente, 34 verific
 - No hay APK/IPA firmado, ejecución nativa en dispositivo, PWA instalada ni publicación en tiendas. Se compilaron bundles JavaScript/Hermes.
 - Perfil básico y academia implementados. Comunidad, membresía detallada, notificaciones, promociones y descargas quedan para los siguientes hitos; ver COVERAGE.
 - No se probaron pagos, vencimiento de una suscripción real, combinación de múltiples fuentes de acceso, 2FA ni verificación pendiente. No se modificaron pedidos ni matrículas para simular esos casos.
-- No se contrataron servicios ni aceptaron acuerdos. Cowboy no está expuesto como herramienta en esta sesión; la autorización administrativa se utilizó mediante WordPress web/REST. No hay acceso a otros chats.
+- No se contrataron servicios ni aceptaron acuerdos. La autorización inicial se utilizó mediante WordPress web/REST. Después se verificó acceso autenticado mediante Cowboy MCP por HTTP con una clave del entorno seguro; ver COWBOY_MCP y la evidencia `cowboy-connection.json`. No hay acceso a otros chats.
+
+## Cowboy MCP verificado
+
+`python3 scripts/check-cowboy.py` repite la consulta de solo lectura a Auren con `COWBOY_MCP_API_KEY`. Confirmó Auren FX, WordPress 7.1.3, PHP 8.3.35, BuddyBoss Child y bridge activo. La conexión funcionó al identificar explícitamente el cliente HTTP; Cloudflare rechazaba la firma genérica de Python con código 1010. No se cambiaron reglas de seguridad ni se guardaron valores secretos en el repositorio.
 
 ## Continuar sin repetir la auditoría
 
