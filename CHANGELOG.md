@@ -1,5 +1,14 @@
 # Cambios
 
+## 0.2.0 — 2026-10-18
+
+- Acceso para alumnos registrados; piloto opcional y permisos de LearnDash/BuddyBoss preservados.
+- Login propio sobre WordPress, retorno corregido tras BuddyBoss, errores/reintentos y recuperación con contexto de app.
+- Inicio, Academia, Comunidad, Avisos y Perfil con interfaz renovada e iconos SVG.
+- Feed paginado, detalle/comentarios de lectura y avisos personales reales desde BuddyBoss. Participación social todavía mediante la web.
+- Pruebas reales con la cuenta de alumna proporcionada; caché privada, aislamiento y revocación.
+- 49 comprobaciones PHP y 4 recorridos de navegador; bundle web reducido mediante imports individuales de iconos.
+
 ## 0.1.3 — 2026-10-18, piloto restringido
 
 - Paquete reproducible con avisos de dependencias y licencia OFL de las fuentes.

@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "files": [
+    {
+      "path": "web/_expo/static/js/web/index-5ccbca4dfeb4fa1bd929db0bf43663a4.js",
+      "before_sha256": null,
+      "after_sha256": "a7f63ac2bf27a5d23416021dd2479236a1d42e8007cb386ba1c333fb6bb7990b",
+      "bytes": 606279
+    },
+    {
+      "path": "web/THIRD_PARTY_NOTICES.txt",
+      "before_sha256": "e3dac2c8bf935643dccd5bdc4402296ce5d20341630767991b2a9e0e6facdf67",
+      "after_sha256": "7a5a55d3bcce14e423871d54735d2416ffe7200a91f76863f7b33e1ec52afa35",
+      "bytes": 726084
+    },
+    {
+      "path": "web/metadata.json",
+      "before_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "after_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "bytes": 49
+    },
+    {
+      "path": "web/index.html",
+      "before_sha256": "ca9e0d25c3ef6c43d59b9e681cc4680c585b5e57a3fbdba11f80f47ee2c28cca",
+      "after_sha256": "5f04d527c838b03b5d4f4ed5c229b9f22b7eb4b847936b34ee73f0309176924c",
+      "bytes": 1249
+    }
+  ],
+  "index_updated_last": true,
+  "fonts_unchanged": true,
+  "previous_bundles_preserved": true,
+  "backup_directory": ".local/deploy-backups/web-20261019T022324Z"
+}

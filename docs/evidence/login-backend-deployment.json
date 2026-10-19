@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "files": [
+    {
+      "path": "assets/login.css",
+      "new_file": true,
+      "after_sha256": "ccbcd826716c180c095b070db8bfc3ed2a5a9c7610fd9f7fadf1864f6ec54a59"
+    },
+    {
+      "path": "includes/login.php",
+      "new_file": true,
+      "after_sha256": "975f7d47886173ca7626cc19f4416fd9bfe548c911ba9ce7573068529e09e3ed"
+    },
+    {
+      "path": "includes/community.php",
+      "new_file": true,
+      "after_sha256": "deea3a5a76450e25e74044ff1c06da73f72a6e82d535a1296a06e8cbc17a99d6"
+    },
+    {
+      "path": "auren-app-bridge.php",
+      "before_sha256": "b7ea8a3f63fd28f36893121b93299fb9c9cad085322b1fff873c819f3df6fca1",
+      "after_sha256": "f541c7fa9f9d18db2322dd79ae0a0ed187185d06ba7b3263758e737afe0bfbda"
+    },
+    {
+      "path": "includes/auth.php",
+      "before_sha256": "99bf1b14d68698214d65d59aded25fa1dc0e6645668f444bb03e9db0e9005a82",
+      "after_sha256": "662e579b3377247d7f8aafa369e0efb2ff48132ba3a394756952e9100227197c"
+    },
+    {
+      "path": "includes/admin.php",
+      "before_sha256": "441aaca32f39b9feecf94fd3329f55f6b96e6c17a6311620118b160bed54b51c",
+      "after_sha256": "7e9e632c84e782f7dcb13a9bb7920550c6071275fd2b62a4b03a084748ee465e"
+    },
+    {
+      "path": "includes/rest.php",
+      "before_sha256": "e9d12cd9050cee2320c2804def0fe85bb92e9aac6194e24023dcfe42ba333421",
+      "after_sha256": "030d8f6dd9a64778479c1613261dffea171cf785bd082a59d93db5b8a4c9485d"
+    },
+    {
+      "path": "includes/web.php",
+      "before_sha256": "979e9366ebf90e92863ae1f72911862450e373532855406dea514346da908bf0",
+      "after_sha256": "f1e672d2e42c4b52b11761e21d4d48e98135a916567f134538a923bbc17e32a1"
+    }
+  ],
+  "backup_directory": ".local/deploy-backups/20261019T020628Z",
+  "method": "Cowboy MCP, syntax preflight and checkpoint comparison",
+  "site_content_changes": false
+}

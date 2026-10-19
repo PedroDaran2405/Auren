@@ -27,3 +27,23 @@ function learndash_process_mark_complete($user,$lesson,$calculate=false,$course=
     if($calculate||$force)throw new RuntimeException('Unexpected completion override');
     update_user_meta($user,'fixture_done_'.$course.'_'.$lesson,1);return true;
 }
+
+/** BuddyBoss REST contract double, local only. Not a privacy test of real BuddyBoss. */
+function bp_is_user_spammer($user){return (bool)get_user_meta($user,'fixture_spam',true);}
+function bp_core_get_user_domain($user){return home_url('/members/fixture-'.$user.'/');}
+function bp_get_activity_directory_permalink(){return home_url('/community-web/');}
+function bp_notifications_get_unread_notification_count($user){return 1;}
+function auren_fixture_activity($id){
+    return array('id'=>$id,'name'=>'Comunidad · fixture','content'=>array('rendered'=>'<p>Publicación de prueba local.</p><script>alert("unsafe")</script>'),'date'=>'2026-10-01T10:00:00','type'=>'activity_update','link'=>home_url('/community-web/'),'user_avatar'=>array('thumb'=>''),'comment_count'=>0,'favorite_count'=>0);
+}
+add_action('rest_api_init',function(){
+    register_rest_route('buddyboss/v1','/activity',array('methods'=>'GET','permission_callback'=>'is_user_logged_in','callback'=>function($r){
+        $page=max(1,(int)$r->get_param('page'));$per=(int)($r->get_param('per_page')?:10);
+        $records=array_map('auren_fixture_activity',range(1001,1013));
+        $response=new WP_REST_Response(array_slice($records,($page-1)*$per,$per));$response->header('X-WP-Total',13);$response->header('X-WP-TotalPages',(int)ceil(13/$per));return $response;
+    }));
+    register_rest_route('buddyboss/v1','/activity/(?P<id>[0-9]+)',array('methods'=>'GET','permission_callback'=>function($r){return is_user_logged_in() && (int)$r['id']!==9999?true:new WP_Error('bp_rest_authorization_required','Private fixture',array('status'=>403));},'callback'=>function($r){$data=auren_fixture_activity((int)$r['id']);$data['comments']=array();return $data;}));
+    register_rest_route('buddyboss/v1','/notifications',array('methods'=>'GET','permission_callback'=>function($r){return is_user_logged_in()&&(int)$r['user_id']===get_current_user_id();},'callback'=>function($r){
+        $response=new WP_REST_Response(array(array('id'=>800+get_current_user_id(),'user_id'=>get_current_user_id(),'description'=>array('rendered'=>'<p>Aviso privado · fixture</p>'),'date'=>'2026-10-01T12:00:00','link_url'=>home_url('/community-web/'),'is_new'=>1)));$response->header('X-WP-TotalPages',1);return $response;
+    }));
+});

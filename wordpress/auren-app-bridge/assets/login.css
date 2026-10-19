@@ -1,0 +1,49 @@
+body.login.auren-app-login{background:#070b15;color:#eef3fc;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;background-image:radial-gradient(ellipse at 90% 0,rgba(66,93,241,.18),transparent 60%)}
+.auren-app-login #login{box-sizing:border-box;width:100%;max-width:448px;padding:48px 24px 28px}
+.auren-app-login #login h1{text-align:left;margin-bottom:38px}
+.auren-app-login #login h1 a{background:none;text-indent:0;width:auto;height:auto;margin:0;color:#f4f7ff;font-size:38px;font-weight:850;letter-spacing:-2px;line-height:1.2;text-align:left;outline-offset:5px}
+.auren-login-kicker{color:#9caeff!important;font-size:11px!important;font-weight:750;letter-spacing:2px}
+.auren-login-intro{margin-bottom:26px}
+.auren-login-intro h2{font-size:34px;line-height:1.2;letter-spacing:-1.2px;margin:16px 0;color:#f4f7ff}
+.auren-login-intro p{font-size:15px;line-height:1.65;color:#a2abc0}
+.auren-app-login #loginform,.auren-app-login #lostpasswordform,.auren-app-login #resetpassform{background:#111827;border:1px solid #293146;border-radius:20px;box-shadow:none;padding:26px 22px;margin-top:0;overflow:visible}
+.auren-app-login label{color:#c5cee1;font-size:13px;font-weight:550}
+.auren-app-login .input{background:#0b101d!important;border:1px solid #35405a!important;border-radius:10px!important;color:#f3f6ff!important;box-shadow:none!important;font-size:17px!important;padding:13px 14px!important;min-height:52px;margin-top:8px!important}
+.auren-app-login .input:focus{border-color:#8295ff!important;outline:2px solid #8295ff;outline-offset:2px}
+.auren-app-login .button-primary{float:none!important;width:100%;min-height:52px;background:#5969f4;border:0;border-radius:11px;font-size:15px;font-weight:700;margin-top:22px;box-shadow:none;text-shadow:none}
+.auren-app-login .button-primary:hover,.auren-app-login .button-primary:focus{background:#7180ff}
+.auren-app-login .forgetmenot{float:none!important;margin:12px 0 0}
+.auren-app-login .forgetmenot label{font-weight:400;color:#a2abc0}
+.auren-app-login .wp-pwd .button.wp-hide-pw{height:52px;top:8px;color:#a8b4d1}
+.auren-app-login #nav,.auren-app-login #backtoblog{padding:0;margin:24px 0 0;text-align:center;line-height:1.8}
+.auren-app-login #nav a,.auren-app-login #backtoblog a,.auren-app-login .privacy-policy-link{color:#acbaff}
+.auren-app-login .message,.auren-app-login #login_error,.auren-app-login .success{background:#172035;color:#e2e9fb;border-radius:10px;box-shadow:none;font-size:14px;line-height:1.6}
+.auren-app-login #login_error{border-color:#f39aa4;background:#30202b}
+.auren-app-login .language-switcher{color:#a2abc0;padding:0 24px 24px}
+.auren-app-login a:focus-visible,.auren-app-login button:focus-visible{outline:2px solid #9caeff;outline-offset:4px}
+@media(max-width:380px){.auren-app-login #login{padding-top:28px}.auren-login-intro h2{font-size:30px}}
+/* Override BuddyBoss split-layout customization only for the app login. */
+body.login.auren-app-login{display:block!important;background-color:#080c16!important;background-image:radial-gradient(ellipse at 90% 0,rgba(90,100,240,.15),transparent 65%)!important}
+body.login.auren-app-login .login-split{display:none!important}
+body.login.auren-app-login #login{float:none!important;position:relative!important;left:auto!important;right:auto!important;width:100%!important;max-width:448px!important;min-height:0!important;margin:0 auto!important;padding:42px 24px 26px!important;background:transparent!important}
+body.login.auren-app-login #login,body.login.auren-app-login #login h1,body.login.auren-app-login #login h2,body.login.auren-app-login #login p,body.login.auren-app-login #login input,body.login.auren-app-login #login label,body.login.auren-app-login #login a{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
+body.login.auren-app-login #login > h1{display:block!important;margin:0 0 34px!important;padding:0!important;text-align:left!important}
+body.login.auren-app-login #login h1 a{display:block!important;background:none!important;text-indent:0!important;color:#f4f7ff!important;font-size:39px!important;font-weight:850!important;letter-spacing:-2px!important;width:auto!important;height:auto!important;margin:0!important;text-align:left!important}
+body.login.auren-app-login #login .auren-login-intro h2{font-size:34px!important;font-weight:800!important;line-height:1.2!important;letter-spacing:-1px!important;color:#f4f7ff!important;margin:15px 0!important}
+body.login.auren-app-login #loginform,body.login.auren-app-login #lostpasswordform{border:1px solid #293146!important;background:#111827!important;border-radius:19px!important;padding:25px 22px!important;box-shadow:none!important;margin:0!important}
+body.login.auren-app-login #login label[for=user_login],body.login.auren-app-login #login label[for=user_pass]{position:static!important;clip:auto!important;clip-path:none!important;height:auto!important;width:auto!important;display:block!important;overflow:visible!important;margin:0 0 8px!important;color:#c5cee1!important;font-size:13px!important;line-height:20px!important}
+body.login.auren-app-login #loginform > p:not(.forgetmenot):not(.submit):before,body.login.auren-app-login .user-pass-wrap:before,body.login.auren-app-login .wp-pwd:before{content:none!important;display:none!important}
+body.login.auren-app-login #login .input{padding:13px 14px!important;margin:0 0 20px!important;border:1px solid #35405a!important;border-radius:10px!important;font-size:16px!important;color:#f4f7ff!important;background:#0b101d!important}
+body.login.auren-app-login #loginform .wp-hide-pw{top:0!important;right:0!important;height:49px!important;color:#a2abc0!important}
+body.login.auren-app-login #login .button-primary{background:#7778ff!important;color:#0b1020!important;min-height:52px!important;border-radius:11px!important;font-size:14px!important;font-weight:750!important;border:0!important;box-shadow:none!important;margin-top:22px!important}
+body.login.auren-app-login #nav,body.login.auren-app-login #backtoblog{display:block!important;position:static!important;margin:23px 0 0!important;padding:0!important;text-align:center!important}
+body.login.auren-app-login #login #nav a,body.login.auren-app-login #login #backtoblog a{color:#aeb4ff!important;font-size:13px!important}
+body.login.auren-app-login .privacy-policy-page-link{margin:25px auto 0!important;padding:0!important;font-family:system-ui,sans-serif!important;font-size:11px!important;line-height:19px!important;color:#a2abc0!important}
+body.login.auren-app-login #login > h1{display:none!important}
+body.login.auren-app-login #login .auren-login-brand{margin:0 0 34px!important}
+body.login.auren-app-login #login .auren-login-brand a{font-size:39px!important;line-height:48px!important;font-weight:850!important;letter-spacing:-2px!important;text-decoration:none!important;color:#f4f7ff!important}
+body.login.auren-app-login #login .auren-login-brand span{color:#8be4ce!important}
+body.login.auren-app-login #login label[for=user_login],body.login.auren-app-login #login label[for=user_pass]{min-height:20px!important;max-height:none!important;width:100%!important;text-indent:0!important;opacity:1!important;visibility:visible!important;transform:none!important}
+body.login.auren-app-login #login label[for=user_login]:before,body.login.auren-app-login #login label[for=user_pass]:before,body.login.auren-app-login #login label[for=user_login]:after,body.login.auren-app-login #login label[for=user_pass]:after{display:none!important;content:none!important}
+body.login.auren-app-login #login .label-switch{display:none!important}
+body.login.auren-app-login #loginform > p:after{content:none!important;display:none!important}

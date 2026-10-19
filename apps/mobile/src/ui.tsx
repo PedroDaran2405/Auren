@@ -1,0 +1,43 @@
+import React from 'react';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ArrowUpRight, BookOpen, ChevronRight, Heart, MessageCircle, Play } from './icons';
+import type { Activity, ActivityComment, Course } from '@auren/api-client';
+
+export const colors = { bg:'#080c16',surface:'#111827',raised:'#192236',line:'#263148',text:'#f3f6ff',muted:'#a0adc4',primary:'#7778ff',mint:'#8be4ce' };
+export const font = { regular:'PlusJakartaSans_400Regular',medium:'PlusJakartaSans_600SemiBold',bold:'PlusJakartaSans_700Bold',heavy:'PlusJakartaSans_800ExtraBold' };
+export function Button({children,onPress,secondary=false,disabled=false,compact=false}:{children:React.ReactNode;onPress:()=>void;secondary?:boolean;disabled?:boolean;compact?:boolean}) {
+ return <Pressable accessibilityRole="button" disabled={disabled} onPress={onPress} style={({pressed})=>[u.button,secondary&&u.secondary,compact&&{minHeight:44,paddingVertical:11},disabled&&{opacity:.45},pressed&&{opacity:.8}]}><Text style={[u.buttonText,secondary&&{color:colors.text}]}>{children}</Text></Pressable>;
+}
+export function Avatar({url,name,size=40}:{url?:string|null;name:string;size?:number}) {
+ return <View style={{width:size,height:size,borderRadius:size/2,backgroundColor:'#2a3155',alignItems:'center',justifyContent:'center',overflow:'hidden'}}>{url?<Image source={{uri:url}} style={{width:size,height:size}} accessibilityLabel={name}/>:<Text style={{fontFamily:font.bold,color:'#d0cfff',fontSize:size*.35}}>{name.trim().slice(0,1).toUpperCase()||'A'}</Text>}</View>;
+}
+export function DateLabel({value}:{value:string}) {
+ let text='';
+ try {const date=new Date(/(?:Z|[+-]\d\d:\d\d)$/.test(value)?value:value+'Z');if(!Number.isNaN(date.getTime()))text=new Intl.DateTimeFormat('es-MX',{day:'numeric',month:'short',year:'numeric'}).format(date);}catch{}
+ return text?<Text style={u.caption}>{text}</Text>:null;
+}
+export function ProgressBar({course}:{course:Course}) {
+ return <View style={{gap:10}}><View style={u.between}><Text style={u.caption}>{course.progress.total?`${course.progress.completed} de ${course.progress.total} actividades`:'Contenido por confirmar'}</Text><Text style={u.percent}>{course.progress.percent}%</Text></View><View accessibilityRole="progressbar" accessibilityValue={{min:0,max:100,now:course.progress.percent}} accessibilityLabel={`Avance de ${course.title}`} style={u.track}><View style={[u.fill,{width:`${course.progress.percent}%`}]} /></View></View>;
+}
+export function CourseArt({course,short=false}:{course:Course;short?:boolean}) {
+ return course.image_url?<Image source={{uri:course.image_url}} style={{width:'100%',height:short?156:190}} accessibilityLabel=""/>:<View style={[u.courseArt,short&&{height:156}]}><View style={u.orbit}/><View style={u.orbit2}/><View style={u.artEmblem}><BookOpen size={35} strokeWidth={1.4} color="#c9ceff" accessible={false}/></View><View style={u.artTag}><Text style={u.artTagText}>AUREN ACADEMY</Text></View></View>;
+}
+export function CourseCard({course,onPress}:{course:Course;onPress:()=>void}) {
+ return <Pressable accessibilityRole="button" accessibilityLabel={`Abrir ${course.title}`} onPress={onPress} style={({pressed})=>[u.courseCard,pressed&&{opacity:.85}]}><CourseArt course={course} short/><View style={u.courseBody}><View style={u.between}><Text style={u.tag}>{course.access.label}</Text><ArrowUpRight color={colors.muted} size={19} accessible={false}/></View><Text style={u.cardTitle}>{course.title}</Text>{!!course.summary&&<Text numberOfLines={2} style={u.body}>{course.summary}</Text>}<ProgressBar course={course}/><View style={[u.row,{gap:8,paddingTop:4}]}><Play size={14} color={colors.mint} fill={colors.mint} accessible={false}/><Text style={u.link}>{course.progress.completed?'Continuar curso':'Empezar a aprender'}</Text></View></View></Pressable>;
+}
+export function ActivityCard({item,onPress,detail=false}:{item:Activity;onPress?:()=>void;detail?:boolean}) {
+ const content=<><View style={[u.row,{gap:11}]}><Avatar url={item.author.avatar_url} name={item.author.name}/><View style={{flex:1,gap:3}}><Text style={u.author}>{item.author.name||'Miembro de Auren'}</Text><DateLabel value={item.date}/></View>{!!item.group_name&&<Text numberOfLines={1} style={[u.tag,{maxWidth:105}]}>{item.group_name}</Text>}</View>{item.type==='new_blog_post'&&<Text style={u.caption}>Compartió un artículo</Text>}{!!item.text&&<Text selectable={detail} numberOfLines={detail?undefined:5} style={[u.postText,detail&&{fontSize:16,lineHeight:27}]}>{item.text}</Text>}{!!item.image_url&&<Image source={{uri:item.image_url}} style={u.postImage} accessibilityLabel="Imagen de la publicación"/>}<View style={[u.row,{gap:20,paddingTop:4}]}><View style={[u.row,{gap:6}]}><Heart size={16} color={colors.muted} accessible={false}/><Text style={u.caption}>{item.reaction_count} Me gusta</Text></View><View style={[u.row,{gap:6}]}><MessageCircle size={16} color={colors.muted} accessible={false}/><Text style={u.caption}>{item.comment_count} comentarios</Text></View>{!detail&&<ChevronRight size={19} color={colors.muted} style={{marginLeft:'auto'}} accessible={false}/>}</View></>;
+ return onPress?<Pressable accessibilityRole="button" accessibilityLabel={`Abrir publicación de ${item.author.name}`} onPress={onPress} style={({pressed})=>[u.postCard,pressed&&{opacity:.8}]}>{content}</Pressable>:<View style={u.postCard}>{content}</View>;
+}
+export function Comments({items,depth=0}:{items:ActivityComment[];depth?:number}) {
+ return <View style={{gap:20}}>{items.map(item=><View key={item.id} style={{gap:12,marginLeft:depth?14:0,borderLeftWidth:depth?1:0,borderLeftColor:colors.line,paddingLeft:depth?12:0}}><View style={[u.row,{gap:10}]}><Avatar url={item.author.avatar_url} name={item.author.name} size={30}/><View style={{gap:2}}><Text style={u.author}>{item.author.name}</Text><DateLabel value={item.date}/></View></View><Text style={u.body}>{item.text}</Text>{!!item.replies.length&&<Comments items={item.replies} depth={depth+1}/>}</View>)}</View>;
+}
+export const u=StyleSheet.create({
+ row:{flexDirection:'row',alignItems:'center'},between:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',gap:10},stack:{gap:20},
+ button:{minHeight:54,paddingHorizontal:20,paddingVertical:16,backgroundColor:'#7778ff',borderRadius:14,alignItems:'center',justifyContent:'center'},secondary:{backgroundColor:colors.surface,borderColor:colors.line,borderWidth:1},buttonText:{color:'#090c1a',fontFamily:font.bold,fontSize:14,textAlign:'center',lineHeight:21},
+ eyebrow:{fontFamily:font.bold,fontSize:10,letterSpacing:2,color:'#b5b8ff'},title:{fontFamily:font.heavy,fontSize:30,lineHeight:39,letterSpacing:-1,color:colors.text},sectionTitle:{fontFamily:font.bold,fontSize:18,lineHeight:26,color:colors.text},body:{fontFamily:font.regular,fontSize:14,lineHeight:23,color:colors.muted},caption:{fontFamily:font.regular,fontSize:11,lineHeight:18,color:colors.muted},link:{fontFamily:font.medium,fontSize:13,lineHeight:22,color:colors.mint},author:{fontFamily:font.bold,fontSize:13,lineHeight:20,color:colors.text},
+ cardTitle:{fontFamily:font.bold,fontSize:22,lineHeight:30,color:colors.text,letterSpacing:-.4},tag:{fontFamily:font.medium,fontSize:10,lineHeight:17,color:'#b9bcff',backgroundColor:'#232c48',paddingHorizontal:10,paddingVertical:4,borderRadius:7,overflow:'hidden'},
+ courseCard:{borderRadius:22,borderWidth:1,borderColor:colors.line,backgroundColor:colors.surface,overflow:'hidden'},courseBody:{padding:21,gap:17},courseArt:{height:190,backgroundColor:'#20284b',alignItems:'center',justifyContent:'center',overflow:'hidden'},orbit:{position:'absolute',height:330,width:330,borderRadius:180,borderWidth:1,borderColor:'#4e5b94',transform:[{scaleY:.45},{rotate:'-35deg'}]},orbit2:{position:'absolute',height:235,width:235,borderRadius:130,borderWidth:1,borderColor:'#8895dc',transform:[{scaleY:.45},{rotate:'35deg'}]},artEmblem:{width:72,height:72,borderRadius:22,backgroundColor:'#343f70',alignItems:'center',justifyContent:'center',transform:[{rotate:'-9deg'}]},artTag:{position:'absolute',bottom:12,left:16},artTagText:{fontFamily:font.medium,fontSize:9,letterSpacing:2,color:'#b6c1e9'},
+ track:{height:5,borderRadius:6,backgroundColor:'#293247',overflow:'hidden'},fill:{height:5,backgroundColor:colors.mint},percent:{fontFamily:font.bold,fontSize:12,color:colors.mint},
+ postCard:{padding:19,gap:15,borderRadius:19,backgroundColor:colors.surface,borderWidth:1,borderColor:colors.line},postText:{fontFamily:font.regular,fontSize:14,lineHeight:24,color:'#d7deed'},postImage:{width:'100%',aspectRatio:16/9,borderRadius:11,backgroundColor:colors.raised},
+});

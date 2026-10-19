@@ -1,0 +1,46 @@
+{
+  "identity": {
+    "status": 200,
+    "code": null,
+    "private_cache": true
+  },
+  "intro": {
+    "status": 200,
+    "code": null,
+    "private_cache": true,
+    "progress": {
+      "completed": 0,
+      "total": 7,
+      "percent": 0
+    }
+  },
+  "pro": {
+    "status": 403,
+    "code": "course_forbidden",
+    "private_cache": true
+  },
+  "cross_user_notifications": {
+    "status": 400,
+    "code": "invalid_target",
+    "private_cache": true
+  },
+  "original_cross_user_notifications": {
+    "status": 403,
+    "code": "bp_rest_authorization_required",
+    "private_cache": true
+  },
+  "community": {
+    "first_status": 200,
+    "second_status": 200,
+    "first_count": 10,
+    "second_count": 10,
+    "pages_distinct": true
+  },
+  "notifications": {
+    "first_status": 200,
+    "second_status": 200,
+    "first_count": 20,
+    "second_count": 20,
+    "pages_distinct": true
+  }
+}

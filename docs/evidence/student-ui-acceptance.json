@@ -1,0 +1,16 @@
+{
+  "tabs": [
+    "Inicio",
+    "Academia",
+    "Comunidad",
+    "Avisos",
+    "Perfil"
+  ],
+  "no_horizontal_overflow": true,
+  "course_and_lesson_opened": true,
+  "community_cards_visible": 10,
+  "activity_detail_opened": true,
+  "notification_cards_visible": 20,
+  "profile_visible": true,
+  "page_errors": []
+}

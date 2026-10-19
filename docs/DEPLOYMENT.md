@@ -1,6 +1,6 @@
 # Despliegue y reversión del piloto
 
-El propietario autorizó desarrollo y cambios prudentes en su academia, conservando apariencia y funcionamiento. La instalación es producción, no staging. Se prueba primero el código en WordPress aislado.
+El propietario autorizó desarrollo y cambios prudentes en su academia, conservando apariencia y funcionamiento. El propietario aclaró posteriormente que Auren está en desarrollo y aún no está en producción. Se conserva el cuidado sobre sus datos y el sitio existente. Se prueba primero el código en WordPress aislado.
 
 ## Cambios del piloto
 
@@ -29,3 +29,13 @@ Se instaló y activó 0.1.0; después se actualizaron únicamente archivos del b
 Durante la instalación inicial, WordPress ejecutó automáticamente una actualización de traducción es_ES de WooCommerce Subscriptions. No se solicitó actualizar su código ni se cambiaron sus ajustes. Se registra este efecto incidental para no afirmar que la instalación solo escribió archivos propios.
 
 Comprobación visual: portada y página pública de trading devolvieron 200; conservaron título y 60/63 hojas de estilo respectivamente. Las capturas antes/después de 1280×900 son idénticas píxel a píxel; se guardan hashes y capturas en `visual-comparison.json`. La portada ya mostraba solo su título, navegación y pie en la observación previa; no se modificó su contenido. Esto no sustituye pruebas de todas las páginas ni de dispositivos reales.
+
+## Actualización 0.2.0: alumnos y experiencia BuddyBoss
+
+La lista del piloto pasa a ser opcional mediante `auren_app_pilot_restricted` (por defecto false). Las opciones anteriores se conservan. La presentación de login se activa solo para retornos de la app y se incluye en `assets/login.css`; el login ordinario conserva el tema. `includes/login.php` registra el retorno después del filtro final de BuddyBoss y conserva el ingreso por correo, recuperación y errores.
+
+Se añaden lecturas de comunidad y avisos a través del REST original de BuddyBoss como el usuario actual. No se crean tablas sociales ni se cambian roles o matrículas. El formulario usa los mecanismos de autenticación existentes; el bypass privado se utilizó exclusivamente en la automatización temporal.
+
+Archivos nuevos primero, loader después y rutas al final, con preflight sintáctico de Cowboy. Para recursos web: nuevo JS primero y HTML al final; fuentes sin cambios, bundles anteriores conservados. Respaldos de archivos propios en `.local/deploy-backups/`; hashes y orden en las evidencias. Cowboy tiene un error al listar directorios recursivamente (`SplFileInfo::isDot`), por lo que se verificaron rutas concretas con lectura de archivos; no se modificó Cowboy.
+
+Reversión puntual: restablecer archivos del bridge desde el respaldo o el paquete 0.1.3 conocido, o desactivar únicamente Auren App Bridge. No restaurar la base de datos entera. Para volver temporalmente al acceso acotado, marcar la restricción de piloto en Ajustes; la lista previa 592/593 se conserva.

@@ -1,0 +1,11 @@
+{
+  "student_id": 20,
+  "consent_and_pkce": true,
+  "cookie_free_bearer_identity": 200,
+  "community_status": 200,
+  "notifications_status": 200,
+  "outside_namespace_status": 401,
+  "revocation_status": 200,
+  "after_revocation_status": 401,
+  "native_device_execution": false
+}

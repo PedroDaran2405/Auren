@@ -1,0 +1,20 @@
+// Public per-icon entry points keep the full Lucide catalog out of Metro bundles.
+export { default as ArrowLeft } from 'lucide-react-native/icons/arrow-left';
+export { default as ArrowUpRight } from 'lucide-react-native/icons/arrow-up-right';
+export { default as Bell } from 'lucide-react-native/icons/bell';
+export { default as BookOpen } from 'lucide-react-native/icons/book-open';
+export { default as Check } from 'lucide-react-native/icons/check';
+export { default as CheckCheck } from 'lucide-react-native/icons/check-check';
+export { default as ChevronRight } from 'lucide-react-native/icons/chevron-right';
+export { default as CircleHelp } from 'lucide-react-native/icons/circle-question-mark';
+export { default as FileText } from 'lucide-react-native/icons/file-text';
+export { default as Heart } from 'lucide-react-native/icons/heart';
+export { default as Home } from 'lucide-react-native/icons/house';
+export { default as LockKeyhole } from 'lucide-react-native/icons/lock-keyhole';
+export { default as MessageCircle } from 'lucide-react-native/icons/message-circle';
+export { default as Play } from 'lucide-react-native/icons/play';
+export { default as RefreshCw } from 'lucide-react-native/icons/refresh-cw';
+export { default as ShieldCheck } from 'lucide-react-native/icons/shield-check';
+export { default as Sparkles } from 'lucide-react-native/icons/sparkles';
+export { default as UserRound } from 'lucide-react-native/icons/user-round';
+export { default as Users } from 'lucide-react-native/icons/users';

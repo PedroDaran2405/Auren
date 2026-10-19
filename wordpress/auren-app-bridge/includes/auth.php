@@ -46,11 +46,15 @@ add_filter('rest_authentication_errors', function ($result) {
 
 function auren_app_permission() {
     if (!auren_app_secure_transport()) { return auren_app_error('https_required', 'Se requiere una conexión segura.', 503); }
-    $uid=get_current_user_id();
+    return auren_app_user_access(get_current_user_id());
+}
+
+function auren_app_user_access($uid) {
     if(!$uid){return auren_app_error('login_required', 'Inicia sesión para continuar.', 401);}
+    if(!get_userdata($uid) || !user_can($uid,'read')){return auren_app_error('account_unavailable','Tu cuenta no está disponible.',403);}
     if((function_exists('bp_is_user_spammer') && bp_is_user_spammer($uid)) || (function_exists('bp_is_user_deleted') && bp_is_user_deleted($uid))){return auren_app_error('account_unavailable','Tu cuenta no está disponible.',403);}
     $pilot=array_map('absint',explode(',',(string)get_option('auren_app_pilot_users','')));
-    if(!current_user_can('manage_options') && !in_array($uid,$pilot,true)){return auren_app_error('pilot_only','Tu cuenta todavía no está habilitada para esta versión de la app.',403);}
+    if(get_option('auren_app_pilot_restricted',false) && !user_can($uid,'manage_options') && !in_array($uid,$pilot,true)){return auren_app_error('pilot_only','Tu cuenta todavía no está habilitada para esta versión de la app.',403);}
     return true;
 }
 
@@ -80,6 +84,8 @@ function auren_app_authorize() {
     header("Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'");
     if (!auren_app_secure_transport()) { wp_die('Se requiere HTTPS.', '', array('response'=>503)); }
     auth_redirect(); // WordPress/BuddyBoss owns passwords, verification and 2FA.
+    $access=auren_app_user_access(get_current_user_id());
+    if(is_wp_error($access)){wp_die(esc_html($access->get_error_message()),'Auren',array('response'=>403));}
     global $wpdb;
     $table = $wpdb->prefix . 'auren_app_codes';
     $id = sanitize_text_field(wp_unslash($_GET['request_id'] ?? ''));
@@ -116,6 +122,8 @@ function auren_app_auth_exchange(WP_REST_Request $request) {
     // Atomic consumption makes simultaneous/replayed exchanges fail.
     $deleted = $wpdb->query($wpdb->prepare("DELETE FROM $table WHERE request_id=%s AND code_hash=%s AND expires>=%d", $id,$row->code_hash,time()));
     if (1 !== $deleted || !get_user_by('id',$row->user_id)) { return auren_app_error('invalid_grant', 'El acceso ya fue utilizado.', 401); }
+    $access=auren_app_user_access((int)$row->user_id);
+    if(is_wp_error($access)){return $access;}
     $manager = WP_Session_Tokens::get_instance((int)$row->user_id);
     $expires = time() + HOUR_IN_SECONDS;
     $token = $manager->create($expires);

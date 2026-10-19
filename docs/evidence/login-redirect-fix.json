@@ -1,0 +1,5 @@
+{
+  "file": "includes/login.php",
+  "sha256": "787e18ffae03201bca774bf56b747c50cf44907e9534a05096b8dcc316a3de3c",
+  "reason": "BuddyBoss redirect runs at PHP_INT_MAX; register app redirect after plugin initialization"
+}

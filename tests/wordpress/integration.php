@@ -1,5 +1,6 @@
 <?php
 require '/var/www/html/wp-load.php';
+ob_start();
 if(wp_get_environment_type()!=='local'||!defined('AUREN_TEST_FIXTURES')){exit(1);}
 $count=0;
 function check($condition,$label){global $count;$count++;if(!$condition){fwrite(STDERR,"FAIL $label\n");exit(1);}echo "PASS $label\n";}
@@ -35,7 +36,26 @@ update_option('auren_app_verified_learndash_version','unexpected');check(code(au
 check(auren_app_youtube_id('https://www.youtube.com/watch?v=NVB_hUQFtt4')==='NVB_hUQFtt4','real provider URL parsed');
 check(auren_app_youtube_id('https://www.youtube.com.attacker.example/watch?v=NVB_hUQFtt4')===null,'lookalike video origin rejected');
 check(auren_app_youtube_id('https://www.youtube.com/watch?v[]=bad')===null,'malformed provider ID rejected');
-update_option('auren_app_pilot_users',(string)$b);check(code(auren_app_permission(),'pilot_only'),'non-pilot user denied');update_option('auren_app_pilot_users',$a.','.$b);
+update_option('auren_app_pilot_users',(string)$b);delete_option('auren_app_pilot_restricted');check(auren_app_permission()===true,'ordinary student accepted without pilot allowlist');
+update_option('auren_app_pilot_restricted',true);check(code(auren_app_permission(),'pilot_only'),'optional restricted pilot still enforced');
+update_option('auren_app_pilot_restricted',false);update_option('auren_app_pilot_users',$a.','.$b);
+update_user_meta($a,'fixture_spam',1);check(code(auren_app_permission(),'account_unavailable'),'suspended student denied');delete_user_meta($a,'fixture_spam');
+check(auren_app_is_return_url(home_url('/?auren_app=1')),'app return URL accepted');
+check(!auren_app_is_return_url('https://attacker.example/?auren_app=1'),'external app-looking redirect rejected');
+check(!auren_app_is_return_url(home_url('/wp-admin/')),'ordinary WordPress redirects remain outside app flow');
+$user=get_user_by('id',$a);$return=home_url('/?auren_app=1');
+add_filter('login_redirect',static fn($redirect)=>home_url('/members/'),PHP_INT_MAX);
+do_action('login_init');
+check(apply_filters('login_redirect',home_url('/members/'),$return,$user)===$return,'student returns to app instead of BuddyBoss dashboard');
+check(apply_filters('login_redirect',home_url('/members/'),home_url('/courses/'),$user)===home_url('/members/'),'unrelated website login redirect preserved');
+check(str_contains(wp_login_url($return),'auren_app_auth=1'),'app login URL carries scoped presentation flag');
+$feed=auren_app_community(1);check(!is_wp_error($feed)&&count($feed['items'])===10&&$feed['next_page']===2,'BuddyBoss feed and pagination delegated to original API');
+check(!str_contains($feed['items'][0]['text'],'<script')&&!str_contains($feed['items'][0]['text'],'alert('),'feed content converted to plain text');
+check(code(auren_app_activity(9999),'community_unavailable'),'BuddyBoss denies private activity before app receives content');
+$alerts=auren_app_notifications(1);check($alerts['items'][0]['id']===800+$a,'notifications are bound to authenticated recipient');
+$r=new WP_REST_Request('GET','/auren/v1/notifications');$r->set_param('user_id',$b);check(rest_do_request($r)->get_status()===400,'notification recipient cannot be changed by client');
+wp_set_current_user($b);check(auren_app_notifications(1)['items'][0]['id']===800+$b,'another student sees only their notifications');wp_set_current_user($a);
+check(auren_app_safe_url('javascript:alert(1)')===null&&auren_app_safe_url('https://attacker.example/',true)===null,'unsafe and cross-origin action URLs excluded');
 // Reproduce the installed BuddyBoss private REST policy without its commercial dependencies.
 $private_rest = function($response,$handler,$request) {
     if(!is_user_logged_in() && !in_array($request->get_route(),apply_filters('bb_exclude_endpoints_from_restriction',array('/existing/public/route')),true)){

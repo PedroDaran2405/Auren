@@ -20,7 +20,7 @@ No hay autenticación con una clave administrativa compartida, una application p
 
 ## Permisos y aprendizaje
 
-El plugin exige versión de LearnDash verificada y restringe el piloto a IDs configurados y administradores. Los endpoints personales nunca aceptan un user_id objetivo. Curso publicado, permiso de LearnDash, requisitos, asociación curso/lección y disponibilidad se comprueban antes de devolver texto o video. Las lecciones lineales respetan sus anteriores; los requisitos avanzados conservan el flujo web. Los resultados privados no se almacenan de forma persistente en el cliente.
+El plugin exige versión de LearnDash verificada y admite alumnos con una cuenta válida. La restricción a IDs de piloto es opcional y está desactivada por defecto. Los endpoints personales nunca aceptan un user_id objetivo. Curso publicado, permiso de LearnDash, requisitos, asociación curso/lección y disponibilidad se comprueban antes de devolver texto o video. Las lecciones lineales respetan sus anteriores; los requisitos avanzados conservan el flujo web. Los resultados privados no se almacenan de forma persistente en el cliente.
 
 La escritura está desactivada por defecto. Cuando se habilita para el piloto, solo completa lecciones simples pasando por las funciones de LearnDash, sin `force`. Videos con progresión, tareas, temas y cuestionarios se abren en la academia. Una petición fallida no se reenvía automáticamente. No existe cola offline que prolongue permisos.
 
@@ -29,3 +29,11 @@ La escritura está desactivada por defecto. Cuando se habilita para el piloto, s
 MP4/HLS autorizados utilizan expo-video. Los bloques YouTube se reconocen en servidor; el cliente recibe un ID validado y muestra el reproductor oficial después de una acción del usuario. Nativo usa un WebView limitado al reproductor de YouTube; el resto de la academia se representa con componentes React Native. No se extraen ni descargan videos embebidos. El contenido de texto se sanea; no se ejecutan shortcodes arbitrarios desde REST.
 
 La salida web comparte pantallas, tipos y lógica. Requiere adaptadores de autenticación y reproductor. Es una web móvil inicial, no una PWA instalada ya certificada; manifiesto, iconos finales, política de actualización y pruebas físicas son otro hito.
+
+## Comunidad y login en 0.2.0
+
+La app añade lecturas paginadas de comunidad y avisos. El bridge ejecuta solicitudes internas al REST de BuddyBoss como el usuario autenticado, con contexto view y sin permitir elegir destinatario o privacidad desde el cliente. La visibilidad de actividad, grupos, bloqueos y detalle permanece en BuddyBoss. Las notificaciones se fijan al usuario actual y además se comprueba el destinatario al reducir la respuesta. Se devuelve texto plano y URLs seguras, sin ejecutar HTML social en la app.
+
+La versión no publica comentarios ni reacciones desde la interfaz propia: el enlace abre su destino original. No se envían notificaciones a terceros. El contador representa avisos internos de BuddyBoss, no push APNs/FCM.
+
+El formulario de acceso sigue siendo wp-login.php con sus hooks y protecciones. El diseño propio solo se aplica a URLs de retorno verificadas de la app o su marca de contexto; no cambia la presentación ordinaria del sitio. El retorno se registra en login_init después del filtro PHP_INT_MAX de BuddyBoss. Se evita el borrado diferido del campo contraseña al reintentar en este contexto. Los destinos externos se rechazan.

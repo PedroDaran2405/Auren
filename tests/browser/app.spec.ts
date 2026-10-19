@@ -4,7 +4,9 @@ import { createHash, randomBytes } from 'node:crypto';
 const password=readFileSync('.local/compose.env','utf8').match(/^AUREN_TEST_PASSWORD=(.+)$/m)![1]!;
 const ids=JSON.parse(readFileSync('.local/test-state.json','utf8'));
 async function login(page:import('@playwright/test').Page,user='alumno-a'){
- await page.goto('/wp-login.php?redirect_to='+encodeURIComponent('http://localhost:8080/?auren_app=1'));
+ await page.goto('/?auren_app=1');
+ await page.getByRole('button',{name:/Entrar a mi academia/}).click();
+ await expect(page.locator('body')).toHaveClass(/auren-app-login/);
  await page.locator('#user_login').fill(user);await page.locator('#user_pass').fill(password);await page.locator('#wp-submit').click();
  await expect(page.getByRole('tab',{name:'Academia'})).toBeVisible();
 }
@@ -14,6 +16,7 @@ test('student enters, opens lesson, completes, reloads, signs out, another stude
  await page.screenshot({path:'artifacts/welcome-mobile.png',fullPage:true});
  await login(page);
  await page.getByRole('button',{name:'Abrir Curso de integración · fixture'}).click();
+ await expect(page.getByRole('tab',{name:'Academia',exact:true})).toHaveAttribute('aria-selected','true');
  await page.getByRole('button',{name:/Lección 1: Lección 1/}).click();
  await page.getByRole('button',{name:'Marcar como completada'}).click();
  await expect(page.getByText('Tu avance se guardó en la academia.')).toBeVisible();
@@ -42,9 +45,51 @@ test('native authorization code requires consent, PKCE, one use and revocation',
  const replay=await page.request.post('/wp-json/auren/v1/auth/exchange',{data:body});expect(replay.status()).toBe(401);
  const headers={Authorization:`Bearer ${token}`};
  expect((await page.request.get('/wp-json/auren/v1/me',{headers})).status()).toBe(200);
+ expect((await page.request.get('/wp-json/auren/v1/community',{headers})).status()).toBe(200);
  expect((await page.request.get(`/wp-json/auren/v1/courses/${ids.pro}`,{headers})).status()).toBe(403);
  expect((await page.request.get(`/wp-json/auren/v1/me?user_id=${ids['alumno-b']}`,{headers})).status()).toBe(400);
  expect((await page.request.get('/wp-json/wp/v2/users/me',{headers})).status()).toBe(401);
  expect((await page.request.post('/wp-json/auren/v1/logout',{headers,data:{}})).status()).toBe(200);
  expect((await page.request.get('/wp-json/auren/v1/me',{headers})).status()).toBe(401);
+});
+
+test('wrong password preserves app return, email login works, and all student screens stay private after logout',async({page})=>{
+ await page.goto('/wp-login.php');await expect(page.locator('body')).not.toHaveClass(/auren-app-login/);
+ await page.goto('/?auren_app=1');await page.getByRole('button',{name:/Entrar a mi academia/}).click();
+ await expect(page.locator('body')).toHaveClass(/auren-app-login/);
+ await page.locator('#user_login').fill('alumno-b@example.invalid');await page.locator('#user_pass').fill('deliberately-invalid');await page.locator('#wp-submit').click();
+ await expect(page.locator('#login_error')).toBeVisible();
+ await expect(page.locator('body')).toHaveClass(/auren-app-login/);
+ expect(await page.locator('[name=redirect_to]').inputValue()).toContain('auren_app=1');
+ await page.waitForLoadState('load');
+ await page.locator('#user_login').fill('alumno-b@example.invalid');await page.locator('#user_pass').fill(password);
+ await expect(page.locator('#user_pass')).toHaveValue(password);await page.locator('#wp-submit').click();
+ await expect(page.getByRole('tab',{name:'Comunidad',exact:true})).toBeVisible();
+ await expect(page.getByText('Hola, Alumno.')).toBeVisible();
+ await page.getByRole('tab',{name:'Comunidad',exact:true}).click();
+ await expect(page.getByText('Publicación de prueba local.').first()).toBeVisible();
+ const first=page.getByRole('button',{name:'Abrir publicación de Comunidad · fixture'}).first();await first.click();
+ await expect(page.getByRole('button',{name:'Volver a la comunidad'})).toBeVisible();
+ await expect(page.getByText('La conversación', {exact:true})).toBeVisible();
+ await page.getByRole('button',{name:'Volver a la comunidad'}).click();
+ await expect(page.getByRole('heading',{name:'Comunidad',exact:true})).toBeVisible();
+ await page.getByRole('tab',{name:'Avisos',exact:true}).click();
+ await expect(page.getByText('Aviso privado · fixture',{exact:true})).toBeVisible();
+ await page.getByRole('tab',{name:'Perfil',exact:true}).click();
+ await expect(page.getByText('Cuenta conectada a tu academia')).toBeVisible();
+ await page.getByRole('button',{name:'Cerrar sesión',exact:true}).click();
+ await expect(page.getByRole('button',{name:/Entrar a mi academia/})).toBeVisible();
+ await expect(page.getByRole('tab')).toHaveCount(0);
+ await expect(page.getByText('Aviso privado · fixture')).toHaveCount(0);
+ expect((await page.request.get('/wp-json/auren/v1/community')).status()).toBe(401);
+ expect((await page.request.get('/wp-json/auren/v1/notifications')).status()).toBe(401);
+ await page.reload();await expect(page.getByRole('tab')).toHaveCount(0);
+});
+
+test('password recovery retains Auren context and a lost cookie cannot restore private screens',async({page,context})=>{
+ await page.goto('/?auren_app=1');await page.getByRole('link',{name:'Recuperar acceso'}).click();
+ await expect(page.locator('#lostpasswordform')).toBeVisible();await expect(page.locator('body')).toHaveClass(/auren-app-login/);
+ await page.getByRole('link',{name:'Volver a Auren App'}).click();await expect(page.getByRole('button',{name:/Entrar a mi academia/})).toBeVisible();
+ await login(page);await page.getByRole('tab',{name:'Avisos',exact:true}).click();await expect(page.getByText('Aviso privado · fixture',{exact:true})).toBeVisible();
+ await context.clearCookies();await page.reload();await expect(page.getByRole('tab')).toHaveCount(0);await expect(page.getByText('Aviso privado · fixture')).toHaveCount(0);
 });

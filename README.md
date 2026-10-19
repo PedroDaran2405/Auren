@@ -25,8 +25,10 @@ Para desarrollo móvil: `npm start`. Para empaquetar JavaScript nativo: `npm run
 
 El plugin está en `wordpress/auren-app-bridge`. `build:web` incorpora una exportación web generada dentro del plugin, excluida de Git. La ruta de entrada es `?auren_app=1`; no reemplaza páginas ni menús del sitio.
 
-Piloto real: https://www.aurenfx.com/?auren_app=1 (administradores y cuentas QA habilitadas). El acceso público general sigue cerrado. Para generar el ZIP reproducible después de `build:web`: `npm run package:plugin`.
+App conectada a Auren: https://www.aurenfx.com/?auren_app=1 (alumnos registrados y administradores). Para generar el ZIP reproducible después de `build:web`: `npm run package:plugin`.
 
-En Ajustes → Auren App se configura la versión de LearnDash verificada, IDs de alumnos del piloto y escritura de progreso. Por defecto el acceso de alumnos y la escritura están cerrados. La app usa el login existente y conserva sus protecciones.
+En Ajustes → Auren App se configura la versión de LearnDash verificada, la escritura de progreso y una restricción de piloto opcional. Por defecto los alumnos registrados pueden entrar; cada curso y publicación conserva sus permisos. El login de la app reutiliza WordPress, con presentación propia y retorno corregido para BuddyBoss. La escritura de progreso se habilita por separado.
+
+La interfaz incluye Inicio, Academia, Comunidad, Avisos y Perfil. El feed y los avisos se consultan desde BuddyBoss con el usuario real. Publicaciones, comentarios y reacciones se realizan todavía en la web de la comunidad.
 
 [Auditoría](docs/AUDIT.md) · [Arquitectura](docs/ARCHITECTURE.md) · [API](docs/API.md) · [Cobertura](docs/COVERAGE.md) · [Pruebas](docs/TESTING.md) · [Despliegue y reversión](docs/DEPLOYMENT.md) · [Distribución y costos](docs/DISTRIBUTION.md).

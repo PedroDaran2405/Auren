@@ -1,0 +1,8 @@
+{
+  "logged_in": true,
+  "returned_to_app": false,
+  "me_status": 403,
+  "me_code": "pilot_only",
+  "student_id": 20,
+  "observed_redirect": "BuddyBoss student dashboard instead of the app"
+}

@@ -1,0 +1,9 @@
+{
+  "branded_login": true,
+  "incorrect_password_rejected": true,
+  "redirect_preserved_on_error": true,
+  "returned_to_app": true,
+  "student_id": 20,
+  "identity_status": 200,
+  "email_login": true
+}

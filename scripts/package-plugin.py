@@ -19,7 +19,7 @@ with zipfile.ZipFile(target, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
         if not source.is_file():
             continue
         relative = source.relative_to(plugin)
-        if relative.parts[0] not in ('includes', 'web', 'auren-app-bridge.php') or any(p.startswith('.') for p in relative.parts):
+        if relative.parts[0] not in ('includes', 'assets', 'web', 'auren-app-bridge.php') or any(p.startswith('.') for p in relative.parts):
             raise SystemExit(f'Unexpected plugin file: {relative}')
         info = zipfile.ZipInfo('auren-app-bridge/' + relative.as_posix())
         info.create_system = 3
