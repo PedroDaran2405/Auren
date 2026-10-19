@@ -33,3 +33,23 @@ Codex CLI no demuestra que un chat cloud de Work reciba la misma configuración.
 La aceptación exige una llamada real de solo lectura que identifique Auren y sus
 versiones de plugins; esa prueba sigue pendiente mediante Cowboy. La integración
 funcional anterior se verificó con las interfaces web/REST autorizadas de WordPress.
+
+## Vía de clave API confirmada en la interfaz de Cowboy
+
+La captura proporcionada por el propietario ofrece explícitamente una clave API
+para entornos sin navegador y muestra `--bearer-token-env-var COWBOY_MCP_API_KEY`.
+Se añadió esa referencia a la configuración del proyecto, sin ningún valor secreto.
+Se preparó en el borrador cloud el requisito secreto `COWBOY_MCP_API_KEY`, limitado
+a `www.aurenfx.com`. Todavía falta que el propietario introduzca la clave de Cowboy
+mediante la configuración segura y active el cambio de entorno.
+
+Para la primera prueba basta una clave de **Solo lectura**, con un nombre reconocible
+como `Codex Auren - prueba`. No pegarla en el chat, commits, comandos registrados ni
+archivos de configuración. Una vez disponible, probar primero la identificación del
+sitio y el inventario de plugins mediante MCP. La clave no demuestra por sí sola
+que se haya resuelto la restricción de red o que se hayan cargado herramientas en
+esta conversación: esas comprobaciones siguen pendientes.
+
+Guardar/publicar aquí se refiere a activar una versión de la configuración del
+entorno cloud; no publica la app ni modifica el sitio WordPress. No hace falta
+publicar el entorno por cada mensaje o cada edición de código.
