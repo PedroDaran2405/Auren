@@ -1,5 +1,12 @@
 # Cambios
 
+## 0.2.1 — 2026-10-19
+
+- Manifest e iconos de instalación en pantalla de inicio de iPhone/Android; metadatos standalone e instrucciones dentro de la app.
+- Detección de nueva entrega web al volver/consultar cada minuto y recarga explícita, sin interrumpir videos o progreso.
+- Versión/build visible y botón Actualizar app en Perfil; metadatos públicos sin sesión ni datos privados.
+- Sin service worker ni caché offline privada. Circuito APK/TestFlight/EAS Update documentado; cuentas y binarios todavía pendientes.
+
 ## 0.2.0 — 2026-10-18
 
 - Acceso para alumnos registrados; piloto opcional y permisos de LearnDash/BuddyBoss preservados.

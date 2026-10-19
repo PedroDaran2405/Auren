@@ -29,3 +29,7 @@ Se reprodujeron dos fallos antes de cambiar código: retorno al panel de BuddyBo
 Las fixtures locales añaden respuestas simuladas del REST de BuddyBoss, explícitas y excluidas del ZIP. No se presenta esa simulación como una prueba de privacidad de BuddyBoss real; el acceso real se verificó por separado con la alumna. No se enviaron publicaciones, reacciones, mensajes o correos de recuperación reales durante las pruebas.
 
 La revisión final conserva `student-navigation-final.json` (pestañas y retornos), `student-logout-final.json` (rutas privadas 401 tras salir) y `student-reentry-final.json` (reingreso y progreso). El nuevo intento de video con la alumna volvió a cargar el reproductor, pero la red cloud rechazó los hosts de medios de Google con `ERR_TUNNEL_CONNECTION_FAILED`; `student-video-final.json` registra ese resultado. No se declara reproducción comprobada.
+
+## Instalación web y actualizaciones 0.2.1
+
+`tests/browser/install.spec.ts` verifica manifest/identidad de inicio, metadatos Apple, PNG de 180/192/512, rechazo de rutas de icono no permitidas, versión pública sin datos de cuenta, ausencia de service workers/Cache Storage, continuidad ante desconexión y aviso/recarga de un nuevo build. Son 5 recorridos de navegador en total; no equivale a instalar en dispositivos reales. La simulación del release actualizado se limita a esa prueba local.

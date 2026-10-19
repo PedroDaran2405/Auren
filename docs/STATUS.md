@@ -1,6 +1,14 @@
 # Estado y continuidad
 
-Actualizado el 18 de octubre de 2026 (México). Versión **0.2.0**. Trabajo en rama local `work`, conservado en `main` de GitHub. El propietario aclaró que Auren todavía está en desarrollo; se sigue cuidando su contenido y funcionamiento.
+Actualizado el 19 de octubre de 2026 (UTC). Versión **0.2.1**. Trabajo en rama local `work`, conservado en `main` de GitHub. El propietario aclaró que Auren todavía está en desarrollo; se sigue cuidando su contenido y funcionamiento.
+
+## Pruebas en celulares: entrega web instalable
+
+Se prepararon manifest, identidad estable e iconos PNG para agregar la app a inicio en Safari/Chrome. La app detecta una nueva entrega al volver a primer plano y cada minuto visible, ofrece cargarla y conserva una recarga manual en Perfil. No se recarga automáticamente mientras el alumno estudia. La versión/build visible permite identificar reportes. No se registra un service worker ni se guarda contenido privado para uso offline.
+
+El propietario confirmó que aún no tiene Expo ni Apple Developer. La instalación web permite empezar ahora; todavía no hay APK/IPA, EAS Update configurado ni validación física. Solo se reservaron canales preview/production para el futuro. [DEVICE_TESTING](DEVICE_TESTING.md) explica instalación, actualización, diferencias de cambios web/nativos y pasos de cuentas/firma. La entrega 0.2.1 se desplegó con Cowboy. Manifest, iconos y build se verificaron por HTTPS contra Auren; no hubo errores JavaScript ni desbordamiento en el viewport móvil. Evidencias `device-preview-*.json`. Esta comprobación sigue siendo distinta de instalarla físicamente en los teléfonos.
+
+Pruebas locales: TypeScript, 6 pruebas del cliente, 49 comprobaciones PHP y 5 recorridos de navegador, incluyendo metadatos/iconos, aislamiento de caché, error de red y aviso de nueva versión. Exportación Hermes Android/iOS correcta, sin presentarla como binario instalable.
 
 ## Acceso de alumnos corregido
 

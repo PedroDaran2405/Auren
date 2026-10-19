@@ -9,7 +9,7 @@ export type Activity = {id:number;author:Author;text:string;date:string;type:str
 export type Notification = {id:number;text:string;date:string;url:string|null;avatar_url:string|null;unread:boolean};
 export type Page<T> = {items:T[];next_page:number|null};
 export type Session = { access_token: string; expires_at: number; token_type: 'Bearer' };
-export type Bootstrap = { api_url: string; site_url: string; nonce: string | null; login_url: string; register_url: string; lost_password_url: string; environment: string };
+export type Bootstrap = { api_url: string; site_url: string; nonce: string | null; login_url: string; register_url: string; lost_password_url: string; environment: string; release?: { version:string; build_id:string }; release_url?:string };
 export class ApiError extends Error {
   constructor(public code: string, message: string, public status: number) { super(message); }
 }

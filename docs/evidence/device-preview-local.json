@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-19T02:57:12.495894+00:00",
+  "version": "0.2.1",
+  "typecheck": "passed",
+  "api_client_tests": {
+    "passed": 6
+  },
+  "wordpress_contract_checks": {
+    "passed": 49,
+    "scope": "WordPress/MariaDB real; isolated LMS/BuddyBoss fixtures"
+  },
+  "browser_tests": {
+    "passed": 5,
+    "scope": "Four existing account/navigation flows plus one installation/release/offline flow; last installation test rerun after public asset permissions and clock setup were corrected"
+  },
+  "web_export": "passed",
+  "native_js_exports": {
+    "android": "passed",
+    "ios": "passed",
+    "scope": "Hermes only, not signed binaries"
+  },
+  "device_installations": "not yet tested",
+  "expo_account": "owner does not have an account yet",
+  "apple_developer_membership": "owner does not have membership yet",
+  "native_remote_updates": "not configured; future channels reserved only"
+}

@@ -1,0 +1,42 @@
+{
+  "version": "0.2.1",
+  "build_id": "9cd8f3311538d4b5b636b83d1f1b0bc1267362c1e022f607e86475bcea2ee0b9",
+  "anonymous_bootstrap": true,
+  "manifest_status": 200,
+  "manifest_display": "standalone",
+  "manifest_identity_equals_start": true,
+  "icons": [
+    {
+      "size": "192x192",
+      "status": 200,
+      "sha256": "7c4159929bff03562fa638b031079b0a7c6bf36bdd8289d90614f11b1ad0a7cd"
+    },
+    {
+      "size": "512x512",
+      "status": 200,
+      "sha256": "e34823670093d909e78668ab39a6515f104270a86c4a052c8f57860dec0d2b66"
+    },
+    {
+      "size": "180x180",
+      "status": 200,
+      "sha256": "d12c3f7ae12fa1413fd10ebe4c2c2447d3fdfdbdc9686e0c3975fe45efa9eb17"
+    }
+  ],
+  "manifest_parse_errors": [],
+  "chromium_installability_errors": [
+    {
+      "errorId": "in-incognito",
+      "errorArguments": []
+    }
+  ],
+  "no_store_release": true,
+  "public_release_fields": [
+    "build_id",
+    "version"
+  ],
+  "no_horizontal_overflow": true,
+  "service_worker_count": 0,
+  "cache_storage_count": 0,
+  "page_errors": [],
+  "validation_scope": "Chromium mobile viewport on real site; not physical iPhone/Android installation"
+}

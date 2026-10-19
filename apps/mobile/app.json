@@ -2,7 +2,8 @@
   "expo": {
     "name": "Auren",
     "slug": "auren",
-    "version": "0.1.0",
+    "version": "0.2.1",
+    "icon": "./assets/icon.png",
     "scheme": "auren",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",

@@ -1,0 +1,5 @@
+{
+  "scope": "Persistent Chromium context (not incognito); not physical installation",
+  "manifest_parse_errors": [],
+  "installability_errors": []
+}

@@ -1,0 +1,66 @@
+{
+  "version": "0.2.1",
+  "files": [
+    {
+      "path": "assets/icon-180.png.b64",
+      "before_sha256": null,
+      "after_sha256": "4540fbeaf7b619f31c6ed9eb496a0efb59bab82c246c12621a7fa165d8d45a57",
+      "bytes": 7145
+    },
+    {
+      "path": "assets/icon-192.png.b64",
+      "before_sha256": null,
+      "after_sha256": "91f93caf70d630665b7dd96625db7218c0e47b2a4d3848dc51e1dfd873572da7",
+      "bytes": 7685
+    },
+    {
+      "path": "assets/icon-512.png.b64",
+      "before_sha256": null,
+      "after_sha256": "0f2d48f787ef1deb266c7ec23a871cbbeb2042d9b194c52491a84df1fdfa88c5",
+      "bytes": 21157
+    },
+    {
+      "path": "web/_expo/static/js/web/index-b9e04f547e7068ea815d417733b3bb92.js",
+      "before_sha256": null,
+      "after_sha256": "0aa60f27823021db3a77e2b4ce7e737f07af4d950ef5027748cfcc53098079d5",
+      "bytes": 609598
+    },
+    {
+      "path": "auren-app-bridge.php",
+      "before_sha256": "f541c7fa9f9d18db2322dd79ae0a0ed187185d06ba7b3263758e737afe0bfbda",
+      "after_sha256": "b0ddf0526581ac22b39b2f947cfcf9a5d372d75b5e90e2354d7cdb24f399bc4e",
+      "bytes": 1573
+    },
+    {
+      "path": "includes/web.php",
+      "before_sha256": "f1e672d2e42c4b52b11761e21d4d48e98135a916567f134538a923bbc17e32a1",
+      "after_sha256": "c0a15c18c90259cd3f0937ddd939e99d231ddb81c1c8389e4d618e7eb360c908",
+      "bytes": 4105
+    },
+    {
+      "path": "web/THIRD_PARTY_NOTICES.txt",
+      "before_sha256": "7a5a55d3bcce14e423871d54735d2416ffe7200a91f76863f7b33e1ec52afa35",
+      "after_sha256": "7a5a55d3bcce14e423871d54735d2416ffe7200a91f76863f7b33e1ec52afa35",
+      "bytes": 726084
+    },
+    {
+      "path": "web/metadata.json",
+      "before_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "after_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "bytes": 49
+    },
+    {
+      "path": "web/index.html",
+      "before_sha256": "674c0d928dcca4125c95dba726e29582511f7d5d3efb41ac3dc8b1b1892c8705",
+      "after_sha256": "9cd8f3311538d4b5b636b83d1f1b0bc1267362c1e022f607e86475bcea2ee0b9",
+      "bytes": 1251
+    }
+  ],
+  "index_updated_last": true,
+  "font_hashes_verified": 4,
+  "previous_bundles_preserved": true,
+  "backup_directory": ".local/deploy-backups/install-20261019T025818Z",
+  "method": "Cowboy MCP, checkpoint/hash comparison and PHP syntax preflight",
+  "site_theme_modified": false,
+  "service_worker_registered": false
+}

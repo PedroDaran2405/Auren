@@ -32,3 +32,5 @@ En Ajustes → Auren App se configura la versión de LearnDash verificada, la es
 La interfaz incluye Inicio, Academia, Comunidad, Avisos y Perfil. El feed y los avisos se consultan desde BuddyBoss con el usuario real. Publicaciones, comentarios y reacciones se realizan todavía en la web de la comunidad.
 
 [Auditoría](docs/AUDIT.md) · [Arquitectura](docs/ARCHITECTURE.md) · [API](docs/API.md) · [Cobertura](docs/COVERAGE.md) · [Pruebas](docs/TESTING.md) · [Despliegue y reversión](docs/DEPLOYMENT.md) · [Distribución y costos](docs/DISTRIBUTION.md).
+
+Para instalar la versión web de prueba en iPhone/Android y conocer cómo se reciben cambios: [DEVICE_TESTING](docs/DEVICE_TESTING.md). La instalación web no requiere cuentas de Expo/Apple; APK/TestFlight y EAS Update siguen pendientes de vincular cuentas y generar binarios.

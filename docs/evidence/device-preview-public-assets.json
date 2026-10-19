@@ -1,0 +1,23 @@
+{
+  "files": [
+    {
+      "path": "web/_expo/static/js/web/index-b9e04f547e7068ea815d417733b3bb92.js",
+      "http_status": 200,
+      "sha256": "0aa60f27823021db3a77e2b4ce7e737f07af4d950ef5027748cfcc53098079d5",
+      "matches_deployed_source": true
+    },
+    {
+      "path": "web/THIRD_PARTY_NOTICES.txt",
+      "http_status": 200,
+      "sha256": "7a5a55d3bcce14e423871d54735d2416ffe7200a91f76863f7b33e1ec52afa35",
+      "matches_deployed_source": true
+    },
+    {
+      "path": "web/metadata.json",
+      "http_status": 200,
+      "sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "matches_deployed_source": true
+    }
+  ],
+  "html_note": "Cloudflare injects its existing analytics script into HTML responses; on-disk HTML hash is verified by the public release metadata instead."
+}

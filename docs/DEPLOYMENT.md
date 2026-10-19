@@ -39,3 +39,11 @@ Se añaden lecturas de comunidad y avisos a través del REST original de BuddyBo
 Archivos nuevos primero, loader después y rutas al final, con preflight sintáctico de Cowboy. Para recursos web: nuevo JS primero y HTML al final; fuentes sin cambios, bundles anteriores conservados. Respaldos de archivos propios en `.local/deploy-backups/`; hashes y orden en las evidencias. Cowboy tiene un error al listar directorios recursivamente (`SplFileInfo::isDot`), por lo que se verificaron rutas concretas con lectura de archivos; no se modificó Cowboy.
 
 Reversión puntual: restablecer archivos del bridge desde el respaldo o el paquete 0.1.3 conocido, o desactivar únicamente Auren App Bridge. No restaurar la base de datos entera. Para volver temporalmente al acceso acotado, marcar la restricción de piloto en Ajustes; la lista previa 592/593 se conserva.
+
+## Actualización 0.2.1: pruebas desde pantalla de inicio
+
+El bridge sirve manifest, iconos fijos y metadatos de versión públicos mediante parámetros propios. Los PNG se conservan como recursos base64 de solo lectura para permitir despliegue con la herramienta textual de Cowboy; el servidor devuelve exclusivamente las tres dimensiones permitidas y no escribe archivos al servirlos. No se instala un worker con scope sobre la academia. Se publican iconos/JS antes del loader y web.php; el HTML se reemplaza al final. Ver `device-preview-deployment.json` y DEVICE_TESTING. El aviso web comprueba cambios, pero nunca ejecuta un despliegue: publicar código en GitHub no actualiza automáticamente el sitio o un teléfono.
+
+Cowboy devuelve un texto de marcador al leer archivos grandes, no su contenido. Para recursos estáticos públicos se contrastan y respaldan los bytes mediante HTTPS con el hash esperado; nunca se acepta el hash de ese marcador como si fuera el archivo original.
+
+Cloudflare añade su script de analítica existente a respuestas HTML, por lo que un hash HTTP del documento transformado difiere del archivo local. La identidad de build se contrasta con el hash del archivo servido por los metadatos de release y los JS/licencias se verifican byte a byte por HTTPS. No se cambió la configuración de Cloudflare.
