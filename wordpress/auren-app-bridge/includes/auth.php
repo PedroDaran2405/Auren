@@ -102,7 +102,8 @@ function auren_app_authorize() {
     }
     echo '<!doctype html><html lang="es"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Conectar Auren</title><body style="background:#000918;color:#f6f8ff;font:18px system-ui;padding:32px;max-width:540px;margin:auto"><h1>Conecta tu academia</h1><p>La app Auren podrá consultar tus cursos y registrar tu aprendizaje con esta cuenta durante una hora.</p><p>Cuenta: <strong>' . esc_html(wp_get_current_user()->display_name) . '</strong></p><form method="post">';
     wp_nonce_field('auren_app_consent_' . $id);
-    echo '<button style="padding:16px;background:#3d5cff;color:white;border:0;border-radius:12px;font:inherit">Continuar en Auren</button></form><p>Puedes cerrar esta ventana para cancelar.</p></body></html>';
+    $switch_url=wp_logout_url(add_query_arg(array('action'=>'auren_app_authorize','request_id'=>$id),admin_url('admin-post.php')));
+    echo '<button style="padding:16px;background:#3d5cff;color:white;border:0;border-radius:12px;font:inherit">Continuar en Auren</button></form><p><a style="color:#aeb4ff" href="'.esc_url($switch_url).'">Usar otra cuenta</a></p><p>Puedes cerrar esta ventana para cancelar.</p></body></html>';
     exit;
 }
 add_action('admin_post_auren_app_authorize', 'auren_app_authorize');

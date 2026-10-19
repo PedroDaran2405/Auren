@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "includes/auth.php",
+      "sha256": "861aacb8a7947596a8cf4583dc42caf0841df069a9c531041b2bfb51feb2e7d1"
+    },
+    {
+      "path": "includes/login.php",
+      "sha256": "10e5a815c65c7e09579fe0e740d8ba88a6b140267baa2f0a17bf381cf7d1c717"
+    }
+  ],
+  "native_consent_has_account_switch": true,
+  "logout_return_scoped_to_app": true
+}

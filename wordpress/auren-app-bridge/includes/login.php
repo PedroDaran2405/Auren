@@ -29,7 +29,10 @@ function auren_app_login_redirect($redirect,$requested,$user){
 }
 // BuddyBoss registers its redirect at PHP_INT_MAX. Attach after plugin initialization
 // on wp-login.php, so its member-dashboard redirect cannot overwrite the app return.
-add_action('login_init',function(){add_filter('login_redirect','auren_app_login_redirect',PHP_INT_MAX,3);});
+add_action('login_init',function(){
+    add_filter('login_redirect','auren_app_login_redirect',PHP_INT_MAX,3);
+    add_filter('logout_redirect','auren_app_login_redirect',PHP_INT_MAX,3);
+});
 
 add_action('login_form',function(){
     if(auren_app_login_context()){echo '<input type="hidden" name="auren_app_auth" value="1">';}

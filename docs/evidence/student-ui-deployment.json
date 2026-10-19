@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "files": [
     {
-      "path": "web/_expo/static/js/web/index-5ccbca4dfeb4fa1bd929db0bf43663a4.js",
+      "path": "web/_expo/static/js/web/index-9d57c542d194096170b16840a3e27d89.js",
       "before_sha256": null,
-      "after_sha256": "a7f63ac2bf27a5d23416021dd2479236a1d42e8007cb386ba1c333fb6bb7990b",
-      "bytes": 606279
+      "after_sha256": "efcf46a95ca981487494e4f9b2fa85d265dd5f4e5133c25f4f729bc55c6258c1",
+      "bytes": 606315
     },
     {
       "path": "web/THIRD_PARTY_NOTICES.txt",
@@ -21,13 +21,13 @@
     },
     {
       "path": "web/index.html",
-      "before_sha256": "ca9e0d25c3ef6c43d59b9e681cc4680c585b5e57a3fbdba11f80f47ee2c28cca",
-      "after_sha256": "5f04d527c838b03b5d4f4ed5c229b9f22b7eb4b847936b34ee73f0309176924c",
+      "before_sha256": "bdc2e8899bb7bad3ca23736ea4b04100df3e8ebd67b9730414e8aac261994da7",
+      "after_sha256": "674c0d928dcca4125c95dba726e29582511f7d5d3efb41ac3dc8b1b1892c8705",
       "bytes": 1249
     }
   ],
   "index_updated_last": true,
   "fonts_unchanged": true,
   "previous_bundles_preserved": true,
-  "backup_directory": ".local/deploy-backups/web-20261019T022324Z"
+  "backup_directory": ".local/deploy-backups/web-20261019T022741Z"
 }

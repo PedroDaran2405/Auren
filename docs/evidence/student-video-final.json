@@ -1,0 +1,16 @@
+{
+  "playback_verified": false,
+  "current_time": 0,
+  "paused": false,
+  "ready_state": 0,
+  "media_failures": [
+    {
+      "failure": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "host": "rr5---sn-p5qddn7z.googlevideo.com"
+    },
+    {
+      "failure": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "host": "rr3---sn-a5m7lnld.googlevideo.com"
+    }
+  ]
+}

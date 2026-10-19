@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-10-19T02:27:38.747273+00:00",
+  "version": "0.2.0",
+  "typecheck": "passed",
+  "api_client_tests": {
+    "passed": 6,
+    "failed": 0
+  },
+  "wordpress_contract_checks": {
+    "passed": 49,
+    "failed": 0,
+    "scope": "Real WordPress/MariaDB with explicitly isolated LearnDash/BuddyBoss fixtures"
+  },
+  "browser_tests": {
+    "passed": 4,
+    "failed": 0,
+    "scope": "Chromium 390x844; username/email, wrong password retry, progress, community, notifications, logout, recovery, cookie loss and native auth protocol"
+  },
+  "web_export": "passed",
+  "native_js_exports": {
+    "android": "passed",
+    "ios": "passed",
+    "scope": "Hermes bundles, not APK/IPA or device execution"
+  },
+  "web_bundles": [
+    {
+      "name": "index-9d57c542d194096170b16840a3e27d89.js",
+      "bytes": 606315
+    }
+  ],
+  "physical_device_tests": "not run",
+  "source_secret_scan": "no credential patterns found"
+}

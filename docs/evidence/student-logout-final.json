@@ -1,0 +1,8 @@
+{
+  "login_visible": true,
+  "private_tabs_removed": true,
+  "courses_after_logout": 401,
+  "community_after_logout": 401,
+  "notifications_after_logout": 401,
+  "reload_stays_logged_out": true
+}

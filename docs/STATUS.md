@@ -29,13 +29,16 @@ La participación (publicar, comentar o reaccionar) se abre todavía en la comun
 
 ## Sesiones y pruebas
 
+- Cierre de sesión real: desaparecen las pestañas privadas; cursos, comunidad y avisos devuelven 401 y la recarga permanece fuera. El reingreso se comprueba por separado y conserva el progreso.
 - La cuenta ID 20 pasó consentimiento/PKCE y acceso bearer sin cookies a identidad, comunidad y avisos; bearer fuera del namespace rechazado y revocación confirmada. Es una prueba de protocolo, no de ejecución en un teléfono.
 - Pasaron TypeScript, 6 pruebas de cliente, 49 comprobaciones PHP y 4 recorridos de navegador local. Las fixtures son explícitas y se mantienen fuera del paquete.
 - Exportaciones web y Hermes Android/iOS correctas. Sigue sin existir APK/IPA firmado, prueba física o PWA instalada.
 - Bundle web aproximadamente 606 KB: importaciones de iconos individuales evitan incluir todo el catálogo de Lucide. Avisos de licencias se incorporan al paquete.
 - La sincronización app→LearnDash y web→app fue verificada en el hito anterior con QA 592/593. En este hito no se completaron lecciones ni se cambió manualmente el progreso de la alumna ID 20.
 
-Evidencia actual: `docs/evidence/student-login-before.json`, `student-login-after.json`, `student-ui-acceptance.json`, `student-permissions-final.json`, `student-native-session.json` y `student-logout-final.json`. Capturas del navegador en `artifacts/student-*-final.png`; credenciales y cookies no se serializan.
+Evidencia actual: `docs/evidence/student-login-before.json`, `student-login-after.json`, `student-ui-acceptance.json`, `student-permissions-final.json`, `student-native-session.json`, `student-navigation-final.json`, `student-logout-final.json` y `student-reentry-final.json`. Capturas del navegador en `artifacts/student-*-final.png`; entrada y login anónimos en `docs/evidence/screenshots/0.2-*.png`. Las capturas de la cuenta de alumna no se publican en Git. Credenciales y cookies no se serializan.
+
+El reproductor real de YouTube carga, pero el último intento sigue sin reproducir: el proxy cloud devuelve `ERR_TUNNEL_CONNECTION_FAILED` a los hosts de `googlevideo.com`. Ver `student-video-final.json`; queda pendiente comprobar reproducción en un dispositivo.
 
 ## Despliegue y reversión
 

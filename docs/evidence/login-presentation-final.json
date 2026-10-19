@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "assets/login.css",
+      "sha256": "e6ad968555a142a1a1651df893e389a6f7c311fa9cdf50fe0fadb5b229679362"
+    },
+    {
+      "path": "includes/login.php",
+      "sha256": "de13f0ea61fe047c5aa4bf2fc806fb8f40be98809a90461bfdd4764ff3233110"
+    }
+  ],
+  "scope": "Only the app login context; ordinary BuddyBoss login preserved"
+}

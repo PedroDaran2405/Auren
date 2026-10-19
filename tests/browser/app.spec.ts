@@ -36,6 +36,7 @@ test('native authorization code requires consent, PKCE, one use and revocation',
  const verifier=randomBytes(32).toString('hex');const state=randomBytes(32).toString('hex');const challenge=createHash('sha256').update(verifier).digest('base64url');
  const start=await page.request.post('/wp-json/auren/v1/auth/start',{data:{challenge,state}});expect(start.status()).toBe(200);const pending=await start.json();
  await page.goto(pending.authorize_url);await expect(page.getByText('Conecta tu academia')).toBeVisible();
+ await expect(page.getByRole('link',{name:'Usar otra cuenta',exact:true})).toBeVisible();
  const nonce=await page.locator('[name=_wpnonce]').inputValue();
  const consent=await page.request.post(pending.authorize_url,{form:{_wpnonce:nonce},maxRedirects:0});expect(consent.status()).toBe(302);
  const location=new URL(consent.headers().location!);expect(location.protocol).toBe('auren:');expect(location.searchParams.get('state')).toBe(state);
