@@ -2,6 +2,8 @@
 
 App propia para la academia de Auren: Expo / React Native / TypeScript y un plugin independiente de WordPress. WordPress mantiene usuarios, cursos, permisos y progreso. Consulta [el estado real](docs/STATUS.md) antes de asumir que un hito está terminado.
 
+Para continuar con otra IA: [contexto y guía de entrega](CONTEXTO-PARA-OTRA-IA.md). `python3 scripts/export-project.py --output artifacts/Auren-proyecto-completo-0.3.0.zip` exporta código, documentación, pruebas, web generada y el plugin empaquetado, sin claves ni dependencias instaladas. El argumento opcional `--attachments-root /ruta/a/adjuntos` incorpora los cinco archivos originales de referencia. Antes de exportar, conservar el build web y el paquete del mismo checkpoint o regenerarlos con los comandos documentados.
+
 ## Desarrollo
 
 Node 24.x, Python 3, Chromium y Docker con Compose. Ver [configuración cloud](docs/ENVIRONMENT.md). El checkout de cada tarea cloud ya está aislado; usa este checkout, sin crear worktrees salvo petición explícita.
