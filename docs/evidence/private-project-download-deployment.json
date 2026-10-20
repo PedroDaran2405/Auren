@@ -1,0 +1,15 @@
+{
+  "url": "https://www.aurenfx.com/wp-content/plugins/auren-handoff-download/download.php",
+  "archive_sha256": "e75dd9e0ed23ed76bbf25ce0fa9dfad19964a5d29241b0db1171c88d330b9571",
+  "archive_bytes": 54368093,
+  "parts": 18,
+  "access": "WordPress cookie and manage_options; other members denied",
+  "anonymous_status": 302,
+  "direct_part_http_status": 404,
+  "expires_at_utc": "2026-11-19T21:46:25+00:00",
+  "not_an_activated_plugin": true,
+  "app_or_theme_modified": false,
+  "payload_published_to_github": false,
+  "manifest_sha256": "042876aee3d52641f6076817397fea18d8204e2e9ae77b27e792632ff09a5ebc",
+  "handler_sha256": "db6a455261b6a399ffc1c6642a44957228a1d2dc54f7959c959ba82fda67eb52"
+}

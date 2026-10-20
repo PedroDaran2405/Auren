@@ -55,3 +55,9 @@ Ver `connected-experience-deployment.json`, `connected-auth-consent-deployment.j
 5. Push APNs/FCM y offline con aceptación independiente. Un bundle JavaScript no demuestra esas capacidades.
 
 Para continuar: leer AUDIT, BUDDYBOSS_REVIEW, ARCHITECTURE, API y ENVIRONMENT. `python3 scripts/check-cowboy.py` verifica acceso en lectura. No guardar credenciales, cookies, claves ni el enlace privado de CAPTCHA en el repositorio.
+
+## Entrega y descarga para otra IA
+
+`CONTEXTO-PARA-OTRA-IA.md` resume objetivos, implementación, aceptación, accesos, restricciones y siguientes hitos. El exportador conserva código, pruebas, documentación, recursos generados y, opcionalmente, los cinco adjuntos originales. El ZIP completo del checkpoint 879ba4e se verificó por hashes, sin claves ni sesiones.
+
+Los enlaces de archivo del entorno no resultaron descargables para el propietario. Se preparó una [descarga protegida en Auren](PROJECT_DOWNLOAD.md), en una carpeta auxiliar independiente que no se activa como plugin ni modifica app/tema. Aceptación real: administrador 200, alumno 403, visitante enviado al login; el ZIP descargado coincide con sus 54 368 093 bytes y SHA-256 original. Ambas sesiones temporales se cerraron. Como GitHub es público, no se publicaron allí los adjuntos y el respaldo completos.

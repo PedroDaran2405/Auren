@@ -1,0 +1,13 @@
+{
+  "student_download_status": 403,
+  "admin_download_status": 200,
+  "content_type": "application/zip",
+  "content_disposition": "attachment; filename=\"Auren-proyecto-completo-0.3.0.zip\"",
+  "cache_control": "private, no-store, max-age=0",
+  "download_bytes": 54368093,
+  "download_sha256": "e75dd9e0ed23ed76bbf25ce0fa9dfad19964a5d29241b0db1171c88d330b9571",
+  "download_matches_original": true,
+  "admin_after_logout_status": 302,
+  "student_after_logout_status": 302,
+  "credentials_or_cookies_persisted": false
+}
