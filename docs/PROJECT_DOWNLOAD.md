@@ -21,3 +21,11 @@ Se añadió únicamente `wp-content/plugins/auren-handoff-download/` como carpet
 Para retirar esta entrega, eliminar únicamente esa carpeta auxiliar y sus 20 archivos, después de comprobar que todavía corresponden al manifiesto registrado. No desactivar Auren App Bridge ni borrar carpetas del proyecto principal. La caducidad bloquea el acceso, pero no elimina los archivos automáticamente.
 
 Evidencia de despliegue y comprobación: `docs/evidence/private-project-download-*.json`. El acceso de prueba usa sesiones temporales sin persistir contraseñas/cookies y se cierra al terminar.
+
+## Lectura en un chat sin ZIP
+
+https://www.aurenfx.com/wp-content/plugins/auren-handoff-download/opus.php descarga `AUREN-PARA-OPUS.txt`: un archivo UTF-8 de lectura con contexto, 66 archivos de implementación/configuración/documentación/pruebas y sus hashes. Pesa aproximadamente 405 KB. Se adjunta directamente como texto, sin MCP o GitHub; también se pueden copiar sus secciones por ruta.
+
+El paquete de lectura excluye package-lock.json, dependencias instaladas, bundles, videos y adjuntos históricos para reducir contexto. No reemplaza el ZIP completo como fuente para reconstruir/instalar: el lockfile permanece allí. Los recursos binarios imprescindibles están en base64. El lector no recibe credenciales ni capacidad de modificar el servidor; debe entregar parches con rutas.
+
+Usa la misma autorización/caducidad de la descarga completa. Los dos archivos remotos adicionales son `opus.php` y `opus-content.php`; retirar también esos archivos al eliminar la carpeta auxiliar. `scripts/export-opus.py` permite regenerar el paquete, y `scripts/private-opus-download.php` conserva el lector auditable.

@@ -1,0 +1,13 @@
+{
+  "student_download_status": 403,
+  "admin_download_status": 200,
+  "content_type": "text/plain; charset=utf-8",
+  "content_disposition": "attachment; filename=\"AUREN-PARA-OPUS.txt\"",
+  "cache_control": "private, no-store, max-age=0",
+  "download_bytes": 405209,
+  "download_sha256": "e43836e971a8ea58801eff01e4fbe02412a9ab4e2701a9df0b3afb245ff44dc4",
+  "download_matches_original": true,
+  "admin_after_logout_status": 302,
+  "student_after_logout_status": 302,
+  "credentials_or_cookies_persisted": false
+}
