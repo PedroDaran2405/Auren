@@ -17,7 +17,7 @@ npm run test:wordpress
 npm run test:browser
 ```
 
-`local:up` genera contraseñas locales aleatorias en `.local/compose.env`, crea WordPress/MariaDB aislados y dos alumnos de pruebas. Son **fixtures** de contratos de LearnDash, no una copia de la academia. `test:wordpress` reinicia únicamente el progreso de esas fixtures. La interfaz local indica expresamente que es contenido de pruebas.
+`local:up` genera contraseñas locales aleatorias en `.local/compose.env`, crea WordPress/MariaDB aislados y dos alumnos de pruebas. Son **fixtures** de los contratos LearnDash/BuddyBoss, no una copia de la academia. Antes de repetir la suite completa de navegador, `test:wordpress` restablece su estado local. La interfaz local indica expresamente que es contenido de pruebas.
 
 Para desarrollo móvil: `npm start`. Para empaquetar JavaScript nativo: `npm run build:native-js`. Eso no genera un APK/IPA. Usa `.env.example` como referencia; ninguna contraseña o clave administrativa debe aparecer en variables `EXPO_PUBLIC_*`.
 
@@ -29,8 +29,10 @@ App conectada a Auren: https://www.aurenfx.com/?auren_app=1 (alumnos registrados
 
 En Ajustes → Auren App se configura la versión de LearnDash verificada, la escritura de progreso y una restricción de piloto opcional. Por defecto los alumnos registrados pueden entrar; cada curso y publicación conserva sus permisos. El login de la app reutiliza WordPress, con presentación propia y retorno corregido para BuddyBoss. La escritura de progreso se habilita por separado.
 
-La interfaz incluye Inicio, Academia, Comunidad, Avisos y Perfil. El feed y los avisos se consultan desde BuddyBoss con el usuario real. Publicaciones, comentarios y reacciones se realizan todavía en la web de la comunidad.
+La interfaz incluye Inicio, Academia, Comunidad, Avisos y Perfil. El feed y los avisos se consultan desde BuddyBoss con el usuario real. Publicaciones, comentarios y Me gusta ya se gestionan dentro de la app y se guardan en BuddyBoss. Perfil ampliado, avisos leídos, búsqueda de miembros, reportes y bloqueos usan los mismos registros de WordPress.
 
-[Auditoría](docs/AUDIT.md) · [Arquitectura](docs/ARCHITECTURE.md) · [API](docs/API.md) · [Cobertura](docs/COVERAGE.md) · [Pruebas](docs/TESTING.md) · [Despliegue y reversión](docs/DEPLOYMENT.md) · [Distribución y costos](docs/DISTRIBUTION.md).
+[Auditoría](docs/AUDIT.md) · [Revisión BuddyBoss](docs/BUDDYBOSS_REVIEW.md) · [Arquitectura](docs/ARCHITECTURE.md) · [API](docs/API.md) · [Cobertura](docs/COVERAGE.md) · [Pruebas](docs/TESTING.md) · [Despliegue y reversión](docs/DEPLOYMENT.md) · [Distribución y costos](docs/DISTRIBUTION.md).
 
 Para instalar la versión web de prueba en iPhone/Android y conocer cómo se reciben cambios: [DEVICE_TESTING](docs/DEVICE_TESTING.md). La instalación web no requiere cuentas de Expo/Apple; APK/TestFlight y EAS Update siguen pendientes de vincular cuentas y generar binarios.
+
+La revisión de BuddyBoss y las diferencias entre comprobaciones locales, reales y pendientes están en [BUDDYBOSS_REVIEW](docs/BUDDYBOSS_REVIEW.md). No se declara equivalencia total ni entrega nativa por implementar recorridos web.

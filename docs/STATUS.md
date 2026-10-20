@@ -1,65 +1,57 @@
 # Estado y continuidad
 
-Actualizado el 18 de octubre de 2026 (Ciudad de México). Versión **0.2.1**. Trabajo en rama local `work`, conservado en `main` de GitHub. El propietario aclaró que Auren todavía está en desarrollo; se sigue cuidando su contenido y funcionamiento.
+Versión **0.3.0**, desplegada en **https://www.aurenfx.com/?auren_app=1**. El propietario autorizó desarrollo prudente sobre su academia en desarrollo. La apariencia del sitio original y sus datos se conservan; las acciones de la app escriben en las fuentes originales de WordPress.
 
-## Pruebas en celulares: entrega web instalable
+## Entrega conectada
 
-Se prepararon manifest, identidad estable e iconos PNG para agregar la app a inicio en Safari/Chrome. La app detecta una nueva entrega al volver a primer plano y cada minuto visible, ofrece cargarla y conserva una recarga manual en Perfil. No se recarga automáticamente mientras el alumno estudia. La versión/build visible permite identificar reportes. No se registra un service worker ni se guarda contenido privado para uso offline.
+- Comunidad: crear publicaciones con audiencia Comunidad/Solo yo, editar y borrar las propias con permiso, comentar y dar/quitar Me gusta. Feed paginado, búsqueda y filtros Para ti / Mi actividad / Me gusta / Personas.
+- Perfil: editor dentro de la app a partir de los grupos y campos reales de xProfile. Auren devuelve 23 campos admitidos, con opciones, selección múltiple, teléfonos y números; no un formulario de demostración. Se conserva la visibilidad y se excluyen tipos de miembro y campos no compatibles.
+- Miembros: directorio y perfil dentro de la app, con permisos originales y datos mínimos. No se exponen emails ni metadatos administrativos.
+- Avisos: detalle interno, Sin leer / Leídos, marcar uno o los visibles, contador recalculado y apertura de conversación cuando el destino corresponde a actividad accesible.
+- Moderación: formulario con las seis categorías reales y bloqueo/desbloqueo propio. No se cambian ajustes globales ni se simula que la app sea administradora.
+- Aprendizaje: búsqueda del catálogo cargado y acceso directo a la siguiente lección disponible. Se conservan las reglas de acceso y progreso de LearnDash.
+- UX: ventanas adaptadas al teclado, estados de guardado/error, confirmación de eliminación, controles independientes de autor/reacción/opciones y navegación interna.
 
-El propietario ya creó una cuenta/proyecto de Expo y compartió la pantalla de onboarding. Enlace recibido: https://expo.dev/accounts/auren-fx/projects/auren-fx?tab=overview (`auren-fx/auren-fx`); el propietario conectó GitHub. Falta comprobar el UUID autenticado. `EXPO_TOKEN` no está configurado en el entorno al comprobarlo. Se añadieron `expo-updates`/`expo-dev-client` compatibles con SDK 58 y perfiles development/preview/production. Falta vincular el proyecto, configurar URL/runtime y firmar/generar APK/IPA. No hay EAS Update activo ni validación física. Apple Developer sigue pendiente; la instalación web permite continuar gratis. [DEVICE_TESTING](DEVICE_TESTING.md) explica instalación, actualización, diferencias de cambios web/nativos y pasos de cuentas/firma. La entrega 0.2.1 se desplegó con Cowboy. Manifest, iconos y build se verificaron por HTTPS contra Auren; no hubo errores JavaScript ni desbordamiento en el viewport móvil. Evidencias `device-preview-*.json`. Esta comprobación sigue siendo distinta de instalarla físicamente en los teléfonos.
+Los cambios se confirman después del guardado del servidor. No hay una segunda base de perfiles, publicaciones o progreso en el teléfono. Al consultar/actualizar la pantalla se leen los registros actuales de WordPress; no se promete actualización instantánea mediante websocket entre dispositivos.
 
-Pruebas locales: TypeScript, 6 pruebas del cliente, 49 comprobaciones PHP y 5 recorridos de navegador, incluyendo metadatos/iconos, aislamiento de caché, error de red y aviso de nueva versión. Exportación Hermes Android/iOS correcta, sin presentarla como binario instalable.
+## Comprobaciones reales en Auren
 
-## Acceso de alumnos corregido
+Con la cuenta de alumna proporcionada por el propietario (ID 20, credenciales fuera del repositorio):
 
-App: **https://www.aurenfx.com/?auren_app=1**. Cualquier alumno con una cuenta válida puede entrar; el acceso ya no exige estar en la lista del piloto. Los permisos de LearnDash y BuddyBoss siguen decidiendo qué contenido puede ver. Ajustes → Auren App conserva una restricción opcional para emergencias o pruebas; está desactivada por defecto.
+- Identidad, perfil, comunidad, miembros, bloqueos y categorías responden 200. Curso introductorio 200; curso PRO sin autorización 403. Progreso inicial 0/7.
+- Una sesión bearer sin cookies obtuvo identidad/perfil/miembros/bloqueos. Creó una actividad propia «Solo yo»; el REST original de BuddyBoss devolvió el mismo registro. Una edición desde ese REST apareció en la app. Editar desde la app conservó la privacidad. Me gusta propio e intento repetido conservaron el estado. El registro privado se eliminó y la sesión de prueba se revocó.
+- Marcar un aviso propio como leído dentro de la UI cambió su estado en el REST original y apareció en el historial. Se restauró su estado inicial desde ese REST y la app reflejó la restauración.
+- En viewport móvil se abrieron perfil, compositor privado, personas y avisos sin salir de la app, sin errores JavaScript observados ni desbordamiento. La búsqueda filtró el curso real y continuar abrió su siguiente lección disponible sin cambiar progreso.
+- Un campo de perfil guardado por la app apareció en xProfile original. Su valor inicial se restauró desde el REST original y la app reflejó la restauración. El progreso quedó intacto.
 
-Se reprodujeron y corrigieron tres problemas con la cuenta de alumna proporcionada por el propietario (ID 20; credenciales fuera del repositorio):
+Evidencias: `connected-live-read.json`, `connected-live-native-write.json`, `connected-live-profile-sync.json`, `connected-live-notification-sync.json`, `connected-live-ui.json`, `connected-live-learning.json` y `connected-live-final.json`. No contienen contraseñas, tokens, contenido del perfil ni textos privados. No se enviaron publicaciones públicas, comentarios, reportes, bloqueos o mensajes hacia otras personas. La prueba de actividad privada no llevaba menciones; se revisó que el helper instalado de avisos a seguidores omite la audiencia Solo yo.
 
-1. `403 pilot_only` pese a una autenticación válida: el piloto era obligatorio. Ahora es una opción explícita.
-2. BuddyBoss enviaba al panel web en lugar de volver a la app. Su filtro usa `PHP_INT_MAX`; el retorno de la app se registra después de inicializar los plugins, solo para las URLs propias de retorno.
-3. WordPress podía borrar una contraseña recién escrita al reintentar después de un error mediante su autofocus diferido. Se desactiva ese comportamiento únicamente en el login de la app.
+La aceptación detectó y corrigió una diferencia real frente a las fixtures: xProfile entrega objetos PHP anidados al hacer dispatch interno. Se normaliza su representación JSON antes de adaptarlos; el caso se añadió a la fixture local. El perfil real vuelve a responder 200. La lectura de avisos acepta un filtro booleano, pero su escritura exige un entero 0/1; también se ajustó y se incorporó a la fixture.
 
-Se verificó login por correo, rechazo de contraseña incorrecta, conservación del destino tras el error y regreso a la app. El formulario tiene presentación propia, campos en español, recuperación y enlace de regreso; conserva la autenticación y las comprobaciones del sitio. El enlace privado para las pruebas de CAPTCHA solo se usó en la sesión temporal del navegador.
+La sincronización de progreso app→LearnDash y web→app fue probada previamente con QA 592/593 (1/7 y 2/7; el segundo alumno permaneció 0/7). En esta entrega no se completaron lecciones ni se cambió manualmente el progreso de la alumna ID 20. Login por correo de alumno, retorno desde BuddyBoss, error/reintento, recuperación y logout conservan sus pruebas previas y locales.
 
-## Interfaz y datos reales
+## Validación y límites
 
-- Cinco secciones: Inicio, Academia, Comunidad, Avisos y Perfil; iconos, navegación y estado seleccionado coherentes.
-- Inicio con curso para continuar, avance real y novedades de BuddyBoss.
-- Academia con filtros, temario, lección, estados de contenido pendiente y siguiente lección. No se modificaron los cinco contenidos vacíos del curso introductorio.
-- Comunidad con feed paginado, autores, avatares, imágenes y detalle de publicación/conversación. El bridge delega lectura y permisos en el REST original de BuddyBoss, sin consultar directamente sus tablas ni ampliar privacidad.
-- Avisos propios paginados y contador real. El destinatario se fija al usuario autenticado; no se permite elegir otro ID.
-- Perfil con avatar, fecha de alta y acceso a su perfil original. No se inventa un plan PRO, saldo de puntos o estado de suscripción.
+TypeScript, **7 pruebas de cliente**, **84 comprobaciones PHP** y **8 recorridos de navegador** pasaron localmente. Los recorridos sociales completos usan WordPress/MariaDB reales con fixtures explícitas de BuddyBoss/LearnDash y correo desactivado. Prueban persistencia por las rutas originales simuladas, recarga, comentario, perfil, lectura, bloqueo/desbloqueo y rechazo entre cuentas. Eso no sustituye las comprobaciones con los plugins comerciales instalados, registradas por separado arriba.
 
-Con la alumna se abrieron curso/lección, diez publicaciones y veinte avisos por página, detalle de publicación y perfil, sin errores JavaScript observados. Las páginas 1/2 no repiten IDs. Curso gratuito 200; PRO 403; avisos ajenos 400 en el bridge y 403 en BuddyBoss. Todas las respuestas propias comprobadas usan caché privada sin almacenamiento.
+Exportaciones web y Hermes Android/iOS correctas. Bundle web de aproximadamente 661 KB y licencias incluidas en el ZIP. No hay APK/IPA firmado, prueba física o publicación en tiendas. El reproductor YouTube carga, pero la red cloud bloquea `googlevideo.com` con `ERR_TUNNEL_CONNECTION_FAILED`; reproducción física sigue pendiente.
 
-La participación (publicar, comentar o reaccionar) se abre todavía en la comunidad web. No se enviaron publicaciones ni mensajes durante las pruebas. Los contadores mostrados proceden del servidor.
+La comprobación final confirmó nombre/perfil restaurados y progreso intacto. Tras salir, las siete rutas privadas comprobadas devolvieron 401 y recargar mantuvo la sesión cerrada.
 
-## Sesiones y pruebas
-
-- Cierre de sesión real: desaparecen las pestañas privadas; cursos, comunidad y avisos devuelven 401 y la recarga permanece fuera. El reingreso se comprueba por separado y conserva el progreso.
-- La cuenta ID 20 pasó consentimiento/PKCE y acceso bearer sin cookies a identidad, comunidad y avisos; bearer fuera del namespace rechazado y revocación confirmada. Es una prueba de protocolo, no de ejecución en un teléfono.
-- Pasaron TypeScript, 6 pruebas de cliente, 49 comprobaciones PHP y 4 recorridos de navegador local. Las fixtures son explícitas y se mantienen fuera del paquete.
-- Exportaciones web y Hermes Android/iOS correctas. Sigue sin existir APK/IPA firmado, prueba física o PWA instalada.
-- Bundle web aproximadamente 606 KB: importaciones de iconos individuales evitan incluir todo el catálogo de Lucide. Avisos de licencias se incorporan al paquete.
-- La sincronización app→LearnDash y web→app fue verificada en el hito anterior con QA 592/593. En este hito no se completaron lecciones ni se cambió manualmente el progreso de la alumna ID 20.
-
-Evidencia actual: `docs/evidence/student-login-before.json`, `student-login-after.json`, `student-ui-acceptance.json`, `student-permissions-final.json`, `student-native-session.json`, `student-navigation-final.json`, `student-logout-final.json` y `student-reentry-final.json`. Capturas del navegador en `artifacts/student-*-final.png`; entrada y login anónimos en `docs/evidence/screenshots/0.2-*.png`. Las capturas de la cuenta de alumna no se publican en Git. Credenciales y cookies no se serializan.
-
-El reproductor real de YouTube carga, pero el último intento sigue sin reproducir: el proxy cloud devuelve `ERR_TUNNEL_CONNECTION_FAILED` a los hosts de `googlevideo.com`. Ver `student-video-final.json`; queda pendiente comprobar reproducción en un dispositivo.
+La documentación comercial pública de BuddyBoss devolvió 403/Cloudflare tanto por HTTPS como por Chromium. Se revisaron el código oficial adjunto, docstrings REST y los handlers exactos instalados: Platform 3.4.3, Pro 3.0.2 y Theme 2.8.51. [BUDDYBOSS_REVIEW](BUDDYBOSS_REVIEW.md) conserva fuentes, decisiones y funciones pendientes; no se afirma haber leído íntegramente páginas bloqueadas.
 
 ## Despliegue y reversión
 
-Se usó Cowboy MCP con la clave segura de acceso completo autorizada. Archivos propios comparados con el checkpoint antes de escribir, respaldo en `.local/deploy-backups`, comprobación sintáctica de PHP y módulos nuevos antes del loader. El bundle se publicó antes del HTML que lo referencia. No se cambió el tema ni se editaron matrículas, precios, pedidos o suscripciones. El login ordinario conserva el tema y el banner original.
+Cowboy MCP con secreto seguro del entorno; archivos propios contrastados antes de escribir, respaldo en `.local/deploy-backups`, preflight PHP, módulos nuevos antes del loader y HTML después del JS. Se conservan bundles anteriores. No se modificaron tema, contenido de LearnDash, roles, matrículas, pedidos, precios ni ajustes globales.
 
-Consultar `DEPLOYMENT.md`, `login-backend-deployment.json`, `student-ui-deployment.json` y `plugin-package.json`. El ZIP reproducible solo contiene este plugin, sus recursos propios y licencias; nunca fixtures o claves.
+Ver `connected-experience-deployment.json`, `connected-auth-consent-deployment.json`, `connected-serialization-deployment.json`, `connected-notification-deployment.json`, `connected-ui-final-deployment.json` y `plugin-package.json`. El consentimiento describe las acciones disponibles sin ampliar TTL o namespace del bearer. Desactivar únicamente Auren App Bridge retira la app/API y conserva el sitio original. No restaurar tablas sociales para revertir código: borraría cambios legítimos.
 
 ## Próximos hitos
 
-1. Probar Android/iPhone físicos, generar development builds y preparar firma/distribución; no contratar servicios ni aceptar acuerdos automáticamente.
-2. Instalar y verificar PWA en dispositivos, sin cachear información de cuenta/cursos de forma indiscriminada.
-3. Añadir participación dentro de la app con permisos, moderación, reporte y bloqueo antes de habilitar escritura social.
-4. Integrar membresía/precios desde servidor y probar caducidad/cancelación y múltiples fuentes de acceso. No conceder promociones antes de resolver el modelo de permisos.
-5. Cuestionarios, certificados, grupos, mensajes, GamiPress y push permanecen en COVERAGE. No declarar entrega nativa, offline o notificaciones push por haber compilado JavaScript.
+1. Probar iPhone/Android físicos. La web tiene manifest/iconos y aviso de entrega nueva, sin caché privada offline. Instalar desde Safari/Chrome sigue requiriendo comprobación física.
+2. Retomar Expo cuando el propietario esté disponible. Ya conectó GitHub a `auren-fx/auren-fx`; `EXPO_TOKEN` sigue ausente. Falta comprobar UUID autenticado, vincular runtime/proyecto y preparar builds/firma. No se contrató ni publicó nada automáticamente. [DEVICE_TESTING](DEVICE_TESTING.md) conserva instrucciones.
+3. Grupos/foros, mensajería privada, adjuntos, respuestas/edición individual de comentarios y preferencias avanzadas, con permisos y pruebas propias.
+4. Cuestionarios/certificados, membresía/precios, vencimientos, compras y GamiPress desde sus fuentes reales; no conceder PRO ni inventar saldos.
+5. Push APNs/FCM y offline con aceptación independiente. Un bundle JavaScript no demuestra esas capacidades.
 
-Para continuar: leer AUDIT, ARCHITECTURE, API y ENVIRONMENT; usar el checkout existente. `python3 scripts/check-cowboy.py` comprueba Cowboy en lectura con el secreto del entorno. No guardar contraseñas, cookies, claves o el enlace privado de CAPTCHA en código o documentación.
+Para continuar: leer AUDIT, BUDDYBOSS_REVIEW, ARCHITECTURE, API y ENVIRONMENT. `python3 scripts/check-cowboy.py` verifica acceso en lectura. No guardar credenciales, cookies, claves ni el enlace privado de CAPTCHA en el repositorio.

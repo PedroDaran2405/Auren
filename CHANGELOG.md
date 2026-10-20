@@ -1,5 +1,15 @@
 # Cambios
 
+## 0.3.0
+
+- Comunidad dentro de la app: crear/editar/eliminar publicaciones propias, comentarios, Me gusta, filtros y búsqueda; privacidad y permisos originales.
+- Perfil dinámico xProfile organizado por secciones, selección múltiple, opciones buscables, teléfono y validación previa.
+- Directorio y perfil de miembros dentro de la app, respetando privacidad.
+- Avisos sin leer/leídos, detalle interno, recibos de lectura individuales/visibles y navegación a conversación.
+- Reporte, bloqueo y desbloqueo conectados a la moderación original; sin activar opciones globales.
+- Acceso directo a la próxima lección disponible, búsqueda del catálogo cargado y mejoras de navegación/modal/teclado.
+- Escrituras serializadas, claves de deduplicación, controles de actor/recipiente y pruebas de persistencia.
+
 ## 0.2.1 — 2026-10-19
 
 - Manifest e iconos de instalación en pantalla de inicio de iPhone/Android; metadatos standalone e instrucciones dentro de la app.

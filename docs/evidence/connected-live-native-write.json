@@ -1,0 +1,23 @@
+{
+  "identity_status": 200,
+  "profile_status": 200,
+  "members_status": 200,
+  "blocked_status": 200,
+  "create_status": 200,
+  "onlyme": true,
+  "author_matches": true,
+  "app_to_platform": true,
+  "platform_edit_status": 200,
+  "platform_to_app": true,
+  "app_edit_status": 200,
+  "edit_keeps_privacy": true,
+  "like_status": 200,
+  "like_idempotent": true,
+  "like_on_platform": true,
+  "public_messages_sent": false,
+  "self_comment_tested": false,
+  "app_delete_status": 200,
+  "private_test_cleanup_status": 200,
+  "private_record_removed": true,
+  "revocation_status": 200
+}

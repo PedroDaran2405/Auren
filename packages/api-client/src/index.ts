@@ -2,11 +2,14 @@ export type Progress = { completed: number; total: number; percent: number };
 export type LessonSummary = { id: number; title: string; completed: boolean; available: boolean };
 export type Course = { id: number; title: string; summary: string; image_url: string | null; url: string; access: {allowed: true; source: string; label: string}; progress: Progress; lessons?: LessonSummary[] };
 export type Lesson = { id: number; course_id: number; title: string; text: string; url: string; completed: boolean; completion_mode: 'app' | 'web'; video: {kind: 'direct' | 'web' | 'youtube'; url: string | null; video_id?: string} | null };
-export type Identity = { id: number; name: string; avatar_url: string; site_url: string; environment: string; profile_url?:string|null; community_url?:string|null; joined?:string; unread_notifications?:number; capabilities: { academy: boolean; community: boolean; notifications?:boolean; checkout: boolean } };
-export type Author = {name:string;avatar_url:string|null};
+export type Identity = { id: number; name: string; avatar_url: string; site_url: string; environment: string; profile_url?:string|null; community_url?:string|null; joined?:string; unread_notifications?:number; capabilities: { academy: boolean; community: boolean; notifications?:boolean; checkout: boolean; profile?:boolean;members?:boolean;report?:boolean;block?:boolean;post_title?:boolean } };
+export type Author = {id?:number;name:string;avatar_url:string|null};
 export type ActivityComment = {id:number;author:Author;text:string;date:string;replies:ActivityComment[]};
-export type Activity = {id:number;author:Author;text:string;date:string;type:string;image_url:string|null;url:string|null;group_name:string;reaction_count:number;comment_count:number;comments?:ActivityComment[]};
-export type Notification = {id:number;text:string;date:string;url:string|null;avatar_url:string|null;unread:boolean};
+export type Activity = {id:number;author:Author;text:string;date:string;type:string;image_url:string|null;url:string|null;group_name:string;reaction_count:number;comment_count:number;comments?:ActivityComment[];liked?:boolean;privacy?:string;title?:string;permissions?:{like:boolean;comment:boolean;edit:boolean;delete:boolean}};
+export type Notification = {id:number;text:string;date:string;url:string|null;avatar_url:string|null;unread:boolean;target?:{type:'activity';id:number}|null};
+export type ProfileField = {id:number;group_id:number;group:string;label:string;type:string;required:boolean;value:string|string[];options:{value:string;label:string}[]};
+export type Profile = {fields:ProfileField[]};
+export type Member = {id:number;name:string;avatar_url:string|null;joined:string;fields?:{label:string;value:string}[]};
 export type Page<T> = {items:T[];next_page:number|null};
 export type Session = { access_token: string; expires_at: number; token_type: 'Bearer' };
 export type Bootstrap = { api_url: string; site_url: string; nonce: string | null; login_url: string; register_url: string; lost_password_url: string; environment: string; release?: { version:string; build_id:string }; release_url?:string };
@@ -32,7 +35,14 @@ export class AurenApi {
   dispose() { this.disposed = true; this.controllers.forEach(c=>c.abort()); this.controllers.clear(); this.options.token = undefined; this.options.nonce = null; }
   async request<T>(path: string, method = 'GET', body?: unknown): Promise<T> {
     if (this.disposed) throw new ApiError('session_closed','La sesión está cerrada.',401);
-    if (!/^\/[a-z0-9/_-]+(?:\?page=[1-9][0-9]*)?$/.test(path)) throw new Error('Ruta no válida');
+    const rawPath=path.split('?')[0]??'';if(!/^\/[a-z0-9][a-z0-9/_-]*$/.test(rawPath))throw new Error('Ruta no válida');
+    const route=new URL(path,'https://route.invalid');
+    if(route.origin!=='https://route.invalid'||route.hash||!/^\/[a-z0-9][a-z0-9/_-]*$/.test(route.pathname))throw new Error('Ruta no válida');
+    const seen=new Set<string>();
+    for(const [key,value] of route.searchParams){
+      if(seen.has(key)||!['page','filter','search'].includes(key)||(key==='page'&&!/^[1-9][0-9]{0,3}$/.test(value))||(key==='filter'&&!/^[a-z-]{1,20}$/.test(value))||(key==='search'&&value.length>80))throw new Error('Ruta no válida');
+      seen.add(key);
+    }
     const controller = new AbortController(); this.controllers.add(controller);
     const timeout = setTimeout(()=>controller.abort(),15000);
     try {
@@ -65,9 +75,24 @@ export class AurenApi {
   lesson(course:number,lesson:number) { return this.request<Lesson>(`/courses/${positiveId(course)}/lessons/${positiveId(lesson)}`); }
   complete(course:number,lesson:number) { return this.request<{lesson:Lesson;progress:Progress}>(`/courses/${positiveId(course)}/lessons/${positiveId(lesson)}/complete`,'POST',{}); }
   logout() { return this.request<{logged_out:boolean}>('/logout','POST',{}); }
-  community(page=1) { return this.request<Page<Activity>>(`/community?page=${positiveId(page)}`); }
+  community(page=1,filter='all',search='') { return this.request<Page<Activity>>(`/community?${new URLSearchParams({page:String(positiveId(page)),filter,search:search.slice(0,80)})}`); }
   activity(id:number) { return this.request<Activity>(`/community/${positiveId(id)}`); }
-  notifications(page=1) { return this.request<Page<Notification>&{unread_count:number}>(`/notifications?page=${positiveId(page)}`); }
+  notifications(page=1,filter='unread') { return this.request<Page<Notification>&{unread_count:number}>(`/notifications?page=${positiveId(page)}&filter=${filter}`); }
+  readVisibleNotifications(ids:number[]) { return this.request<{changed:number;unread_count:number}>('/notifications/read','PUT',{ids}); }
+  readNotification(id:number) { return this.request<{id:number;unread:false;unread_count:number}>(`/notifications/${positiveId(id)}/read`,'PUT',{}); }
+  profile() { return this.request<Profile>('/profile'); }
+  saveProfile(fields:{id:number;value:string|string[]}[]) { return this.request<Profile>('/profile','PATCH',{fields}); }
+  createActivity(content:string,privacy:string,request_key:string,title='') { return this.request<Activity>('/community','POST',{content,privacy,request_key,title}); }
+  editActivity(id:number,content:string) { return this.request<Activity>(`/community/${positiveId(id)}`,'PATCH',{content}); }
+  deleteActivity(id:number) { return this.request<{deleted:true;id:number}>(`/community/${positiveId(id)}`,'DELETE'); }
+  comment(id:number,content:string,request_key:string) { return this.request<Activity>(`/community/${positiveId(id)}/comments`,'POST',{content,request_key}); }
+  like(id:number,liked:boolean) { return this.request<Activity>(`/community/${positiveId(id)}/like`,'PUT',{liked}); }
+  reportForm() { return this.request<{categories:{id:string;label:string}[]}>('/reports'); }
+  report(id:number,category:string,note:string) { return this.request<{reported:true}>(`/community/${positiveId(id)}/report`,'POST',{category,note}); }
+  members(page=1,search='') { return this.request<Page<Member>>(`/members?${new URLSearchParams({page:String(positiveId(page)),search:search.slice(0,80)})}`); }
+  blocked(page=1) { return this.request<Page<Member>>(`/blocked?page=${positiveId(page)}`); }
+  blockMember(id:number,blocked:boolean) { return this.request<{id:number;blocked:boolean}>(`/members/${positiveId(id)}/block`,'PUT',{blocked}); }
+  member(id:number) { return this.request<Member>(`/members/${positiveId(id)}`); }
 }
 function positiveId(id:number) { if (!Number.isSafeInteger(id) || id < 1) throw new Error('ID inválido'); return id; }
 function publicMessage(code:string,status:number) {
@@ -81,6 +106,10 @@ function publicMessage(code:string,status:number) {
   if (code === 'account_unavailable') return 'Tu cuenta no está disponible. Contacta al equipo de Auren.';
   if (code === 'community_unavailable') return 'Este contenido de la comunidad no está disponible para tu cuenta.';
   if (code === 'notifications_unavailable') return 'No pudimos consultar tus avisos. Intenta de nuevo.';
+  if (['invalid_content','profile_validation','invalid_privacy'].includes(code)) return 'Revisa los campos antes de guardar. Si WordPress rechazó un campo, actualiza para comprobar lo guardado.';
+  if (code === 'write_in_progress') return 'Hay un cambio guardándose. Espera un momento.';
+  if (code === 'duplicate_request') return 'Esta solicitud ya se utilizó. Actualiza para comprobar lo guardado.';
+  if (code === 'action_forbidden') return 'Tu cuenta no tiene permiso para realizar esta acción.';
   if (status === 429) return 'Espera un momento antes de volver a intentar.';
   return 'No pudimos completar la solicitud. Intenta de nuevo en un momento.';
 }

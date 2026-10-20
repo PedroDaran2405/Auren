@@ -30,3 +30,31 @@ El inventario de rutas observado en producción está en `evidence/public-api-in
 `GET /notifications?page=N` devuelve `{items,next_page,unread_count}` con hasta 20 avisos sin leer del destinatario autenticado. Se fuerza user_id en servidor y se excluye cualquier resultado de otro destinatario. El cliente no puede elegir user_id; se devuelve 400. Estas consultas no marcan avisos como leídos ni envían push.
 
 Todos estos endpoints mantienen la autenticación y los encabezados privados. `POST /logout` requiere sesión autenticada y transporte seguro, incluso si una restricción opcional del piloto impide consultar cursos; el alumno siempre puede cerrar su propia sesión.
+
+## Ampliaciones 0.3.0: acciones conectadas
+
+Todas las rutas siguen exigiendo cookie+nonce o bearer de app; el actor se fija en el servidor. BuddyBoss conserva permisos, privacidad, bloqueo y validación de contenido. Los errores internos se traducen a mensajes públicos.
+
+| Método/ruta | Datos y efecto |
+| --- | --- |
+| GET /community?page=N&filter=all/mine/liked&search=texto | Feed original con búsqueda y alcance de cuenta; sin elegir otro autor para mine/liked |
+| POST /community | content, privacy loggedin/onlyme, request_key UUID, title si el sitio lo exige; crea actividad propia |
+| PATCH /community/{id} | content; solo autor con permiso nativo, conserva audiencia/título |
+| DELETE /community/{id} | Solo autor con permiso nativo; elimina el registro original y su conversación |
+| POST /community/{id}/comments | content y request_key; comentario en publicación visible y comentable |
+| PUT /community/{id}/like | liked booleano; estado deseado idempotente sobre el toggle original |
+| GET /profile | Campos/grupos reales de xProfile de la cuenta autenticada; valor escalar o lista, tipo, opciones y obligatoriedad |
+| PATCH /profile | fields [{id,value}], máximo 50; valida IDs/tipos/opciones y handler nativo; no permite cambiar roles o tipo de membresía ni visibilidad |
+| GET /members?page=N&search=texto | Directorio con permiso original; nombre/avatar/alta, sin email o datos administrativos |
+| GET /members/{id} | Perfil mínimo y únicamente campos que permite la privacidad original |
+| GET /notifications?page=N&filter=unread/read | Sin leer por defecto; read fija is_new=false explícitamente |
+| PUT /notifications/{id}/read | Verifica destinatario y cambia estado, devuelve contador recalculado |
+| PUT /notifications/read | ids hasta 20; verifica todos los destinatarios antes de empezar; errores posteriores pueden exigir refrescar la lista |
+| GET /reports | Categorías reales del formulario de moderación original |
+| POST /community/{id}/report | category y note; destino fijo actividad, permisos nativos |
+| GET /blocked?page=N | Lista de bloqueos del miembro autenticado |
+| PUT /members/{id}/block | blocked booleano; deriva registro de moderación desde la lista propia para bloquear/desbloquear |
+
+Activity añade author.id, title, liked, privacy y permissions {like,comment,edit,delete}. Notification añade target de actividad cuando se puede resolver; abrirlo vuelve a comprobar visibilidad. /me anuncia capacidades profile, members, report, block y post_title detectadas en el servidor.
+
+Publicaciones/comentarios llevan deduplicación por usuario y clave durante una hora, incluyendo estado pendiente para no repetir una escritura cuyo resultado es incierto. Un lock de opción propia serializa mutaciones por miembro; su liberación comprueba el token de la solicitud. No se reintentan mutaciones automáticamente. Los datos sociales permanecen en las tablas nativas, no en una base paralela de la app.

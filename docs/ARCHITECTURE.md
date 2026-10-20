@@ -28,12 +28,22 @@ La escritura está desactivada por defecto. Cuando se habilita para el piloto, s
 
 MP4/HLS autorizados utilizan expo-video. Los bloques YouTube se reconocen en servidor; el cliente recibe un ID validado y muestra el reproductor oficial después de una acción del usuario. Nativo usa un WebView limitado al reproductor de YouTube; el resto de la academia se representa con componentes React Native. No se extraen ni descargan videos embebidos. El contenido de texto se sanea; no se ejecutan shortcodes arbitrarios desde REST.
 
-La salida web comparte pantallas, tipos y lógica. Requiere adaptadores de autenticación y reproductor. Es una web móvil inicial, no una PWA instalada ya certificada; manifiesto, iconos finales, política de actualización y pruebas físicas son otro hito.
+La salida web comparte pantallas, tipos y lógica. Requiere adaptadores de autenticación y reproductor. La web tiene manifest, iconos y detección de entrega nueva; instalación física y funcionamiento en teléfonos siguen pendientes. No cachea respuestas privadas para uso offline.
 
 ## Comunidad y login en 0.2.0
 
 La app añade lecturas paginadas de comunidad y avisos. El bridge ejecuta solicitudes internas al REST de BuddyBoss como el usuario autenticado, con contexto view y sin permitir elegir destinatario o privacidad desde el cliente. La visibilidad de actividad, grupos, bloqueos y detalle permanece en BuddyBoss. Las notificaciones se fijan al usuario actual y además se comprueba el destinatario al reducir la respuesta. Se devuelve texto plano y URLs seguras, sin ejecutar HTML social en la app.
 
-La versión no publica comentarios ni reacciones desde la interfaz propia: el enlace abre su destino original. No se envían notificaciones a terceros. El contador representa avisos internos de BuddyBoss, no push APNs/FCM.
+En 0.2 la participación abría su destino web. La versión 0.3 añade escritura propia, descrita abajo. El contador representa avisos internos de BuddyBoss, no push APNs/FCM.
 
 El formulario de acceso sigue siendo wp-login.php con sus hooks y protecciones. El diseño propio solo se aplica a URLs de retorno verificadas de la app o su marca de contexto; no cambia la presentación ordinaria del sitio. El retorno se registra en login_init después del filtro PHP_INT_MAX de BuddyBoss. Se evita el borrado diferido del campo contraseña al reintentar en este contexto. Los destinos externos se rechazan.
+
+## Interacciones compartidas en 0.3.0
+
+`interactions.php` centraliza el dispatch de rutas BuddyBoss fijas. Clona y alinea temporalmente el usuario almacenado por BuddyBoss con la identidad ya autenticada por WordPress; restaura tanto loggedin_user como displayed_user después del dispatch. Normaliza los objetos anidados a la representación JSON que entrega REST: xProfile devuelve stdClass en campos internos y no puede asumirse que todos son arrays PHP.
+
+Publicar, comentar, editar, borrar, reaccionar, marcar avisos, reportar y bloquear llaman a los handlers originales. No hay tablas paralelas de perfiles/actividad ni sincronización mediante scraping. `profile.php` reduce el esquema real a tipos editables admitidos y valida antes de guardar; no expone roles, email, tipo de miembro o cambios de visibilidad. El directorio conserva permisos y minimiza datos personales.
+
+Las mutaciones de una cuenta se serializan con un lock privado de WordPress con token y expiración. Crear post/comentario conserva una clave de deduplicación durante una hora, incluyendo un estado pendiente para una respuesta incierta. Likes reciben estado deseado; el bridge solo invoca el toggle si hace falta. La respuesta visible llega después del guardado y una nueva lectura del registro original. No hay promesa de transacciones globales ni streaming entre dispositivos.
+
+La UI separa comunidad, editor de perfil, avisos y bloqueos en componentes propios, con estados de carga/error, filtros, búsqueda, paginación y ventanas adaptadas al teclado. Al cambiar de pantalla o refrescar se consulta WordPress. La búsqueda de cursos abarca el catálogo ya cargado; comunidad/miembros consultan al servidor. No se usan datos de fixture en la aplicación publicada.

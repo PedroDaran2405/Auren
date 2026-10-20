@@ -1,0 +1,67 @@
+{
+  "version": "0.3.0",
+  "files": [
+    {
+      "path": "includes/interactions.php",
+      "before_sha256": null,
+      "after_sha256": "0df53f197b0c9d72a29a76c30f948d096b49f15561ffda6c1dee4f111ab791b9",
+      "bytes": 11595
+    },
+    {
+      "path": "includes/profile.php",
+      "before_sha256": null,
+      "after_sha256": "69a8f5a7001b5b427d3628b636b682853889d8f9975066c716ebfbf8bcd6b309",
+      "bytes": 6103
+    },
+    {
+      "path": "web/_expo/static/js/web/index-da1bb5fa1f0d22c03179ca7e79ddc15c.js",
+      "before_sha256": null,
+      "after_sha256": "a44b85fc7fec6da21905a858fae3c1c4ac1ff3e1d4b54c244ddfc51defe57145",
+      "bytes": 661244
+    },
+    {
+      "path": "auren-app-bridge.php",
+      "before_sha256": "b0ddf0526581ac22b39b2f947cfcf9a5d372d75b5e90e2354d7cdb24f399bc4e",
+      "after_sha256": "867f2e26485db9e6bdfc8f2b1afe5cfb2ac225d30653d882207cce1651a75ead",
+      "bytes": 1674
+    },
+    {
+      "path": "includes/community.php",
+      "before_sha256": "deea3a5a76450e25e74044ff1c06da73f72a6e82d535a1296a06e8cbc17a99d6",
+      "after_sha256": "2f324e434838f10fde6011b0603a2ee9e10d6b19ab043ea7395a9a380a613e25",
+      "bytes": 6763
+    },
+    {
+      "path": "includes/rest.php",
+      "before_sha256": "030d8f6dd9a64778479c1613261dffea171cf785bd082a59d93db5b8a4c9485d",
+      "after_sha256": "2d34cf82506d34513e578fc19894ebe8b028499231b9b5e4a27c01a649e3cef5",
+      "bytes": 5949
+    },
+    {
+      "path": "web/THIRD_PARTY_NOTICES.txt",
+      "before_sha256": "7a5a55d3bcce14e423871d54735d2416ffe7200a91f76863f7b33e1ec52afa35",
+      "after_sha256": "00e13cab7b011f9b8728bbc6be03a6e24e20e25b87ad0cac79f97dcbae9882f0",
+      "bytes": 737355
+    },
+    {
+      "path": "web/metadata.json",
+      "before_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "after_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "bytes": 49
+    },
+    {
+      "path": "web/index.html",
+      "before_sha256": "9cd8f3311538d4b5b636b83d1f1b0bc1267362c1e022f607e86475bcea2ee0b9",
+      "after_sha256": "2c3796aceb2ce9c98e350a9b7c5d0176d04f2ea34bc4b0aab358a2e438af8964",
+      "bytes": 1251
+    }
+  ],
+  "new_modules_first": true,
+  "html_last": true,
+  "previous_bundles_preserved": true,
+  "php_preflight": true,
+  "backup_directory": ".local/deploy-backups/v3-20261020T185531Z",
+  "site_theme_modified": false,
+  "learndash_content_modified": false,
+  "options_or_roles_modified_by_deploy": false
+}

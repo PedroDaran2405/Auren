@@ -1,0 +1,43 @@
+{
+  "version": "0.3.0",
+  "typecheck": "passed",
+  "api_client_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "wordpress_tests": {
+    "passed": 84,
+    "failed": 0,
+    "environment": "local WordPress/MariaDB; explicit LearnDash/BuddyBoss fixtures, mail disabled"
+  },
+  "browser_journeys": {
+    "passed": 8,
+    "failed": 0,
+    "viewport": [
+      390,
+      844
+    ],
+    "state_reset_before_suite": "npm run test:wordpress",
+    "regressions": "xProfile nested objects, integer notification update schema, second private publication visible from Mi actividad; fixture state reset before repeating full suite"
+  },
+  "exports": {
+    "web": "passed",
+    "android_hermes": "passed",
+    "ios_hermes": "passed",
+    "native_bundles": [
+      {
+        "path": "apps/mobile/dist-native/_expo/static/js/android/index-c2e264fc7b6a69f91cd32cef1218ce7a.hbc",
+        "bytes": 2008950,
+        "sha256": "8dd60e7276f9b3a6fe02ae309e2f10c17d0e976b0dd6d00d93c2bc073ab18ce7"
+      },
+      {
+        "path": "apps/mobile/dist-native/_expo/static/js/ios/index-f1e3430f8167725e7bc92e88c6e838a2.hbc",
+        "bytes": 2000927,
+        "sha256": "6e13618a51a8183c1eccef475993f796e34f0465094b9ceb13df7e2f1e846ed9"
+      }
+    ]
+  },
+  "signed_apk_or_ipa": false,
+  "physical_device_acceptance": false,
+  "real_platform_acceptance": "connected-live-*.json; scoped separately from local fixture journeys"
+}

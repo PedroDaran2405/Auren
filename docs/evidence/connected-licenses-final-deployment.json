@@ -1,0 +1,7 @@
+{
+  "path": "plugins/auren-app-bridge/web/THIRD_PARTY_NOTICES.txt",
+  "before_sha256": "00e13cab7b011f9b8728bbc6be03a6e24e20e25b87ad0cac79f97dcbae9882f0",
+  "after_sha256": "c9ab81b9a4f7fe06dacfb863a45d5687884e4fbd0bc137a25192de780144b363",
+  "change": "preserve original CRLF sections in generated third party notices so deployed bytes match packaged notices",
+  "backup_directory": ".local/deploy-backups/licenses-final-20261020T192012Z"
+}

@@ -1,0 +1,37 @@
+{
+  "version": "0.3.0",
+  "files": [
+    {
+      "path": "web/_expo/static/js/web/index-c2a1cb0bbe1169f42634db10412297bc.js",
+      "before_sha256": null,
+      "after_sha256": "d871cc51fde88f9e84d5c629431ce327a5598c1e06ac3ff192c4a6ee3d8cba33",
+      "bytes": 660789
+    },
+    {
+      "path": "web/THIRD_PARTY_NOTICES.txt",
+      "before_sha256": "00e13cab7b011f9b8728bbc6be03a6e24e20e25b87ad0cac79f97dcbae9882f0",
+      "after_sha256": "00e13cab7b011f9b8728bbc6be03a6e24e20e25b87ad0cac79f97dcbae9882f0",
+      "bytes": 737355
+    },
+    {
+      "path": "web/metadata.json",
+      "before_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "after_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "bytes": 49
+    },
+    {
+      "path": "web/index.html",
+      "before_sha256": "2c3796aceb2ce9c98e350a9b7c5d0176d04f2ea34bc4b0aab358a2e438af8964",
+      "after_sha256": "8784b6110bdc5d0acfb13b89d23a3ddf56aa88765929ede1e5ead4b2fb02b2b6",
+      "bytes": 1251
+    }
+  ],
+  "new_modules_first": true,
+  "html_last": true,
+  "previous_bundles_preserved": true,
+  "php_preflight": true,
+  "backup_directory": ".local/deploy-backups/v3-ui-final-20261020T191808Z",
+  "site_theme_modified": false,
+  "learndash_content_modified": false,
+  "options_or_roles_modified_by_deploy": false
+}

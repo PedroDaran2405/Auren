@@ -1,0 +1,60 @@
+{
+  "me": {
+    "status": 200,
+    "count": 0,
+    "code": null,
+    "id": 20,
+    "capabilities": {
+      "academy": true,
+      "community": true,
+      "notifications": true,
+      "checkout": false,
+      "post_title": false,
+      "profile": true,
+      "members": true,
+      "block": true,
+      "report": true
+    }
+  },
+  "profile": {
+    "status": 200,
+    "count": 23,
+    "code": null
+  },
+  "community": {
+    "status": 200,
+    "count": 10,
+    "code": null
+  },
+  "members": {
+    "status": 200,
+    "count": 12,
+    "code": null
+  },
+  "blocked": {
+    "status": 200,
+    "count": 0,
+    "code": null
+  },
+  "reports": {
+    "status": 200,
+    "count": 6,
+    "code": null
+  },
+  "intro": {
+    "status": 200,
+    "count": 0,
+    "code": null,
+    "progress": {
+      "completed": 0,
+      "total": 7,
+      "percent": 0
+    }
+  },
+  "pro": {
+    "status": 403,
+    "count": 0,
+    "code": "course_forbidden"
+  },
+  "version": "0.3.0"
+}

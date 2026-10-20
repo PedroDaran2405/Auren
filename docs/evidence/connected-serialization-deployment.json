@@ -1,0 +1,7 @@
+{
+  "path": "plugins/auren-app-bridge/includes/interactions.php",
+  "before_sha256": "0df53f197b0c9d72a29a76c30f948d096b49f15561ffda6c1dee4f111ab791b9",
+  "after_sha256": "f027c7245aad6beb565f64a1116c743c190a14f5bf8ca555e4a2f1b426913475",
+  "change": "normalize nested BuddyBoss response objects to JSON arrays before adapting xProfile data",
+  "backup_directory": ".local/deploy-backups/serialization-20261020T190522Z"
+}

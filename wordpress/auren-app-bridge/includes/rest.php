@@ -18,7 +18,11 @@ add_action('rest_api_init',function() {
             'profile_url'=>function_exists('bp_core_get_user_domain')?auren_app_safe_url(bp_core_get_user_domain($u->ID),true):null,
             'community_url'=>function_exists('bp_get_activity_directory_permalink')?auren_app_safe_url(bp_get_activity_directory_permalink(),true):null,
             'joined'=>substr($u->user_registered,0,10),'unread_notifications'=>$notifications?auren_app_unread_count():0,
-            'capabilities'=>array('academy'=>auren_app_lms_ready() === true,'community'=>$community,'notifications'=>$notifications,'checkout'=>false),
+            'capabilities'=>array('academy'=>auren_app_lms_ready() === true,'community'=>$community,'notifications'=>$notifications,'checkout'=>false,
+                'post_title'=>function_exists('bb_is_activity_post_title_enabled')&&bb_is_activity_post_title_enabled(),
+                'profile'=>auren_app_has_buddyboss_route('/buddyboss/v1/xprofile/groups'),'members'=>auren_app_has_buddyboss_route('/buddyboss/v1/members'),
+                'block'=>auren_app_has_buddyboss_route('/buddyboss/v1/moderation'),
+                'report'=>auren_app_has_buddyboss_route('/buddyboss/v1/moderation/report')),
             'environment'=>wp_get_environment_type());
     });
     $route('/courses','GET',function($r) {
@@ -38,9 +42,25 @@ add_action('rest_api_init',function() {
     $route('/courses/(?P<course>[1-9][0-9]*)/lessons/(?P<lesson>[1-9][0-9]*)','GET',fn($r)=>auren_app_lesson((int)$r['course'],(int)$r['lesson']));
     $route('/courses/(?P<course>[1-9][0-9]*)/lessons/(?P<lesson>[1-9][0-9]*)/complete','POST',fn($r)=>auren_app_complete((int)$r['course'],(int)$r['lesson']));
     $page=static fn($r)=>max(1,min(1000,(int)($r->get_param('page')?:1)));
-    $route('/community','GET',fn($r)=>auren_app_community($page($r)));
+    $search=static function($r){$value=$r->get_param('search');return is_string($value)?mb_substr(sanitize_text_field($value),0,80):'';};
+    $route('/community','GET',fn($r)=>auren_app_community($page($r),in_array($r->get_param('filter'),array('mine','liked'),true)?$r->get_param('filter'):'all',$search($r)));
+    $route('/community','POST',fn($r)=>auren_app_create_activity($r));
     $route('/community/(?P<activity>[1-9][0-9]*)','GET',fn($r)=>auren_app_activity((int)$r['activity']));
-    $route('/notifications','GET',fn($r)=>auren_app_notifications($page($r)));
+    $route('/community/(?P<activity>[1-9][0-9]*)','PATCH',fn($r)=>auren_app_change_activity($r));
+    $route('/community/(?P<activity>[1-9][0-9]*)','DELETE',fn($r)=>auren_app_change_activity($r,true));
+    $route('/community/(?P<activity>[1-9][0-9]*)/comments','POST',fn($r)=>auren_app_create_activity($r,(int)$r['activity']));
+    $route('/community/(?P<activity>[1-9][0-9]*)/like','PUT','auren_app_like');
+    $route('/community/(?P<activity>[1-9][0-9]*)/report','POST','auren_app_report');
+    $route('/reports','GET','auren_app_report_form');
+    $route('/profile','GET','auren_app_profile');
+    $route('/profile','PATCH','auren_app_save_profile');
+    $route('/members','GET',fn($r)=>auren_app_members($page($r),$search($r)));
+    $route('/blocked','GET',fn($r)=>auren_app_blocked_members($page($r)));
+    $route('/members/(?P<member>[1-9][0-9]*)','GET',fn($r)=>auren_app_member((int)$r['member']));
+    $route('/members/(?P<member>[1-9][0-9]*)/block','PUT','auren_app_block_member');
+    $route('/notifications','GET',fn($r)=>auren_app_notifications($page($r),$r->get_param('filter')==='read'));
+    $route('/notifications/read','PUT','auren_app_read_visible_notifications');
+    $route('/notifications/(?P<notification>[1-9][0-9]*)/read','PUT','auren_app_read_notification');
 });
 
 add_filter('rest_pre_dispatch',function($result,$server,$request) {

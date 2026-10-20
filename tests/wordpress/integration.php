@@ -6,6 +6,7 @@ $count=0;
 function check($condition,$label){global $count;$count++;if(!$condition){fwrite(STDERR,"FAIL $label\n");exit(1);}echo "PASS $label\n";}
 function code($value,$expected){return is_wp_error($value)&&$value->get_error_code()===$expected;}
 $a=get_user_by('login','alumno-a')->ID;$b=get_user_by('login','alumno-b')->ID;
+delete_option('auren_fixture_social_posts');foreach(array($a,$b) as $uid){delete_user_meta($uid,'fixture_notification_read');delete_user_meta($uid,'fixture_like_1001');delete_user_meta($uid,'fixture_blocks');}
 $course=(int)get_option('auren_fixture_free');$pro=(int)get_option('auren_fixture_pro');
 $l1=(int)get_option('auren_fixture_lesson1');$l2=(int)get_option('auren_fixture_lesson2');
 foreach(array($a,$b) as $u){foreach(array($l1,$l2) as $l){delete_user_meta($u,'fixture_done_'.$course.'_'.$l);}}
@@ -70,4 +71,48 @@ $r=new WP_REST_Request('GET','/auren/v1/courses');check(rest_do_request($r)->get
 check(apply_filters('bb_exclude_endpoints_from_restriction',array('/existing/public/route'))===array('/existing/public/route','/auren/v1/auth/start','/auren/v1/auth/exchange'),'existing exclusions preserved and only exact auth routes added');
 remove_filter('rest_request_before_callbacks',$private_rest,100);wp_set_current_user($a);
 foreach(array($a,$b) as $u){foreach(array($l1,$l2) as $l){delete_user_meta($u,'fixture_done_'.$course.'_'.$l);}}
-echo "$count checks passed. WordPress real; LearnDash adapter fixture only.\n";
+// Write-through contracts: WordPress persists state, original platform handlers remain authoritative.
+delete_option('auren_fixture_social_posts');
+foreach(array($a,$b) as $uid){delete_user_meta($uid,'fixture_notification_read');delete_user_meta($uid,'fixture_like_1001');delete_user_meta($uid,'fixture_blocks');}
+wp_set_current_user($a);
+function app_request($method,$path,$params=array()){$r=new WP_REST_Request($method,'/auren/v1'.$path);foreach($params as $k=>$v){$r->set_param($k,$v);}return rest_do_request($r);}
+$key=wp_generate_uuid4();$create=app_request('POST','/community',array('content'=>'Aprendizaje privado de integración','privacy'=>'onlyme','request_key'=>$key));
+check($create->get_status()===200,'member creates through original platform handler');$post=$create->get_data();$id=$post['id'];
+check($post['author']['id']===$a&&$post['privacy']==='onlyme','server fixes post author and preserves private audience');
+check((int)buddypress()->loggedin_user->id===0,'temporary BuddyBoss auth context is restored');
+$again=app_request('POST','/community',array('content'=>'Aprendizaje privado de integración','privacy'=>'onlyme','request_key'=>$key));check($again->get_data()['id']===$id&&count(auren_fixture_posts())===1,'retry key does not duplicate an acknowledged post');
+check(app_request('POST','/community',array('content'=>'Different payload','privacy'=>'onlyme','request_key'=>$key))->get_status()===409,'request key cannot be reused for different content');
+check(app_request('POST','/community',array('content'=>'','request_key'=>wp_generate_uuid4()))->get_status()===400,'empty post rejected before persistence');
+check(app_request('POST','/community',array('content'=>'Not sent','request_key'=>wp_generate_uuid4(),'user_id'=>$b))->get_status()===400,'post author spoofing rejected');
+$before=auren_fixture_posts();wp_set_current_user($b);check(app_request('GET','/community/'.$id)->get_status()===403,'another member cannot read private post');
+check(app_request('PATCH','/community/'.$id,array('content'=>'Overwrite'))->get_status()===403,'another member cannot edit private post');check(auren_fixture_posts()===$before,'denied mutation leaves content unchanged');
+wp_set_current_user($a);$edited=app_request('PATCH','/community/'.$id,array('content'=>'Mi aprendizaje actualizado'));check($edited->get_status()===200&&str_contains(auren_fixture_posts()[$id]['content']['rendered'],'actualizado'),'app edit persists into platform storage');check($edited->get_data()['privacy']==='onlyme','editing text retains the original private audience');
+$r=app_request('POST','/community/1001/comments',array('content'=>'Comentario desde la app','request_key'=>wp_generate_uuid4()));check($r->get_status()===200&&$r->get_data()['comment_count']===1,'comment persists and conversation is returned');
+$r=app_request('PUT','/community/1001/like',array('liked'=>true));check($r->get_status()===200&&$r->get_data()['liked']===true,'like is persisted for authenticated member');
+$r=app_request('PUT','/community/1001/like',array('liked'=>true));check($r->get_data()['liked']===true,'repeated desired like state does not toggle it off');
+check(app_request('GET','/community',array('filter'=>'liked'))->get_data()['items'][0]['id']===1001,'liked feed reads original member favorites');
+$profile=app_request('GET','/profile')->get_data();check(count($profile['fields'])===3&&!in_array(77,array_column($profile['fields'],'id'),true),'profile editor excludes protected member type field');
+$choice=app_request('PATCH','/profile',array('fields'=>array(array('id'=>4,'value'=>array('Futuros')))));check($choice->get_status()===200&&get_user_meta($a,'fixture_instruments',true)===array('Futuros'),'multi-select profile values persist through platform');
+check(app_request('PATCH','/profile',array('fields'=>array(array('id'=>4,'value'=>array('Administrator')))))->get_status()===400,'unknown multi-select option is rejected');
+$name=get_userdata($a)->display_name;$role=get_userdata($a)->roles;
+$r=app_request('PATCH','/profile',array('fields'=>array(array('id'=>1,'value'=>'Alumno sincronizado'))));check($r->get_status()===200&&get_userdata($a)->display_name==='Alumno sincronizado','profile edit writes through platform and WordPress');
+check(app_request('PATCH','/profile',array('fields'=>array(array('id'=>77,'value'=>'administrator'))))->get_status()===400&&get_userdata($a)->roles===$role,'protected profile field cannot grant membership or roles');
+app_request('PATCH','/profile',array('fields'=>array(array('id'=>1,'value'=>$name))));
+check(app_request('PUT','/notifications/'.(800+$b).'/read')->get_status()===403,'recipient isolation on notification writes');
+check(app_request('PUT','/notifications/read',array('ids'=>array(800+$a,800+$b)))->get_status()===403&&!get_user_meta($a,'fixture_notification_read',true),'bulk read checks every recipient before any mutation');
+$r=app_request('PUT','/notifications/'.(800+$a).'/read');check($r->get_status()===200&&$r->get_data()['unread_count']===0,'read receipt persists and unread count is recalculated');
+check(app_request('PUT','/notifications/'.(800+$a).'/read')->get_status()===200,'read receipt is idempotent');
+check(count(app_request('GET','/notifications',array('filter'=>'read'))->get_data()['items'])===1,'read history uses platform read-state filter');
+check(app_request('GET','/members',array('search'=>'Alumno'))->get_status()===200,'member directory delegates platform visibility');
+$del=app_request('DELETE','/community/'.$id);check($del->get_status()===200&&!isset(auren_fixture_posts()[$id]),'owner delete removes original platform post');
+update_option('auren_app_write_lock_'.$a,time().':another-request',false);check(app_request('PUT','/community/1001/like',array('liked'=>false))->get_status()===409,'concurrent mutation lock rejects conflicting write');delete_option('auren_app_write_lock_'.$a);
+wp_set_current_user($a);delete_user_meta($a,'fixture_blocks');delete_user_meta($b,'fixture_blocks');
+check(app_request('PUT','/members/'.$b.'/block',array('blocked'=>true))->get_status()===200,'block uses original platform mutation');
+check(app_request('PUT','/members/'.$b.'/block',array('blocked'=>true))->get_status()===200,'repeated desired block state is idempotent');
+check(auren_app_blocked_members()['items'][0]['id']===$b,'member can inspect own block list');
+wp_set_current_user($b);check(count(auren_app_blocked_members()['items'])===0,'block list is isolated between accounts');
+wp_set_current_user($a);check(app_request('PUT','/members/'.$b.'/block',array('blocked'=>false))->get_status()===200&&count(auren_app_blocked_members()['items'])===0,'unblock updates the original platform and own list');
+check(app_request('PUT','/members/'.$a.'/block',array('blocked'=>true))->get_status()===400,'self block rejected');
+// Restore fixture state for the browser acceptance flows.
+delete_option('auren_fixture_social_posts');foreach(array($a,$b) as $uid){delete_user_meta($uid,'fixture_notification_read');delete_user_meta($uid,'fixture_like_1001');delete_user_meta($uid,'fixture_blocks');}
+echo "$count checks passed. WordPress real; LearnDash/BuddyBoss adapters use explicit fixtures.\n";

@@ -47,3 +47,15 @@ El bridge sirve manifest, iconos fijos y metadatos de versión públicos mediant
 Cowboy devuelve un texto de marcador al leer archivos grandes, no su contenido. Para recursos estáticos públicos se contrastan y respaldan los bytes mediante HTTPS con el hash esperado; nunca se acepta el hash de ese marcador como si fuera el archivo original.
 
 Cloudflare añade su script de analítica existente a respuestas HTML, por lo que un hash HTTP del documento transformado difiere del archivo local. La identidad de build se contrasta con el hash del archivo servido por los metadatos de release y los JS/licencias se verifican byte a byte por HTTPS. No se cambió la configuración de Cloudflare.
+
+## Actualización 0.3.0: acciones dentro de la app
+
+Se añaden `interactions.php` y `profile.php` antes de cambiar el loader, seguidos de comunidad/rutas y nuevo bundle web. HTML se publica al final; bundles anteriores se conservan. Los archivos existentes se contrastan con el checkpoint y se respaldan bajo `.local/deploy-backups`. Cowboy ejecuta preflight PHP antes de escribir. Ver `connected-experience-deployment.json`.
+
+El consentimiento nativo ahora describe aprendizaje, perfil, avisos y comunidad. No cambia el TTL ni el namespace del bearer (`connected-auth-consent-deployment.json`). Una corrección posterior normaliza stdClass anidados del REST interno, necesaria para leer el perfil de la instalación real (`connected-serialization-deployment.json`). La actualización de avisos se adapta al esquema entero original (`connected-notification-deployment.json`). El último ajuste de UI y búsqueda se registra en `connected-ui-final-deployment.json`. No se modifica el tema, contenido de LearnDash, roles, matrículas ni ajustes globales de BuddyBoss.
+
+Las acciones del alumno sí escriben los registros originales de BuddyBoss, como solicita el proyecto. La aceptación real crea y elimina únicamente una actividad propia privada, restaura el campo de perfil probado y el estado del aviso probado. Los bloqueos/reportes hacia otros usuarios se comprueban únicamente con fixtures locales. El paquete generado debe coincidir con los hashes finales del bridge, no solo con el despliegue inicial anterior a la corrección.
+
+Reversión 0.3: restaurar los archivos propios del respaldo o desactivar únicamente el bridge. No restaurar tablas BuddyBoss: hacerlo borraría cambios legítimos de usuarios. No hay migración destructiva de datos sociales en esta entrega.
+
+Los avisos de terceros contienen algunos segmentos CRLF originales. Para comprobar/desplegar sus bytes se lee con `read_bytes().decode('utf-8')`: `read_text()` normaliza esos segmentos a LF y produce un hash distinto del ZIP. `connected-licenses-final-deployment.json` registra la entrega exacta, y `connected-live-release.json` verifica paquete, recursos y PHP finales por separado.

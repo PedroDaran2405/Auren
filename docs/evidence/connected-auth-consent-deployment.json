@@ -1,0 +1,7 @@
+{
+  "path": "plugins/auren-app-bridge/includes/auth.php",
+  "before_sha256": "861aacb8a7947596a8cf4583dc42caf0841df069a9c531041b2bfb51feb2e7d1",
+  "after_sha256": "106a5b06b6510bbf55ac6123a478f760be4cd66bb9ad952e53e8a08a14947d5e",
+  "change": "consent description includes learning, profile, notifications and community; session scope/TTL unchanged",
+  "backup_directory": ".local/deploy-backups/consent-20261020T185920Z"
+}

@@ -34,3 +34,10 @@ test('only safe HTTPS video URLs are accepted',()=>{
  for(const s of ['javascript:alert(1)','data:text/html,x','http://cdn.example/a.mp4','https://user:pw@example.com/v.mp4'])assert.equal(safeHttpsUrl(s),null);
  assert.equal(safeHttpsUrl('https://cdn.example/a.mp4'),'https://cdn.example/a.mp4');
 });
+test('search encodes text while identity overrides and route traversal are rejected before sending credentials',async()=>{
+ let calls=0;let target='';const api=new AurenApi({baseUrl:'https://example.com/wp-json/auren/v1',token:'private-token',fetcher:async(url)=>{calls++;target=String(url);return json({items:[],next_page:null});}});
+ await api.community(1,'mine','a&b español');assert.equal(new URL(target).searchParams.get('search'),'a&b español');
+ const before=calls;
+ for(const path of ['/community?user_id=99','/community?page=1&page=2','/community/../me','/community?filter=mine#secret'])await assert.rejects(api.request(path),/Ruta/);
+ assert.equal(calls,before);
+});

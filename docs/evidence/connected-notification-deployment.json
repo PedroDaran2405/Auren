@@ -1,0 +1,7 @@
+{
+  "path": "plugins/auren-app-bridge/includes/interactions.php",
+  "before_sha256": "f027c7245aad6beb565f64a1116c743c190a14f5bf8ca555e4a2f1b426913475",
+  "after_sha256": "5ed001f371063a186443555170d6acb8244082cbc4bb733f6c24a45959f663a3",
+  "change": "send the integer 0 required by installed notification update schema; reads retain boolean filtering",
+  "backup_directory": ".local/deploy-backups/notification-20261020T191158Z"
+}

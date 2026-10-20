@@ -1,0 +1,107 @@
+{
+  "release": {
+    "version": "0.3.0",
+    "build_id": "8784b6110bdc5d0acfb13b89d23a3ddf56aa88765929ede1e5ead4b2fb02b2b6"
+  },
+  "php": [
+    {
+      "path": "auren-app-bridge.php",
+      "matches": true,
+      "sha256": "867f2e26485db9e6bdfc8f2b1afe5cfb2ac225d30653d882207cce1651a75ead"
+    },
+    {
+      "path": "includes/academy.php",
+      "matches": true,
+      "sha256": "c831e7d07ac8ed86a9879f045d0dcb896d6b58757da91c3c998bf0049f76c9cb"
+    },
+    {
+      "path": "includes/admin.php",
+      "matches": true,
+      "sha256": "7e9e632c84e782f7dcb13a9bb7920550c6071275fd2b62a4b03a084748ee465e"
+    },
+    {
+      "path": "includes/auth.php",
+      "matches": true,
+      "sha256": "106a5b06b6510bbf55ac6123a478f760be4cd66bb9ad952e53e8a08a14947d5e"
+    },
+    {
+      "path": "includes/community.php",
+      "matches": true,
+      "sha256": "2f324e434838f10fde6011b0603a2ee9e10d6b19ab043ea7395a9a380a613e25"
+    },
+    {
+      "path": "includes/interactions.php",
+      "matches": true,
+      "sha256": "5ed001f371063a186443555170d6acb8244082cbc4bb733f6c24a45959f663a3"
+    },
+    {
+      "path": "includes/login.php",
+      "matches": true,
+      "sha256": "10e5a815c65c7e09579fe0e740d8ba88a6b140267baa2f0a17bf381cf7d1c717"
+    },
+    {
+      "path": "includes/profile.php",
+      "matches": true,
+      "sha256": "69a8f5a7001b5b427d3628b636b682853889d8f9975066c716ebfbf8bcd6b309"
+    },
+    {
+      "path": "includes/rest.php",
+      "matches": true,
+      "sha256": "2d34cf82506d34513e578fc19894ebe8b028499231b9b5e4a27c01a649e3cef5"
+    },
+    {
+      "path": "includes/web.php",
+      "matches": true,
+      "sha256": "c0a15c18c90259cd3f0937ddd939e99d231ddb81c1c8389e4d618e7eb360c908"
+    }
+  ],
+  "public_assets": [
+    {
+      "path": "web/_expo/static/js/web/index-c2a1cb0bbe1169f42634db10412297bc.js",
+      "matches": true,
+      "sha256": "d871cc51fde88f9e84d5c629431ce327a5598c1e06ac3ff192c4a6ee3d8cba33",
+      "bytes": 660789
+    },
+    {
+      "path": "web/assets/__node_modules/@expo-google-fonts/plus-jakarta-sans/400Regular/PlusJakartaSans_400Regular.dd3a1370a03dc0f2d7d093bd0ffe7c0b.ttf",
+      "matches": true,
+      "sha256": "ca6ef907028d1d1808870967d7b7ddcf68c0f33552d15d7f0c6c7d6ae97e7571",
+      "bytes": 94756
+    },
+    {
+      "path": "web/assets/__node_modules/@expo-google-fonts/plus-jakarta-sans/600SemiBold/PlusJakartaSans_600SemiBold.73de6fb49299ccb6478575127008c120.ttf",
+      "matches": true,
+      "sha256": "bbaa1d21ce4839070547b1cc06d5db2a56f520abe90278d971665b3f6dca6851",
+      "bytes": 94836
+    },
+    {
+      "path": "web/assets/__node_modules/@expo-google-fonts/plus-jakarta-sans/700Bold/PlusJakartaSans_700Bold.bac8ecad2d6da4aa6b4200699a80a9dd.ttf",
+      "matches": true,
+      "sha256": "71af7a0aac7db1b7e30cd389d7aabdabb44b5b5553d470ddd5aa25c0537c8108",
+      "bytes": 94772
+    },
+    {
+      "path": "web/assets/__node_modules/@expo-google-fonts/plus-jakarta-sans/800ExtraBold/PlusJakartaSans_800ExtraBold.f90855567d2c693a26e66f7184645099.ttf",
+      "matches": true,
+      "sha256": "f95af252acb2a09e79452366d05346975e7fda7e0a5831ff671effcb2568504c",
+      "bytes": 94780
+    },
+    {
+      "path": "web/THIRD_PARTY_NOTICES.txt",
+      "matches": true,
+      "sha256": "c9ab81b9a4f7fe06dacfb863a45d5687884e4fbd0bc137a25192de780144b363",
+      "bytes": 737442
+    },
+    {
+      "path": "web/metadata.json",
+      "matches": true,
+      "sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "bytes": 49
+    }
+  ],
+  "zip_matches_source": true,
+  "zip_sha256": "f03a6e066120232f86603d3b565d609995e790587c2a21ed305d13a1db448d40",
+  "homepage_http_status": 200,
+  "homepage_does_not_load_app_bundle": true,
+  "read_only_check": true
+}

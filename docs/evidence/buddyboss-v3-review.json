@@ -1,0 +1,114 @@
+{
+  "review": "BuddyBoss 0.3 integration audit",
+  "installed_sources": [
+    {
+      "path": "plugins/buddyboss-platform/bp-loader.php",
+      "bytes": 17209,
+      "sha256": "eabee64c4de8677c23ccd01ecdbff09ff784121705bd8ae9d8a2b569b8fb1712"
+    },
+    {
+      "path": "plugins/buddyboss-platform/bp-activity/classes/class-bp-rest-activity-endpoint.php",
+      "bytes": 130270,
+      "sha256": "81d3b05e9a97f765e1d0dd5080e199fa82b4ea48d463ef16bf9af1ff39cdc813"
+    },
+    {
+      "path": "plugins/buddyboss-platform/bp-activity/classes/class-bp-rest-activity-comment-endpoint.php",
+      "bytes": 37153,
+      "sha256": "c32a1c918f3b28b4116f28a28e6083341102fbf0a3499d72faed426fe9f11990"
+    },
+    {
+      "path": "plugins/buddyboss-platform/bp-xprofile/classes/class-bp-rest-xprofile-field-groups-endpoint.php",
+      "bytes": 34427,
+      "sha256": "bc4b254ada55ae97ee07d45c1d31d4f00e286baef3d2d82112d0ce7e97fe45b1"
+    },
+    {
+      "path": "plugins/buddyboss-platform/bp-xprofile/classes/class-bp-rest-xprofile-update-endpoint.php",
+      "bytes": 20185,
+      "sha256": "257f9f83208bdd95d5ca19b01af60a17fdd8ea1cae397e7bf6a1391e9e57723a"
+    },
+    {
+      "path": "plugins/buddyboss-platform/bp-members/classes/class-bp-rest-members-endpoint.php",
+      "bytes": 52948,
+      "sha256": "ab67a90977c0c4715735d6d6f296853fb6d172108040a4defa6bbf4d790f812b"
+    },
+    {
+      "path": "plugins/buddyboss-platform/bp-moderation/classes/class-bp-rest-moderation-report-endpoint.php",
+      "bytes": 24336,
+      "sha256": "3cb94208949271700e52be4120f668400693c2406da8863e3a577a55bac1b53a"
+    },
+    {
+      "path": "plugins/buddyboss-platform/bp-moderation/classes/class-bp-rest-moderation-endpoint.php",
+      "bytes": 92453,
+      "sha256": "a6accf26ec3834d43054e76b9adb5c6bba60db67b34a8e455cee7ef431ac2a67"
+    },
+    {
+      "path": "plugins/buddyboss-platform/bp-notifications/classes/class-bp-rest-notifications-endpoint.php",
+      "bytes": 53838,
+      "sha256": "ff624be66149cb7aa4d55877a4da5abf3dfe2cd258492a6866ab2d4a4ea7b8ac"
+    },
+    {
+      "path": "themes/buddyboss-theme/style.css",
+      "bytes": 321,
+      "sha256": "dc87dc51c1d9fa3ac9082cd401a4b3209ed2c0914320d98d8751b54b1771c3aa"
+    },
+    {
+      "path": "plugins/buddyboss-platform-pro/buddyboss-platform-pro.php",
+      "bytes": 15334,
+      "sha256": "1f5c62287034c271c48988c873f2b7bfe1568a89d06efff00752571f0238f4a7"
+    },
+    {
+      "path": "plugins/buddyboss-platform-pro/class-bb-platform-pro.php",
+      "bytes": 13646,
+      "sha256": "75cb8118e3952ef8c4de2ba3dc00a8963908843b6a935365037ee15ddd42eb07"
+    },
+    {
+      "path": "plugins/buddyboss-platform/bp-activity/bp-activity-filters.php",
+      "bytes": 143213,
+      "sha256": "868de8e5c0dfd8adbd044f07e0065b4835834a7d96e291e54382b281c006d9f8"
+    }
+  ],
+  "commercial_docs_attempts": [
+    {
+      "url": "https://www.buddyboss.com/app/",
+      "error": "HTTPError",
+      "status": 403
+    },
+    {
+      "url": "https://www.buddyboss.com/platform/",
+      "error": "HTTPError",
+      "status": 403
+    },
+    {
+      "url": "https://www.buddyboss.com/platform-pro/",
+      "error": "HTTPError",
+      "status": 403
+    },
+    {
+      "url": "https://www.buddyboss.com/theme/",
+      "error": "HTTPError",
+      "status": 403
+    },
+    {
+      "url": "https://www.buddyboss.com/resources/docs/",
+      "error": "HTTPError",
+      "status": 403
+    },
+    {
+      "url": "https://www.buddyboss.com/resources/api/",
+      "error": "HTTPError",
+      "status": 403
+    }
+  ],
+  "browser_docs_attempt": {
+    "url": "https://www.buddyboss.com/resources/docs/",
+    "status": 403,
+    "title": "Attention Required! | Cloudflare"
+  },
+  "versions": {
+    "platform": "3.4.3",
+    "platform_pro": "3.0.2",
+    "theme": "2.8.51"
+  },
+  "claims": "Installed code and REST docstrings reviewed; blocked commercial documentation not claimed as fully read.",
+  "private_post_test_guard": "Installed follower-notification helper returns before sending when privacy is onlyme; test content must contain no mentions."
+}

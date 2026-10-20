@@ -1,0 +1,16 @@
+{
+  "progress_unchanged": true,
+  "identity_name_restored": true,
+  "profile_restored": true,
+  "tabs_after_logout": 0,
+  "private_routes_after_logout": {
+    "me": 401,
+    "profile": 401,
+    "community": 401,
+    "notifications": 401,
+    "members": 401,
+    "blocked": 401,
+    "courses": 401
+  },
+  "reload_stays_signed_out": true
+}
