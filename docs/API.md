@@ -58,3 +58,12 @@ Todas las rutas siguen exigiendo cookie+nonce o bearer de app; el actor se fija 
 Activity añade author.id, title, liked, privacy y permissions {like,comment,edit,delete}. Notification añade target de actividad cuando se puede resolver; abrirlo vuelve a comprobar visibilidad. /me anuncia capacidades profile, members, report, block y post_title detectadas en el servidor.
 
 Publicaciones/comentarios llevan deduplicación por usuario y clave durante una hora, incluyendo estado pendiente para no repetir una escritura cuyo resultado es incierto. Un lock de opción propia serializa mutaciones por miembro; su liberación comprueba el token de la solicitud. No se reintentan mutaciones automáticamente. Los datos sociales permanecen en las tablas nativas, no en una base paralela de la app.
+
+
+## Ampliaciones 0.4.0: GamiPress y marca
+
+`GET /gamification` exige la misma sesión privada y solo consulta la cuenta autenticada. Devuelve `available`, `credits {type,label,balance,image_url}`, `rank {type,current,next,progress}`, `achievements`, `achievement_total` y `achievement_earned`. Cada progreso incluye porcentaje o null y los requisitos nativos `{id,title,earned,optional,current,total,unit,percent}`. No hay POST/PATCH para asignar saldos, conceder logros o cambiar niveles. `user`/`user_id` siguen rechazados.
+
+`GET /me` incorpora exactamente el mismo objeto `gamification`, `branding {name,logo_url}` y `cover_url` del miembro. Sin GamiPress/tipo de puntos, `available=false` y los bloques correspondientes se ocultan. La marca toma el logo de las opciones del tema; no reemplaza sus ajustes.
+
+Solo se presentan imágenes/estados publicados y logros visibles; los logros por triggers sin pasos no se anuncian como pendientes. Un requisito no cuantificable no genera un porcentaje ficticio. Ver GAMIFICATION para selección de tipos, reglas y cálculo agregado.

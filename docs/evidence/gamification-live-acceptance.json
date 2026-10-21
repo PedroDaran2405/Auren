@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-10-21T00:33:13.473079+00:00",
+  "version": "0.4.0",
+  "real_student_authenticated": true,
+  "reads": {
+    "me": 200,
+    "gamification": 200,
+    "authorized_course": 200,
+    "unauthorized_pro_course": 403
+  },
+  "identity_and_gamification_equal": true,
+  "only_original_points_type": "credits",
+  "original_coin_attachment": 1578,
+  "sample": {
+    "type": 1691,
+    "base": 1692,
+    "next": 1693,
+    "requirement": 1694,
+    "threshold_balance": 200
+  },
+  "native_bearer_matches_cookie": true,
+  "native_identity_override_status": 400,
+  "native_bearer_revoked_status": 401,
+  "student_progress_unchanged": true,
+  "student_gamification_unchanged": true,
+  "manually_awarded_points_or_ranks": false,
+  "visual": {
+    "transport": "exact app bundle and actual authenticated GETs/assets via temporary loopback relay with validated upstream HTTPS",
+    "app_no_horizontal_overflow": true,
+    "website_desktop_level_and_balance_visible": true,
+    "website_mobile_balance_visible": true,
+    "website_no_horizontal_overflow": true,
+    "app_javascript_errors": [],
+    "physical_device_acceptance": false
+  },
+  "browser_persistent_ca_modified": false,
+  "after_logout": {
+    "me": 401,
+    "gamification": 401,
+    "courses": 401,
+    "community": 401,
+    "profile": 401,
+    "notifications": 401
+  },
+  "older_browser_test_session_logout": 200,
+  "credentials_or_tokens_saved": false,
+  "logo_native_sha256": "43e4751f2cf06255cc72713fd8b139969bc0399a4c001796be293c3f76975111"
+}

@@ -16,10 +16,10 @@ Esta tabla describe implementación, no equivale a aceptación en producción. V
 | Amigos / seguidores | Pendiente | Confirmar componentes activos y privacidad | 2 |
 | Búsqueda | Feed y miembros desde servidor; cursos cargados en cliente | Permisos originales; no hay búsqueda global de documentos/grupos | 2 |
 | Documentos / fotos | Pendiente | Permisos de archivos, URLs y borrado | 2 |
-| Mensajes privados | Pendiente | Acceso cruzado, adjuntos, retención; no tiempo real prometido | 3 |
+| Mensajes privados | Fuera de la navegación por decisión del propietario | Acceso cruzado, adjuntos, retención; no tiempo real prometido | 3 |
 | Notificaciones internas / push | Avisos internos y estado leído implementados; push pendiente | Destinatario fijo, historial y conversación interna; sin APNs/FCM | 3 |
 | Cuestionarios / certificados | Flujo web, interfaz propia pendiente | LearnDash, temporizadores y reglas | 2 |
-| GamiPress | Inventariado, sin saldo local | API/autorización real antes de mostrar puntos | 3 |
+| GamiPress | Implementado: Credits, niveles, logros y requisitos privados | Plugin original, pruebas reales y locales; sin otorgamiento desde cliente; ver GAMIFICATION | 2 |
 | Promoción broker | No implementada | Modelo de fuentes, vencimiento y revisión manual antes de conceder acceso | 3 |
 | Sesiones en vivo | Sin oferta confirmada | No anunciar ni implementar hasta inventario | Posterior |
 | Videos offline | No implementados | Derechos del proveedor, expiración y almacenamiento | Posterior |

@@ -47,3 +47,8 @@ Publicar, comentar, editar, borrar, reaccionar, marcar avisos, reportar y bloque
 Las mutaciones de una cuenta se serializan con un lock privado de WordPress con token y expiración. Crear post/comentario conserva una clave de deduplicación durante una hora, incluyendo un estado pendiente para una respuesta incierta. Likes reciben estado deseado; el bridge solo invoca el toggle si hace falta. La respuesta visible llega después del guardado y una nueva lectura del registro original. No hay promesa de transacciones globales ni streaming entre dispositivos.
 
 La UI separa comunidad, editor de perfil, avisos y bloqueos en componentes propios, con estados de carga/error, filtros, búsqueda, paginación y ventanas adaptadas al teclado. Al cambiar de pantalla o refrescar se consulta WordPress. La búsqueda de cursos abarca el catálogo ya cargado; comunidad/miembros consultan al servidor. No se usan datos de fixture en la aplicación publicada.
+
+
+## GamiPress 0.4.0
+
+`includes/gamification.php` adapta exclusivamente funciones públicas de GamiPress para el usuario autenticado. `/me` y `/gamification` comparten implementación. No hay base móvil de puntos ni endpoint de asignación. El cliente refresca identidad con protección contra respuestas antiguas, al recuperar foco/cada minuto y tras acciones relevantes. El tema y GamiPress no se modifican; `gamification-web.php` encola recursos propios y monta el indicador en los contenedores BuddyBoss existentes. Los selectores de tipos son opciones propias del bridge; los objetos, imágenes y requisitos siguen en GamiPress. Ver GAMIFICATION para las reglas de muestra y límites de progreso.

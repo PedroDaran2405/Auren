@@ -1,0 +1,31 @@
+{
+  "version": "0.4.0",
+  "timestamp": "2026-10-21T00:28:48.883459+00:00",
+  "files": [
+    {
+      "path": "plugins/auren-app-bridge/web/_expo/static/js/web/index-e03845757d46f92c16344b61e3fe1a24.js",
+      "before_sha256": null,
+      "after_sha256": "b2ecf839bf6b1ad7d6c7fee8f9e353d8ec5f2702b3ff0b219e7c9e8f384a09d0",
+      "bytes": 676401
+    },
+    {
+      "path": "plugins/auren-app-bridge/web/metadata.json",
+      "before_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "after_sha256": "aa5f19cc84d41c0f8c70ececb2bc82e863227ea1e121632aca879eb616056991",
+      "bytes": 49
+    },
+    {
+      "path": "plugins/auren-app-bridge/web/index.html",
+      "before_sha256": "8784b6110bdc5d0acfb13b89d23a3ddf56aa88765929ede1e5ead4b2fb02b2b6",
+      "after_sha256": "797d1ad188124be4f67fdde562e03c2c217c57d7c51737c4bdbd72aaceb5991f",
+      "bytes": 1251
+    }
+  ],
+  "html_last": true,
+  "previous_bundles_preserved": true,
+  "backup_directory": ".local/deploy-backups/gamification-web-20261021T002321Z",
+  "html_source_verified_via_mcp": true,
+  "public_html_includes_existing_cloudflare_beacon": true,
+  "entrypoint_has_current_bundle": true,
+  "entrypoint_private_no_store": true
+}

@@ -51,3 +51,12 @@ No se envían publicaciones públicas, comentarios/reportes/bloqueos hacia perso
 `connected-live-notification-sync.json` comprueba marcado de lectura desde la UI, estado original, historial y restauración. `connected-live-ui.json` documenta pantallas internas en 390×844 sin desbordamiento/errores JS observados, sin enviar posts. `connected-live-learning.json` comprueba búsqueda y siguiente lección real sin completar contenido. Los ajustes finales evitan un fetch duplicado de avisos y hacen visible una segunda publicación al crearla desde Mi actividad; este último caso forma parte del recorrido social local.
 
 `connected-live-final.json` confirma valores de perfil y nombre restaurados, progreso intacto y cierre de sesión: siete rutas privadas 401, ninguna pestaña privada y recarga fuera de sesión. `connected-live-release.json` contrasta PHP y recursos públicos con el árbol empaquetado y el build anunciado; la portada original responde 200 sin cargar el bundle de la app.
+
+
+## Aceptación 0.4.0
+
+`npm run local:gamipress` instala el plugin gratuito oficial 8.0.6 en Docker; `npm run test:gamification` prepara objetos locales explícitos y ejecuta 15 contratos contra el plugin real. Comprueba lectura nativa, progreso, cambios de requisitos/nombre y premios/descuentos nativos, privacidad, ausencia de otorgamientos en GET y prohibición de escribir puntos desde móvil. El instalador no toca el sitio remoto ni distribuye plugins comerciales.
+
+El recorrido `gamification.spec.ts` comprueba saldo/barra/tooltip, detalle de recompensa, perfil/logros, marca, Avisos y anchos 320/390/768. Usa la copia original del logo para aislar esa petición pública del proxy cloud. Debe ejecutarse después de preparar GamiPress; en instalaciones sin él se omite explícitamente. La batería completa tiene 9 recorridos. Los 8 anteriores conservan aceptación de progreso/social/perfil/avisos y aislamiento.
+
+Antes de repetir la batería completa, `npm run test:wordpress` restaura el progreso y avisos locales y `npm run test:gamification` restablece sus saldos. No repetir pruebas de escritura sobre alumnos reales. La aceptación remota 0.4.0 se limita a lecturas y sesiones propias; incluye PKCE/bearer revocable y no altera progreso ni puntos. Para la limitación de CA del navegador y el relay temporal de renderizado, ver GAMIFICATION.

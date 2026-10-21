@@ -1,0 +1,19 @@
+.auren-gami[hidden]{display:none!important}
+.auren-gami{display:flex;align-items:center;gap:18px;margin-inline-end:16px;font:inherit;color:inherit;flex-shrink:0}
+.auren-gami__level{display:flex;align-items:center;gap:9px;max-width:210px;outline-offset:5px;border-radius:8px}
+.auren-gami__medal{display:flex;align-items:center;justify-content:center;object-fit:contain;width:34px;height:38px;flex-shrink:0;border-radius:10px;background:linear-gradient(145deg,#143d90,#001d35);color:#27e2f3;font-size:24px}
+.auren-gami__info{display:flex;flex-direction:column;gap:6px;min-width:110px}
+.auren-gami__name{font-size:11px;font-weight:600;line-height:16px;white-space:nowrap;max-width:165px;overflow:hidden;text-overflow:ellipsis}
+.auren-gami__track{height:6px;overflow:hidden;border-radius:8px;background:#1f9cc226;width:100%}
+.auren-gami__fill{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#1560ff,#00d9ee)}
+.auren-gami__credits{position:relative;display:flex;align-items:center;gap:7px;min-height:38px;outline-offset:4px;border-radius:20px}
+.auren-gami__coin{width:30px;height:30px;object-fit:contain}
+.auren-gami__balance{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.auren-gami__tooltip{display:none;position:absolute;top:calc(100% + 9px);inset-inline-end:0;padding:6px 10px;border-radius:7px;white-space:nowrap;background:#001629;color:#fff;font-size:11px;line-height:20px;z-index:20;box-shadow:0 4px 18px #00182d26}
+.auren-gami__credits:hover .auren-gami__tooltip,.auren-gami__credits:focus .auren-gami__tooltip{display:block}
+.bb-mobile-header .auren-gami{gap:7px;margin-inline-end:8px}
+.bb-mobile-header .auren-gami__level{display:none}
+.bb-mobile-header .auren-gami__coin{width:25px;height:25px}
+.bb-mobile-header .auren-gami__balance{font-size:12px}
+@media(max-width:1200px){#header-aside .auren-gami__level{display:none}}
+@media(max-width:380px){.bb-mobile-header .auren-gami{margin-inline-end:4px}.bb-mobile-header .auren-gami__coin{width:21px;height:21px}.bb-mobile-header .auren-gami__balance{font-size:11px}}

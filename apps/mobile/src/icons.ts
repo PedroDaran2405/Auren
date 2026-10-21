@@ -26,3 +26,5 @@ export { default as Send } from 'lucide-react-native/icons/send';
 export { default as Pencil } from 'lucide-react-native/icons/pencil';
 export { default as Flag } from 'lucide-react-native/icons/flag';
 export { default as Trash2 } from 'lucide-react-native/icons/trash';
+export { default as Trophy } from 'lucide-react-native/icons/trophy';
+export { default as Award } from 'lucide-react-native/icons/award';

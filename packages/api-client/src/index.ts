@@ -2,7 +2,12 @@ export type Progress = { completed: number; total: number; percent: number };
 export type LessonSummary = { id: number; title: string; completed: boolean; available: boolean };
 export type Course = { id: number; title: string; summary: string; image_url: string | null; url: string; access: {allowed: true; source: string; label: string}; progress: Progress; lessons?: LessonSummary[] };
 export type Lesson = { id: number; course_id: number; title: string; text: string; url: string; completed: boolean; completion_mode: 'app' | 'web'; video: {kind: 'direct' | 'web' | 'youtube'; url: string | null; video_id?: string} | null };
-export type Identity = { id: number; name: string; avatar_url: string; site_url: string; environment: string; profile_url?:string|null; community_url?:string|null; joined?:string; unread_notifications?:number; capabilities: { academy: boolean; community: boolean; notifications?:boolean; checkout: boolean; profile?:boolean;members?:boolean;report?:boolean;block?:boolean;post_title?:boolean } };
+export type GamiRequirement = {id:number;title:string;earned:boolean;optional:boolean;current:number;total:number;unit:string;percent:number|null};
+export type GamiProgress = {percent:number|null;requirements:GamiRequirement[]};
+export type GamiRank = {type:string;current:{id:number;name:string;number:number;image_url:string|null};next:{id:number;name:string;number:number;image_url:string|null}|null;progress:GamiProgress};
+export type GamiAchievement = {id:number;name:string;description:string;earned:boolean;image_url:string|null;progress:GamiProgress;reward:number|null};
+export type Gamification = {available:boolean;credits:{type:string;label:string;balance:number;image_url:string|null}|null;rank:GamiRank|null;achievements:GamiAchievement[];achievement_total:number;achievement_earned:number};
+export type Identity = { id: number; name: string; avatar_url: string; site_url: string; environment: string; profile_url?:string|null; community_url?:string|null; cover_url?:string|null; branding?:{name:string;logo_url:string|null}; gamification?:Gamification; joined?:string; unread_notifications?:number; capabilities: { academy: boolean; community: boolean; notifications?:boolean; checkout: boolean; profile?:boolean;members?:boolean;report?:boolean;block?:boolean;post_title?:boolean } };
 export type Author = {id?:number;name:string;avatar_url:string|null};
 export type ActivityComment = {id:number;author:Author;text:string;date:string;replies:ActivityComment[]};
 export type Activity = {id:number;author:Author;text:string;date:string;type:string;image_url:string|null;url:string|null;group_name:string;reaction_count:number;comment_count:number;comments?:ActivityComment[];liked?:boolean;privacy?:string;title?:string;permissions?:{like:boolean;comment:boolean;edit:boolean;delete:boolean}};
@@ -70,6 +75,7 @@ export class AurenApi {
     } finally { clearTimeout(timeout); this.controllers.delete(controller); }
   }
   me() { return this.request<Identity>('/me'); }
+  gamification() { return this.request<Gamification>('/gamification'); }
   courses(page=1) { return this.request<{items:Course[];next_page:number|null}>(`/courses?page=${page}`); }
   course(id:number) { return this.request<Course>(`/courses/${positiveId(id)}`); }
   lesson(course:number,lesson:number) { return this.request<Lesson>(`/courses/${positiveId(course)}/lessons/${positiveId(lesson)}`); }

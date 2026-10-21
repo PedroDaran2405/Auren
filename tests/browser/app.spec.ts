@@ -8,7 +8,7 @@ async function login(page:import('@playwright/test').Page,user='alumno-a'){
  await page.getByRole('button',{name:/Entrar a mi academia/}).click();
  await expect(page.locator('body')).toHaveClass(/auren-app-login/);
  await page.locator('#user_login').fill(user);await page.locator('#user_pass').fill(password);await page.locator('#wp-submit').click();
- await expect(page.getByRole('tab',{name:'Academia'})).toBeVisible();
+ await expect(page.getByRole('tab',{name:'Cursos'})).toBeVisible();
 }
 test('student enters, opens lesson, completes, reloads, signs out, another student stays separate',async({page})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
@@ -16,7 +16,7 @@ test('student enters, opens lesson, completes, reloads, signs out, another stude
  await page.screenshot({path:'artifacts/welcome-mobile.png',fullPage:true});
  await login(page);
  await page.getByRole('button',{name:'Abrir Curso de integración · fixture'}).click();
- await expect(page.getByRole('tab',{name:'Academia',exact:true})).toHaveAttribute('aria-selected','true');
+ await expect(page.getByRole('tab',{name:'Cursos',exact:true})).toHaveAttribute('aria-selected','true');
  await page.getByRole('button',{name:/Lección 1: Lección 1/}).click();
  await page.getByRole('button',{name:'Marcar como completada'}).click();
  await expect(page.getByText('Tu avance se guardó en la academia.')).toBeVisible();

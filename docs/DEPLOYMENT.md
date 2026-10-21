@@ -59,3 +59,10 @@ Las acciones del alumno sí escriben los registros originales de BuddyBoss, como
 Reversión 0.3: restaurar los archivos propios del respaldo o desactivar únicamente el bridge. No restaurar tablas BuddyBoss: hacerlo borraría cambios legítimos de usuarios. No hay migración destructiva de datos sociales en esta entrega.
 
 Los avisos de terceros contienen algunos segmentos CRLF originales. Para comprobar/desplegar sus bytes se lee con `read_bytes().decode('utf-8')`: `read_text()` normaliza esos segmentos a LF y produce un hash distinto del ZIP. `connected-licenses-final-deployment.json` registra la entrega exacta, y `connected-live-release.json` verifica paquete, recursos y PHP finales por separado.
+
+
+## Entrega visual y GamiPress 0.4.0
+
+Los módulos nuevos y recursos del encabezado se instalaron antes del loader; después se actualizó el contrato de identidad y los selectores propios. La nueva web se publicó con JavaScript primero e índice al final, preservando bundles anteriores. El HTML servido por Cloudflare incorpora su beacon existente: el hash del archivo fuente se comprueba mediante MCP; la entrada pública se comprueba por versión, bundle nuevo y no-store, sin exigir que ese HTML inyectado coincida byte a byte. JavaScript, fuentes y licencias sí coinciden con los recursos empaquetados. Ver `gamification-backend-deployment.json`, `gamification-ui-deployment.json` y `plugin-package.json`.
+
+Para revertir únicamente la interfaz, restaurar el índice/bundle anterior desde `.local/deploy-backups`. Para retirar también el indicador, revertir los archivos propios del bridge o desactivarlo. Los objetos de muestra son nativos: se administran por GamiPress y no se borran al desactivar el bridge. No restaurar tablas de puntos o progreso para revertir código.

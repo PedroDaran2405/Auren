@@ -1,6 +1,17 @@
 # Estado y continuidad
 
-Versión **0.3.0**, desplegada en **https://www.aurenfx.com/?auren_app=1**. El propietario autorizó desarrollo prudente sobre su academia en desarrollo. La apariencia del sitio original y sus datos se conservan; las acciones de la app escriben en las fuentes originales de WordPress.
+Versión **0.4.0**, en **https://www.aurenfx.com/?auren_app=1**. La entrega añade el diseño inspirado en los conceptos, marca original y gamificación nativa compartida con el encabezado web. Ver [GAMIFICATION](GAMIFICATION.md) para edición de niveles, auditoría y límites de contenido.
+
+## Entrega 0.4.0
+
+- Auren Credits existentes, con su imagen y saldo reales. Sin segunda moneda ni XP inventado. Tooltip y detalle de saldo/nivel.
+- Niveles Auren nativos: Inicio y Explorador (saldo de 200 Credits). Editables en GamiPress; siete rangos anteriores preservados. Selector de tipos en Ajustes → Auren App.
+- Inicio, Cursos, clase, Comunidad, Avisos y Perfil con sistema visual azul/cian, navegación inferior y datos/acciones existentes. Logo del sitio, portada real del perfil y logros nativos.
+- 15 comprobaciones nuevas contra GamiPress 8.0.6 real, además de las 84 PHP anteriores, 7 pruebas de cliente y 9 recorridos de navegador. Exportaciones web y Hermes iOS/Android; no son binarios firmados.
+- En Auren: alumno admitido, curso autorizado 200 y PRO 403; identidad y endpoint de gamificación coinciden; bearer nativo devuelve el mismo estado, rechaza otro usuario y queda revocado al salir. Sin completar lecciones ni asignar puntos a la alumna.
+- Apariencia revisada con el bundle actual y lecturas/recursos reales mediante un relay temporal GET de loopback que verifica HTTPS. No se amplió el almacén de confianza del navegador. Capturas privadas fuera de Git; aceptación física pendiente.
+
+Las siguientes secciones conservan la aceptación anterior 0.3.0. Los grupos nativos, offline, adjuntos, certificados y push siguen pendientes. Varias lecciones están vacías; no se simulan materiales o recompensas de curso.
 
 ## Entrega conectada
 
@@ -50,8 +61,8 @@ Ver `connected-experience-deployment.json`, `connected-auth-consent-deployment.j
 
 1. Probar iPhone/Android físicos. La web tiene manifest/iconos y aviso de entrega nueva, sin caché privada offline. Instalar desde Safari/Chrome sigue requiriendo comprobación física.
 2. Retomar Expo cuando el propietario esté disponible. Ya conectó GitHub a `auren-fx/auren-fx`; `EXPO_TOKEN` sigue ausente. Falta comprobar UUID autenticado, vincular runtime/proyecto y preparar builds/firma. No se contrató ni publicó nada automáticamente. [DEVICE_TESTING](DEVICE_TESTING.md) conserva instrucciones.
-3. Grupos/foros, mensajería privada, adjuntos, respuestas/edición individual de comentarios y preferencias avanzadas, con permisos y pruebas propias.
-4. Cuestionarios/certificados, membresía/precios, vencimientos, compras y GamiPress desde sus fuentes reales; no conceder PRO ni inventar saldos.
+3. Grupos/foros, adjuntos, respuestas/edición individual de comentarios y preferencias avanzadas, con permisos y pruebas propias.
+4. Cuestionarios/certificados, membresía/precios, vencimientos y compras desde sus fuentes reales; no conceder PRO ni inventar saldos.
 5. Push APNs/FCM y offline con aceptación independiente. Un bundle JavaScript no demuestra esas capacidades.
 
 Para continuar: leer AUDIT, BUDDYBOSS_REVIEW, ARCHITECTURE, API y ENVIRONMENT. `python3 scripts/check-cowboy.py` verifica acceso en lectura. No guardar credenciales, cookies, claves ni el enlace privado de CAPTCHA en el repositorio.

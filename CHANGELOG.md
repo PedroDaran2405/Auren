@@ -1,5 +1,14 @@
 # Cambios
 
+## 0.4.0 — 2026-10-21
+
+- Diseño azul profundo, azul eléctrico y cian basado en los conceptos; logo original de Auren FX, tarjetas de curso con continuación, niveles/logros reales y perfil con portada de WordPress.
+- Una sola moneda: Auren Credits, imagen nativa, número y tooltip; detalle accesible al tocar. Se conserva Avisos en la navegación.
+- Adaptador privado de GamiPress, compartido por app y encabezado BuddyBoss. Sin asignaciones de puntos desde el cliente ni cambios al plugin/tema.
+- Tipo nativo de muestra Niveles Auren: Inicio y Explorador, requisito editable de saldo de 200 Credits; se preservan los siete rangos anteriores.
+- Actualización de identidad al volver/cada minuto en primer plano y después de acciones; requisitos/logros y privacidad originales respetados.
+- Pruebas con GamiPress real, aislamiento de cuentas, cambios de reglas/saldo, accesibilidad y recorridos completos. Ver GAMIFICATION y las evidencias 0.4.0.
+
 ## 0.3.0
 
 - Comunidad dentro de la app: crear/editar/eliminar publicaciones propias, comentarios, Me gusta, filtros y búsqueda; privacidad y permisos originales.

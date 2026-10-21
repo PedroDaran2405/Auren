@@ -23,6 +23,8 @@ add_action('rest_api_init',function() {
                 'profile'=>auren_app_has_buddyboss_route('/buddyboss/v1/xprofile/groups'),'members'=>auren_app_has_buddyboss_route('/buddyboss/v1/members'),
                 'block'=>auren_app_has_buddyboss_route('/buddyboss/v1/moderation'),
                 'report'=>auren_app_has_buddyboss_route('/buddyboss/v1/moderation/report')),
+            'cover_url'=>function_exists('bp_attachments_get_attachment')?auren_app_safe_url(bp_attachments_get_attachment('url',array('object_dir'=>'members','item_id'=>$u->ID,'type'=>'cover-image'))):null,
+            'branding'=>auren_app_branding(),'gamification'=>auren_app_gamification(),
             'environment'=>wp_get_environment_type());
     });
     $route('/courses','GET',function($r) {
@@ -52,6 +54,7 @@ add_action('rest_api_init',function() {
     $route('/community/(?P<activity>[1-9][0-9]*)/like','PUT','auren_app_like');
     $route('/community/(?P<activity>[1-9][0-9]*)/report','POST','auren_app_report');
     $route('/reports','GET','auren_app_report_form');
+    $route('/gamification','GET','auren_app_gamification');
     $route('/profile','GET','auren_app_profile');
     $route('/profile','PATCH','auren_app_save_profile');
     $route('/members','GET',fn($r)=>auren_app_members($page($r),$search($r)));

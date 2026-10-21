@@ -1,0 +1,54 @@
+{
+  "version": "0.4.0",
+  "checked_at": "2026-10-21T00:32:50.039955+00:00",
+  "installed_gamipress_version": "8.0.6",
+  "official_reference": "https://downloads.wordpress.org/plugin/gamipress.8.0.6.zip",
+  "installed_ranks_source_matches_reference": true,
+  "original_points_type": {
+    "id": 610,
+    "slug": "credits",
+    "thumbnail_id": 1578
+  },
+  "existing_rank_type": {
+    "id": 612,
+    "slug": "rangos",
+    "published_rank_ids": [
+      613,
+      614,
+      615,
+      616,
+      617,
+      618,
+      619
+    ],
+    "published_requirements_before": 0,
+    "modified": false
+  },
+  "created_native_sample": {
+    "rank_type": 1691,
+    "slug": "niveles-auren",
+    "published_ranks": [
+      1692,
+      1693
+    ],
+    "published_requirement": 1694,
+    "condition": "greater_or_equal",
+    "balance": 200,
+    "points_type": "credits",
+    "manual_user_awards": false
+  },
+  "configured_achievement_ids": [
+    620,
+    854
+  ],
+  "configured_step_ids": [
+    1415,
+    1607
+  ],
+  "unconfigured_achievements_excluded": [
+    851,
+    853
+  ],
+  "native_objects_remain_editable_in_gamipress": true,
+  "third_party_php_committed": false
+}

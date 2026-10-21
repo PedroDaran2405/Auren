@@ -50,3 +50,8 @@ Las mutaciones no se reintentan automáticamente. Publicaciones/comentarios inco
 Grupos/foros completos, mensajería privada, adjuntos/media, respuestas y edición individual de comentarios, preferencias avanzadas de notificaciones, push, offline, cuestionarios/certificados nativos y compras siguen en etapas posteriores. Los enlaces de autenticación/recuperación y actividades avanzadas de LearnDash mantienen el flujo original cuando es necesario. Expo continúa pendiente de autorización y firma según la vía de iOS elegida.
 
 La evidencia distingue fixture local, API real y recorrido físico. No se publican mensajes, reportes o reacciones de prueba hacia personas reales para demostrar una pantalla; los recorridos sociales completos se prueban en WordPress local con correo desactivado. La aceptación real utiliza una publicación propia «Solo yo», sin menciones, y una reacción propia; se verifica contra el REST original y se elimina el registro al terminar. El helper instalado de avisos a seguidores omite esa audiencia. No se envían comentarios, reportes, bloqueos ni mensajes hacia otras personas en Auren.
+
+
+## Diseño y gamificación 0.4.0
+
+Se aplican los conceptos visuales entregados por el propietario a las acciones ya conectadas. Se conserva Avisos y no se incluye una pestaña de mensajes. El adaptador GamiPress consulta el plugin nativo; la moneda, niveles y logros coinciden con el encabezado web. [GAMIFICATION](GAMIFICATION.md) registra objetos/configuración, fuentes, pruebas y contenido que falta antes de implementar los bloques restantes del concepto. Las cantidades, cursos y recompensas de las imágenes no se usan como datos de alumno.

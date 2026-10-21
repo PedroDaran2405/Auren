@@ -1,0 +1,23 @@
+{
+  "version": "0.4.0",
+  "checked_at": "2026-10-21T00:32:50.041178+00:00",
+  "client_tests_passed": 7,
+  "wordpress_contract_checks_passed": 84,
+  "real_gamipress_checks_passed": 15,
+  "browser_journeys_passed": 9,
+  "viewports_checked": [
+    320,
+    390,
+    768
+  ],
+  "typecheck": "passed",
+  "web_export": "passed",
+  "ios_hermes_export": "passed",
+  "android_hermes_export": "passed",
+  "web_bundle_bytes": 676401,
+  "web_bundle_sha256": "b2ecf839bf6b1ad7d6c7fee8f9e353d8ec5f2702b3ff0b219e7c9e8f384a09d0",
+  "real_gamipress_version": "8.0.6",
+  "local_learndash_buddyboss": "explicit fixtures",
+  "signed_native_binaries": false,
+  "physical_devices_tested": false
+}
