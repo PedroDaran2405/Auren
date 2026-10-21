@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-10-21T01:54:43.868046+00:00",
+  "bridge_version": "0.4.2",
+  "source_attachment_id": 56,
+  "source_url": "https://www.aurenfx.com/wp-content/uploads/2025/05/FAVICON-AUREN-1.png",
+  "source_sha256": "d42e54945a1f660be059363dc3b1629f08534e6f59ea874c6d5106ff64e85c79",
+  "original_artwork_preserved": true,
+  "background": "#00121f",
+  "apple_touch_icon": "https://www.aurenfx.com/?auren_app_icon=180&v=0.4.2",
+  "share_image": "https://www.aurenfx.com/?auren_app_icon=512&v=0.4.2",
+  "favicon": "https://www.aurenfx.com/?auren_app_icon=192&v=0.4.2",
+  "public_png_hashes_verified": [
+    {
+      "size": 180,
+      "sha256": "6b80a3adf05f838322e05abd8597afa20377da7faf3ffbd027e9cee8a079d24a",
+      "content_type": "image/png",
+      "bytes": 12316
+    },
+    {
+      "size": 192,
+      "sha256": "c4b9f1cfa129e016a1524144bb5fbf4035786ec3c17a727bb8767d32adcaa1f8",
+      "content_type": "image/png",
+      "bytes": 13351
+    },
+    {
+      "size": 512,
+      "sha256": "9c7a733ea3e4ce3da68b29e1fa5463e8b9972f58dd96c2dcb53d502d868ff813",
+      "content_type": "image/png",
+      "bytes": 69629
+    }
+  ],
+  "manifest_identity_preserved": true,
+  "browser_installation_test_passed": true,
+  "php_lint_passed": true,
+  "physical_iphone_share_sheet_verified": false,
+  "native_apk_built": false
+}

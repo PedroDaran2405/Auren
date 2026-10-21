@@ -87,3 +87,11 @@ Pendiente físico: instalación real standalone, cookies y retorno desde login, 
 - [TestFlight](https://developer.apple.com/testflight/)
 
 Conectar GitHub a Expo no autentica este entorno en EAS. La [documentación de acceso programático](https://docs.expo.dev/accounts/programmatic-access/) confirma el uso de `EXPO_TOKEN`. La [documentación de compilación desde GitHub](https://docs.expo.dev/build/building-from-github/) exige preparar EAS y un primer build exitoso por plataforma; la conexión del repositorio por sí sola no es una app lista para instalar. Si se usa ese flujo después, la base del proyecto en este monorepo es `apps/mobile`.
+
+## Icono del toro · bridge 0.4.2
+
+Se usa la imagen original de la biblioteca, adjunto 56 (`FAVICON-AUREN-1.png`), sin redibujar el símbolo. Fuente conservada en `apps/mobile/assets/auren-bull-original.png`; `bash scripts/prepare-app-icons.sh` genera con ImageMagick los PNG de instalación 180/192/512 y el icono nativo 1024, con fondo opaco azul oscuro. Se actualizan `apple-touch-icon`, favicon, manifest e imagen pública Open Graph/Twitter de la app. El manifest declara `purpose: any`; no promete recorte seguro maskable. La identidad y URL de inicio de la app permanecen iguales.
+
+En iPhone, abrir la URL de Auren en Safari, recargar y elegir Compartir → Agregar a inicio (puede estar en Ver más/Editar acciones). Si ya se añadió antes, quitar únicamente ese acceso directo y añadirlo de nuevo: iOS puede conservar su imagen anterior. La vista de compartir también puede conservar una miniatura en caché; el cambio de URL del icono incluye versión para evitar reutilizar el recurso anterior. Falta confirmación visual en el iPhone del propietario. El nuevo icono nativo se incluirá al generar el siguiente APK/IPA; no cambia un binario ya instalado.
+
+Evidencias: `app-icon-deployment.json` y `app-icon-live.json`. El sitio conserva su biblioteca, logo horizontal y ajustes generales; el despliegue afecta únicamente al bridge de la app.

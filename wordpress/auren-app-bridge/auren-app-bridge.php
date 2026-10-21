@@ -2,12 +2,12 @@
 /**
  * Plugin Name: Auren App Bridge
  * Description: API privada y acceso móvil para la app propia de Auren. Integra el encabezado mediante recursos propios.
- * Version: 0.4.1
+ * Version: 0.4.2
  * Requires PHP: 8.1
  * License: GPL-2.0-or-later
  */
 defined('ABSPATH') || exit;
-define('AUREN_APP_VERSION','0.4.1');
+define('AUREN_APP_VERSION','0.4.2');
 require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/login.php';
 require_once __DIR__ . '/includes/academy.php';

@@ -1,0 +1,35 @@
+{
+  "checked_at": "20261021T015344Z",
+  "bridge_version": "0.4.2",
+  "scope": "Own bridge only; no theme/plugin settings or user records modified",
+  "files": [
+    {
+      "path": "plugins/auren-app-bridge/assets/icon-180.png.b64",
+      "before_sha256": "4540fbeaf7b619f31c6ed9eb496a0efb59bab82c246c12621a7fa165d8d45a57",
+      "after_sha256": "22a856e3ef21ebbba60411a2b771b034cba6ebec2b9d36db6dd67dca68973280"
+    },
+    {
+      "path": "plugins/auren-app-bridge/assets/icon-192.png.b64",
+      "before_sha256": "91f93caf70d630665b7dd96625db7218c0e47b2a4d3848dc51e1dfd873572da7",
+      "after_sha256": "b6ab7dd18eb91f51de1e132f8c26cfd2ca6246f2861811e85644afc7329b33aa"
+    },
+    {
+      "path": "plugins/auren-app-bridge/assets/icon-512.png.b64",
+      "before_sha256": "0f2d48f787ef1deb266c7ec23a871cbbeb2042d9b194c52491a84df1fdfa88c5",
+      "after_sha256": "186bc2810c5595533b48140ac15fc3f445bdaa414a551d9bd130592299d7583d"
+    },
+    {
+      "path": "plugins/auren-app-bridge/includes/web.php",
+      "before_sha256": "c0a15c18c90259cd3f0937ddd939e99d231ddb81c1c8389e4d618e7eb360c908",
+      "after_sha256": "9b9617ab9c4e35b285b43edaf16e1904447f1a7e3f0287cb0931225caeff7d68"
+    },
+    {
+      "path": "plugins/auren-app-bridge/auren-app-bridge.php",
+      "before_sha256": "d4b563215289cd2275d31ae7a836bbf1bd93a422ecaed231ecea854dc9f9b08f",
+      "after_sha256": "b9d8e8d4ed1d8efa72c6bf9a30f9c5d46e9f6585c54e1e5ace51af0885667bbe"
+    }
+  ],
+  "backup_directory": ".local/deploy-backups/app-icon-20261021T015344Z",
+  "php_preflight": true,
+  "read_back_sha256_verified": true
+}

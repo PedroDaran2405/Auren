@@ -10,7 +10,7 @@ function auren_app_web_manifest() {
     $start=add_query_arg('auren_app','1',home_url('/'));
     $icons=array();
     foreach(array(192,512) as $size){
-        $icons[]=array('src'=>add_query_arg(array('auren_app_icon'=>(string)$size,'v'=>AUREN_APP_VERSION),home_url('/')),'sizes'=>$size.'x'.$size,'type'=>'image/png','purpose'=>'any maskable');
+        $icons[]=array('src'=>add_query_arg(array('auren_app_icon'=>(string)$size,'v'=>AUREN_APP_VERSION),home_url('/')),'sizes'=>$size.'x'.$size,'type'=>'image/png','purpose'=>'any');
     }
     return array('id'=>$start,'name'=>'Auren','short_name'=>'Auren','description'=>'Tu academia, tu comunidad y tu aprendizaje conectado.',
         'lang'=>'es-MX','start_url'=>$start,'scope'=>home_url('/'),'display'=>'standalone','orientation'=>'portrait',
@@ -49,9 +49,15 @@ add_action('template_redirect',function() {
     $html = file_get_contents($file);
     $asset_base = plugins_url('web/',dirname(__DIR__) . '/auren-app-bridge.php');
     $html = str_replace('"/_expo/','"' . esc_url($asset_base) . '_expo/',$html);
+    $share_icon=add_query_arg(array('auren_app_icon'=>'512','v'=>AUREN_APP_VERSION),home_url('/'));
+    $app_url=add_query_arg('auren_app','1',home_url('/'));
     $tag = '<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#080c16"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Auren"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">'
         .'<link rel="manifest" href="'.esc_url(add_query_arg('auren_app_manifest','1',home_url('/'))).'">'
         .'<link rel="apple-touch-icon" sizes="180x180" href="'.esc_url(add_query_arg(array('auren_app_icon'=>'180','v'=>AUREN_APP_VERSION),home_url('/'))).'">'
+        .'<link rel="icon" type="image/png" sizes="192x192" href="'.esc_url(add_query_arg(array('auren_app_icon'=>'192','v'=>AUREN_APP_VERSION),home_url('/'))).'">'
+        .'<meta property="og:type" content="website"><meta property="og:site_name" content="Auren"><meta property="og:title" content="Auren"><meta property="og:description" content="Tu academia, tu comunidad y tu aprendizaje conectado.">'
+        .'<meta property="og:url" content="'.esc_url($app_url).'"><meta property="og:image" content="'.esc_url($share_icon).'"><meta property="og:image:secure_url" content="'.esc_url($share_icon).'"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="512"><meta property="og:image:height" content="512"><meta property="og:image:alt" content="Icono del toro de Auren">'
+        .'<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Auren"><meta name="twitter:image" content="'.esc_url($share_icon).'">'
         .'<script>window.__AUREN_BOOTSTRAP__=' . wp_json_encode($bootstrap,JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT) . ';</script>';
     echo str_replace('</head>',$tag . '</head>',$html);
     exit;
