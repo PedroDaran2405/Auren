@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-10-21T01:30:58.901785+00:00",
+  "php_header_checks": 12,
+  "real_gamipress_checks": 15,
+  "browser_tests": 6,
+  "viewports": [
+    1920,
+    1280,
+    1024,
+    390,
+    320
+  ],
+  "delayed_response_tested": true,
+  "long_rank_and_large_balance_tested": true,
+  "session_expiry_preserves_geometry": true,
+  "javascript_disabled_tested": true,
+  "neighbor_control_coordinates_unchanged": true,
+  "fixture_layout_shift_entries": 0,
+  "live_html_visual_review": {
+    "viewports": [
+      1920,
+      1280,
+      390
+    ],
+    "widget_visible": true,
+    "horizontal_overflow": false,
+    "javascript_enabled": false,
+    "upstream_tls_verified": true,
+    "browser_trust_changed": false
+  },
+  "physical_device_tested": false
+}

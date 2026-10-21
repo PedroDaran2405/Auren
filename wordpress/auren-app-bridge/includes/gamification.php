@@ -54,7 +54,7 @@ function auren_app_gami_rank_item($post,$number=0) {
         'image_url'=>auren_app_safe_url(get_the_post_thumbnail_url($post->ID,'medium')));
 }
 
-function auren_app_gamification() {
+function auren_app_gamification($include_achievements=true) {
     $empty=array('available'=>false,'credits'=>null,'rank'=>null,'achievements'=>array(),'achievement_total'=>0,'achievement_earned'=>0);
     $points=auren_app_gami_type('points');$user=get_current_user_id();
     if(!$user||!$points||!function_exists('gamipress_get_user_points')){return $empty;}
@@ -71,6 +71,7 @@ function auren_app_gamification() {
             'next'=>$next?auren_app_gami_rank_item($next,$position===false?0:$position+2):null,
             'progress'=>$next?auren_app_gami_progress(gamipress_get_rank_requirements($next->ID),$user):array('percent'=>null,'requirements'=>array()));}
     }
+    if(!$include_achievements){return $result;}
     if(function_exists('gamipress_get_achievement_types')){
         $types=array_keys(gamipress_get_achievement_types());
         $posts=$types?gamipress_get_achievements(array('post_type'=>$types,'post_status'=>'publish','numberposts'=>50,'orderby'=>'date','order'=>'DESC')):array();

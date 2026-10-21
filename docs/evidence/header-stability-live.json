@@ -1,0 +1,10 @@
+{
+  "authenticated": true,
+  "status": 200,
+  "bridge_header_css_in_head": true,
+  "widgets_in_initial_html": 2,
+  "balance_matches_native_api": true,
+  "progress_matches_native_api": true,
+  "cache_control": "no-cache, must-revalidate, max-age=0, no-store, private",
+  "account_content_saved_to_git": false
+}

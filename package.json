@@ -23,7 +23,8 @@
     "test:wordpress": "bash scripts/test-wordpress.sh",
     "package:plugin": "python3 scripts/package-plugin.py",
     "test:gamification": "docker compose -f compose.test.yml exec -T wp php /opt/auren-tests/gamification.php",
-    "local:gamipress": "python3 scripts/local-gamipress.py"
+    "local:gamipress": "python3 scripts/local-gamipress.py",
+    "test:header": "bash scripts/test-header.sh"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

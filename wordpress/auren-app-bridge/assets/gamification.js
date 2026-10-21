@@ -3,14 +3,10 @@
   'use strict';
   const config = window.aurenGamification;
   if (!config || new URL(config.endpoint, location.href).origin !== location.origin) return;
-  const hosts = [...document.querySelectorAll('#header-aside .header-aside-inner, .bb-mobile-header > .header-aside')];
-  if (!hosts.length) return;
+  // Slots and first values already exist in the server-rendered header.
+  const widgets = [...document.querySelectorAll('[data-auren-gami]')];
+  if (!widgets.length) return;
   let loading = false;
-  const widgets = hosts.map(host => {
-    const el = document.createElement('div');
-    el.className = 'auren-gami'; el.hidden = true;
-    host.prepend(el); return el;
-  });
   const node = (tag, cls, value) => {
     const el = document.createElement(tag); el.className = cls;
     if (value !== undefined) el.textContent = value;
@@ -23,8 +19,10 @@
     const img = node('img', cls); img.src = src.href; img.alt = ''; return img;
   };
   function render(el, data) {
-    el.replaceChildren(); el.hidden = !data.available || !data.credits;
-    if (el.hidden) return;
+    el.replaceChildren();
+    const unavailable = !data.available || !data.credits;
+    el.style.visibility = unavailable ? 'hidden' : '';
+    if (unavailable) return;
     const rank = data.rank;
     if (rank?.current) {
       const level = node('div', 'auren-gami__level'); level.tabIndex = 0;
@@ -57,11 +55,12 @@
     const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 15000);
     try {
       const response = await fetch(config.endpoint, {headers: {'X-WP-Nonce': config.nonce, Accept: 'application/json'}, credentials: 'same-origin', cache: 'no-store', redirect: 'error', signal: controller.signal});
-      if (!response.ok) { if ([401, 403].includes(response.status)) widgets.forEach(el => {el.hidden = true; el.replaceChildren();}); return; }
+      if (!response.ok) { if ([401, 403].includes(response.status)) widgets.forEach(el => {el.style.visibility = 'hidden'; el.replaceChildren();}); return; }
       const data = await response.json(); widgets.forEach(el => render(el, data));
     } catch { /* Keep the last confirmed values during a transient connection failure. */ }
     finally { clearTimeout(timeout); loading = false; }
   }
-  refresh(); window.addEventListener('focus', refresh); window.addEventListener('pageshow', refresh);
+  window.addEventListener('focus', refresh);
+  window.addEventListener('pageshow', event => { if (event.persisted) refresh(); });
   document.addEventListener('visibilitychange', refresh); setInterval(refresh, 60000);
 })();

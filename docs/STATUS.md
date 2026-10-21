@@ -2,6 +2,12 @@
 
 Versión **0.4.0**, en **https://www.aurenfx.com/?auren_app=1**. La entrega añade el diseño inspirado en los conceptos, marca original y gamificación nativa compartida con el encabezado web. Ver [GAMIFICATION](GAMIFICATION.md) para edición de niveles, auditoría y límites de contenido.
 
+## Corrección del encabezado web · bridge 0.4.1
+
+El video del propietario mostraba el desplazamiento causado por insertar el widget después de consultar REST. Se retiró esa inserción: los templates originales de BuddyBoss reciben saldo, nivel y progreso en el servidor mediante los hooks de carga de templates de WordPress. CSS crítico en `<head>`, dimensiones fijas de widgets e imágenes y texto acotado evitan que sus refrescos muevan el menú. No se copian ni editan templates del tema; GamiPress conserva sus tipos, reglas y saldos.
+
+Ver [HEADER_STABILITY](HEADER_STABILITY.md), pruebas reproducibles `npm run test:header` y evidencias `header-stability-*.json`. La app nativa conserva su versión independiente 0.4.0.
+
 ## Entrega 0.4.0
 
 - Auren Credits existentes, con su imagen y saldo reales. Sin segunda moneda ni XP inventado. Tooltip y detalle de saldo/nivel.

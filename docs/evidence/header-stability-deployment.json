@@ -1,0 +1,35 @@
+{
+  "checked_at": "20261021T012433Z",
+  "bridge_version": "0.4.1",
+  "scope": "Own bridge only; no theme/plugin settings or user records modified",
+  "files": [
+    {
+      "path": "plugins/auren-app-bridge/assets/gamification.css",
+      "before_sha256": "3ba98ab8abca007d136c8cfd9d5e30d26b813b565264d5d9d89de6a6d4e138e4",
+      "after_sha256": "d3239f265912b00d37d61894d084c183e4e6284fa6d196124ddf8d67a8a469c7"
+    },
+    {
+      "path": "plugins/auren-app-bridge/assets/gamification.js",
+      "before_sha256": "5552615c743ef7b820eed5ab28c91fb0f46816b806ecb122706566162347d60d",
+      "after_sha256": "ce83274d55909751de6f880be678aa695f8a06b23ef83aae392345c7e3f01f02"
+    },
+    {
+      "path": "plugins/auren-app-bridge/includes/gamification.php",
+      "before_sha256": "b46ec6acd2e8d23f5ae89928ecd5a9ef236194a8896087913a896639acc7db3c",
+      "after_sha256": "eeab99a362480ceac9680ad3ac3e10a4e880cb8bb5d624faecbf5c291c73f33e"
+    },
+    {
+      "path": "plugins/auren-app-bridge/includes/gamification-web.php",
+      "before_sha256": "fec125e097eba41d8f35ed95352eb11254731e7795f798cbdea02ae15ba82318",
+      "after_sha256": "c4129f9f149739d96724e86476f23b3fde8199f4e26a2664ee640a3b2f55365b"
+    },
+    {
+      "path": "plugins/auren-app-bridge/auren-app-bridge.php",
+      "before_sha256": "cc04d4d2909d363deff8bef6b1a4c7e3ecc3b8bd48bedc1db069b289b5d4f6f4",
+      "after_sha256": "d4b563215289cd2275d31ae7a836bbf1bd93a422ecaed231ecea854dc9f9b08f"
+    }
+  ],
+  "backup_directory": ".local/deploy-backups/header-20261021T012433Z",
+  "php_preflight": true,
+  "read_back_sha256_verified": true
+}
