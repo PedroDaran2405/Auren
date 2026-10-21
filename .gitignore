@@ -15,5 +15,8 @@ __pycache__/
 *.keystore
 *.jks
 *.p12
+credentials.json
+*.mobileprovision
+*.p8
 wordpress/auren-app-bridge/web/
 artifacts/

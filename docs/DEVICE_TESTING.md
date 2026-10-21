@@ -24,19 +24,19 @@ Reabrir un icono puede recuperar la ventana anterior sin recargarla: por eso exi
 
 El repositorio usa Expo/React Native con identificadores `com.aurenfx.academy` y esquema `auren://auth/callback`. El login real usa ese retorno; **Expo Go no sustituye la prueba de la app nativa**. El protocolo de autorización ya pasó en un contexto sin cookies, pero falta validación física del retorno al binario.
 
-Se necesitan cuenta/proyecto de Expo bajo propiedad de Auren y, para iPhone distribuido mediante TestFlight o ad hoc, membresía activa de Apple Developer. Android de prueba puede instalar un APK firmado sin publicar en Google Play. No introducir contraseñas Apple/Expo ni claves privadas en Git o en el chat; vincular cuentas por sus flujos oficiales. El propietario creó después una cuenta/proyecto de Expo y compartió su pantalla de onboarding. El propietario compartió el enlace completo: https://expo.dev/accounts/auren-fx/projects/auren-fx?tab=overview y confirmó que conectó el repositorio GitHub. Cuenta/slug esperados: `auren-fx/auren-fx`. Falta verificar el UUID con la API autenticada y configurar `EXPO_TOKEN` como secreto del entorno. No hay token de Expo disponible en este entorno al comprobarlo. La membresía de Apple Developer continúa pendiente; crear Expo no la sustituye.
+El acceso seguro `EXPO_TOKEN` ya fue verificado con EAS CLI 25.3.0 y con la API autenticada de Expo. Proyecto bajo propiedad de Auren: `@auren-fx/auren-fx`, UUID público `b13fe800-5cec-4287-b75a-6565639979ec`. `app.json` ya fija esa identidad, URL de EAS Update y política `fingerprint`; `eas.json` fija Node 24.19.0, versión local y canales/environments separados. La variable pública `EXPO_PUBLIC_WORDPRESS_URL` también está creada en el environment remoto `preview` para publicar updates con la misma URL del build.
 
-Perfiles/canales preparados en `apps/mobile/eas.json`: `development` con development client, `preview` para APK/pruebas internas y `production` para distribución; cada uno fija su EAS environment homónimo. Se añadieron `expo-updates` y `expo-dev-client` con las versiones compatibles del SDK 58. **Instalar esos módulos y definir canales no activa EAS Update.** Todavía faltan vincular el proyecto real, URL de actualizaciones y política de runtime, así como firmas/builds. No se ha iniciado una compilación remota ni se ha distribuido una app a dispositivos.
+El canal y branch `preview` fueron creados y Expo generó el primer keystore Android remoto. **La compilación todavía no se creó:** la subida de fuentes a `storage.googleapis.com` recibió 403 porque el proxy cloud no permite ese destino. El token sí funciona. No regenerar el keystore al reintentar y no comprar un plan para intentar resolver un bloqueo de red. Queda pendiente añadir ese host mediante el flujo de configuración del entorno y su revisión, volver a ejecutar el build y comprobar el APK final. No hay APK/IPA disponible ni update remoto publicado.
 
-Pasos técnicos cuando la cuenta esté vinculada (desde `apps/mobile`, no guardar IDs inventados):
+TypeScript y 10 pruebas de cliente/actualizaciones pasaron; exportaciones Hermes Android/iOS correctas. Expo Doctor pasó 18/20 comprobaciones: la consulta de esquema y metadatos de React Native Directory quedó sin completar por red. No presentar ese resultado como 20/20 ni como una prueba de instalación física. Las compilaciones iOS siguen necesitando una vía de firma válida; el propietario no tiene membresía Apple Developer de pago.
+
+Reintento técnico desde `apps/mobile` cuando se permita subir los archivos:
 
 ```sh
-npx eas-cli@latest login
-npx eas-cli@latest init
-npx eas-cli@latest update:configure
+EXPO_NO_TELEMETRY=1 npm exec --yes --package=eas-cli@25.3.0 -- eas build --platform android --profile preview --no-wait
 ```
 
-Revisar el diff generado, conservar la URL de WordPress, comprobar las dependencias con Expo y definir `runtimeVersion: { "policy": "fingerprint" }` en la configuración. Conservar el `projectId` público real en el repositorio; los tokens de publicación van en secretos. Configurar EAS environments `preview`/`production` si se usan variables; las variables de `build.<perfil>.env` no se aplican automáticamente a `eas update`.
+Se conserva el mismo proyecto, paquete y keystore. Después del primer binario exitoso, publicar únicamente cambios compatibles en el canal `preview` y verificar descarga/aplicación en un teléfono. GitHub conectado a Expo no publica cada commit automáticamente.
 
 - **Android:** `eas build --platform android --profile preview` produce APK interno; compartir su enlace privado/QR e instalar aceptando esa fuente en el dispositivo de prueba.
 - **iPhone con pocos dispositivos:** `eas device:create`, registrar el iPhone y `eas build --platform ios --profile preview`. Requiere perfil ad hoc que incluya su UDID. Añadir otro dispositivo puede exigir nuevo build o nueva firma.
@@ -44,7 +44,7 @@ Revisar el diff generado, conservar la URL de WordPress, comprobar las dependenc
 
 ## Autorizar Codex en Expo
 
-1. Enlace del proyecto recibido: https://expo.dev/accounts/auren-fx/projects/auren-fx?tab=overview. Identifica cuenta/slug, pero su redirección a login sin sesión no permite verificar el UUID. Con el token se comprobará el proyecto antes de vincularlo.
+1. Enlace del proyecto recibido: https://expo.dev/accounts/auren-fx/projects/auren-fx?tab=overview. Identidad y UUID ya verificados con la API autenticada; no hace falta crear otro proyecto ni token para repetir la vinculación.
 2. Crear el token desde la cuenta **personal**, no los ajustes del proyecto/organización. La documentación oficial enlaza https://expo.dev/settings/access-tokens. Ruta directa para el usuario mostrado en la captura: https://expo.dev/accounts/pedrodaran2405/settings/access-tokens. Iniciar sesión si hace falta y crear un token identificable, por ejemplo `Codex Auren`.
 3. Guardarlo en la configuración segura de Codex como **`EXPO_TOKEN`** (clave) y el token en **Valor**. No usar una variable `EXPO_PUBLIC_*`, pegarlo en el chat, escribirlo en `.env.example` o subirlo a Git.
 4. Comprobar la identidad y el proyecto con EAS antes de modificar la vinculación. Usar el repositorio existente; omitir el paso genérico de crear otro starter. No es necesario instalar paquetes de skills para conectar el proyecto.
@@ -57,7 +57,7 @@ El QR de **Download Expo Go** instala el cliente Expo Go; no instala Auren ni ac
 Una vez que el primer binario incluya EAS Update, publicar cambios compatibles con:
 
 ```sh
-npx eas-cli@latest update --channel preview --environment preview --message "Descripción verificable del cambio"
+npx eas-cli@25.3.0 update --channel preview --environment preview --message "Descripción verificable del cambio"
 ```
 
 Ese comando publica una entrega; no hacerlo por cada guardado sin pruebas. No hay publicación automática desde GitHub configurada. El circuito previsto es **cambio → checks → actualización preview → prueba en ambos dispositivos → publicación production cuando corresponda**.
@@ -69,7 +69,7 @@ Ese comando publica una entrega; no hacerlo por cada guardado sin pruebas. No ha
 | Plugin/bridge PHP | Desplegar el bridge; conservar contrato compatible | Igual; los binarios existentes siguen usando ese servidor |
 | SDK, librerías/configuración nativa, permisos, esquema, push nativo | Evaluar versión web por separado | Nuevo binario firmado e instalación/actualización por su canal de distribución |
 
-Un update remoto no sustituye la firma inicial, no evita las reglas de Apple/Google ni puede añadir componentes nativos ausentes del binario. El control de actualizaciones con aviso dentro del binario se implementará y probará cuando exista el runtime real; el aviso actual solo corresponde a la versión web.
+Un update remoto no sustituye la firma inicial, no evita las reglas de Apple/Google ni puede añadir componentes nativos ausentes del binario. El código nativo ya incorpora aviso de disponibilidad, descarga y aplicación con confirmación explícita, así como búsqueda manual en Perfil. Consultar o descargar nunca reinicia la lección; una operación en curso impide duplicar acciones y los errores permiten seguir usando la versión instalada. Las tres pruebas nuevas comprueban esas garantías con un driver controlado. Queda pendiente probarlo con EAS Update real y un APK instalado. La variante web conserva su aviso de versión independiente.
 
 ## Primera sesión de UX en ambos teléfonos
 

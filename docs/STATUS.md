@@ -8,6 +8,10 @@ El video del propietario mostraba el desplazamiento causado por insertar el widg
 
 Ver [HEADER_STABILITY](HEADER_STABILITY.md), pruebas reproducibles `npm run test:header` y evidencias `header-stability-*.json`. La app nativa conserva su versión independiente 0.4.0.
 
+## Preparación de dispositivos · pendiente de subida
+
+Expo autenticado y proyecto real vinculado. Canal/branch preview, variable pública WordPress y keystore Android remoto creados. Configuración de EAS Update y control de actualizaciones dentro de la app implementados; TypeScript, 10 tests y exportaciones Hermes de ambas plataformas pasaron. La subida a almacenamiento de EAS recibió 403 del proxy: `storage.googleapis.com` necesita permiso de red cloud. No hay APK, compilación remota creada ni update publicado. Ver [DEVICE_TESTING](DEVICE_TESTING.md) y `expo-native-preparation.json`. No se generaron claves iOS ni se publicaron tiendas.
+
 ## Entrega 0.4.0
 
 - Auren Credits existentes, con su imagen y saldo reales. Sin segunda moneda ni XP inventado. Tooltip y detalle de saldo/nivel.

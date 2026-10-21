@@ -1,7 +1,44 @@
 {
+  "cli": {
+    "version": "25.3.0",
+    "appVersionSource": "local"
+  },
   "build": {
-    "development": {"developmentClient":true,"distribution":"internal","channel":"development","environment":"development","android":{"buildType":"apk"}},
-    "preview": {"distribution":"internal","channel":"preview","environment":"preview","android":{"buildType":"apk"}},
-    "production": {"channel":"production","environment":"production","android":{"buildType":"app-bundle"}}
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "development",
+      "environment": "development",
+      "env": {
+        "EXPO_PUBLIC_WORDPRESS_URL": "https://www.aurenfx.com"
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "node": "24.19.0"
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "preview",
+      "environment": "preview",
+      "env": {
+        "EXPO_PUBLIC_WORDPRESS_URL": "https://www.aurenfx.com"
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "node": "24.19.0"
+    },
+    "production": {
+      "channel": "production",
+      "environment": "production",
+      "env": {
+        "EXPO_PUBLIC_WORDPRESS_URL": "https://www.aurenfx.com"
+      },
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "node": "24.19.0"
+    }
   }
 }

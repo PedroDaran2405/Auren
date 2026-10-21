@@ -1,37 +1,37 @@
 {
-  "checked_at": "2026-10-18T21:16:23.187762-06:00",
-  "state": "native dependencies and build profiles prepared; Expo project not linked",
-  "owner_reported_expo_account_created": true,
-  "full_project_url_received": false,
-  "expo_token_available": false,
-  "sdk": "58",
-  "dependencies": {
-    "expo-updates": "~58.0.17",
-    "expo-dev-client": "~58.0.14"
+  "checked_at": "2026-10-21T01:33:34.966718+00:00",
+  "eas_cli": "25.3.0",
+  "authenticated": true,
+  "project": {
+    "owner": "auren-fx",
+    "slug": "auren-fx",
+    "id": "b13fe800-5cec-4287-b75a-6565639979ec"
   },
-  "profiles": [
-    "development",
-    "preview",
-    "production"
+  "android_package": "com.aurenfx.academy",
+  "android_build_configured": true,
+  "preview_channel_and_branch_created": true,
+  "preview_public_wordpress_url_configured": true,
+  "android_remote_keystore_created": true,
+  "build_request_attempted": true,
+  "build_created": false,
+  "upload_blocker": {
+    "hostname": "storage.googleapis.com",
+    "http_status": 403,
+    "diagnostic": "HEAD through inherited proxy: Tunnel connection failed: 403 Forbidden",
+    "secret_or_signed_url_recorded": false
+  },
+  "typecheck_passed": true,
+  "client_update_tests_passed": 10,
+  "hermes_exports": [
+    "android",
+    "ios"
   ],
-  "typecheck": "passed",
-  "expo_prebuild_config": "evaluated successfully without generating native projects",
-  "native_exports": {
-    "android": "Hermes bundle passed",
-    "ios": "Hermes bundle passed"
+  "expo_doctor": {
+    "passed": 18,
+    "total": 20,
+    "uncompleted": "schema/React Native Directory network lookups"
   },
-  "project_id": null,
-  "updates_url": null,
-  "remote_builds_started": false,
-  "remote_updates_published": false,
-  "wordpress_modified": false,
-  "physical_device_execution": false,
-  "remaining": [
-    "confirm full Expo project URL and UUID",
-    "authorize environment with secure EXPO_TOKEN",
-    "verify account/project before linking",
-    "configure updates URL and runtime policy",
-    "generate signed Android build using available free quota",
-    "resolve iOS signing route before physical native test"
-  ]
+  "ota_update_published": false,
+  "installed_on_physical_device": false,
+  "ios_signing_configured": false
 }

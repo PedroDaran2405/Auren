@@ -4,7 +4,7 @@ import type { Course, GamiAchievement, Identity } from '@auren/api-client';
 import { ArrowUpRight, BookOpen, ChevronRight, CircleHelp, ShieldCheck, UserRound } from './icons';
 import { Avatar, Button, colors as c, font, u } from './ui';
 import { Achievements, Brand, NextAchievement, RankCard } from './Gamification';
-import { WebReleaseInfo } from './WebInstall';
+import { ReleaseInfo } from './AppUpdates';
 export default function ProfileScreen({user,courses,more,busy,onEdit,onBlocked,onLeave,onLevel,onAchievement,onError,onCourses}:{user:Identity;courses:Course[];more:boolean;busy:boolean;onEdit:()=>void;onBlocked:()=>void;onLeave:()=>void;onLevel:()=>void;onAchievement:(item:GamiAchievement)=>void;onError:(message:string)=>void;onCourses:()=>void}) {
  return <View style={u.stack}>
   <Text accessibilityRole="header" style={u.title}>Mi perfil</Text>
@@ -14,7 +14,7 @@ export default function ProfileScreen({user,courses,more,busy,onEdit,onBlocked,o
   <Pressable accessibilityRole="button" accessibilityLabel="Ver mis cursos" onPress={onCourses} style={s.panel}><View style={[u.row,{gap:10}]}><BookOpen color={c.mint} size={25}/><Text style={[u.sectionTitle,{flex:1}]}>Tu aprendizaje</Text><ChevronRight size={20} color={c.muted}/></View><View style={[u.row,{gap:32}]}><View><Text style={s.stat}>{courses.length}{more?'+':''}</Text><Text style={u.caption}>Cursos disponibles</Text></View><View><Text style={s.stat}>{courses.filter(x=>x.progress.percent===100).length}</Text><Text style={u.caption}>Completados</Text></View></View></Pressable>
   <View style={[u.row,{gap:8,paddingVertical:3}]}><ShieldCheck size={16} color={c.mint}/><Text style={[u.caption,{color:c.mint}]}>Cuenta conectada a tu academia</Text></View>
   <View style={s.settings}><Pressable accessibilityRole="button" onPress={()=>void Linking.openURL('mailto:soporte@aurenfx.com').catch(()=>onError('Puedes escribir a soporte@aurenfx.com.'))} style={s.row}><CircleHelp size={20} color={c.muted}/><Text style={s.label}>Ayuda y contacto</Text><ArrowUpRight size={18} color={c.muted}/></Pressable>{user.capabilities.block&&<Pressable accessibilityRole="button" style={s.row} onPress={onBlocked}><ShieldCheck size={20} color={c.muted}/><Text style={s.label}>Personas bloqueadas</Text><ChevronRight size={18} color={c.muted}/></Pressable>}</View>
-  <Button secondary disabled={busy} onPress={onLeave}>Cerrar sesión</Button><WebReleaseInfo busy={busy}/>
+  <Button secondary disabled={busy} onPress={onLeave}>Cerrar sesión</Button><ReleaseInfo busy={busy}/>
  </View>;
 }
 const s=StyleSheet.create({profileCard:{borderWidth:1,borderColor:c.line,borderRadius:17,overflow:'hidden',backgroundColor:c.surface},cover:{height:130,backgroundColor:'#073355',justifyContent:'center'},body:{padding:17,paddingTop:54,gap:13},avatar:{position:'absolute',top:-41,left:14,padding:4,borderRadius:46,backgroundColor:c.bg},editButton:{position:'absolute',right:16,top:14,paddingHorizontal:14,minHeight:33,justifyContent:'center',borderWidth:1,borderColor:c.muted,borderRadius:20},editText:{fontFamily:font.medium,fontSize:11,color:c.text},panel:{padding:17,gap:16,borderRadius:16,borderWidth:1,borderColor:c.line,backgroundColor:c.surface},stat:{fontFamily:font.heavy,fontSize:27,lineHeight:40,color:c.text},settings:{borderRadius:15,borderWidth:1,borderColor:c.line,backgroundColor:c.surface,overflow:'hidden'},row:{flexDirection:'row',alignItems:'center',gap:13,padding:16,borderBottomWidth:1,borderBottomColor:c.line},label:{fontFamily:font.medium,fontSize:13,color:c.text,flex:1}});

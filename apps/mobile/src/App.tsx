@@ -11,7 +11,8 @@ import { Bell, BookOpen, Home, ShieldCheck, UserRound, Users } from './icons';
 import { AurenApi, type Activity, type Course, type GamiAchievement, type Identity, type Lesson, type Session } from '@auren/api-client';
 import { apiBase, bootstrap, clearSession, restoreSession, signIn } from './auth';
 import { Avatar, Button, colors as c, font, u } from './ui';
-import { WebInstallHelp, WebReleaseBanner } from './WebInstall';
+import { WebInstallHelp } from './WebInstall';
+import { AppUpdatesProvider, ReleaseBanner } from './AppUpdates';
 import SocialScreen from './SocialScreen';
 import NotificationsScreen from './NotificationsScreen';
 import ProfileEditor from './ProfileEditor';
@@ -111,9 +112,9 @@ export default function App() {
  function showLevel(){setAchievement(null);setGamificationOpen(true);refreshIdentity();}
  function showAchievement(item:GamiAchievement){setAchievement(item);setGamificationOpen(true);}
  function moreCourses(){if(coursesPage)void action(async(api,current)=>{const data=await api.courses(coursesPage);if(current()){setCourses(old=>[...old,...data.items.filter(item=>!old.some(x=>x.id===item.id))]);setCoursesPage(data.next_page);}});}
- return <SafeAreaProvider><SafeAreaView style={s.root}><StatusBar style="light"/><View style={s.shell}>
+ return <AppUpdatesProvider><SafeAreaProvider><SafeAreaView style={s.root}><StatusBar style="light"/><View style={s.shell}>
   <View style={s.header}><Pressable accessibilityRole="button" accessibilityLabel="Ir al inicio" onPress={()=>user&&changeTab('Inicio')} style={{minHeight:44,justifyContent:'center'}}><Brand url={user?.branding?.logo_url}/></Pressable>{user?<View style={[u.row,{gap:9}]}><CreditBadge data={user.gamification} onPress={showLevel}/><Pressable accessibilityRole="button" accessibilityLabel="Ver mi perfil" onPress={()=>changeTab('Perfil')} style={{padding:3}}><Avatar url={user.avatar_url} name={user.name} size={35}/></Pressable></View>:<Text style={s.headerLabel}>TU ACADEMIA</Text>}</View>
-  <WebReleaseBanner busy={busy}/>
+  <ReleaseBanner busy={busy}/>
   {(b?.environment==='local'||user?.environment==='local')&&<Text style={s.testBanner}>PRUEBAS LOCALES · CONTENIDO DE INTEGRACIÓN</Text>}
   <ScrollView ref={scroll} contentContainerStyle={s.content} keyboardShouldPersistTaps="handled" refreshControl={user&&tab!=='Comunidad'&&tab!=='Avisos'?<RefreshControl refreshing={false} onRefresh={refresh} tintColor={c.mint} enabled={!busy}/>:undefined}>
    {!!error&&<View accessibilityRole="alert" style={s.error}><Text style={s.errorText}>{error}</Text>{user&&<Pressable accessibilityRole="button" onPress={refresh}><Text style={u.link}>Volver a intentar</Text></Pressable>}</View>}
@@ -133,7 +134,7 @@ export default function App() {
   {editProfile&&apiRef.current&&user&&<ProfileEditor key={user.id} api={apiRef.current} onClose={()=>setEditProfile(false)} onSaved={identity=>{setUser(identity);setEditProfile(false);setNotice('Tu perfil se guardó en Auren.');}}/>}
   {gamificationOpen&&user&&<GamificationSheet user={user} achievement={achievement?user.gamification?.achievements.find(a=>a.id===achievement.id)??achievement:null} onClose={()=>{setGamificationOpen(false);setAchievement(null);}}/>}
   {user&&<View style={s.tabs}>{tabs.map(({name,icon:Icon})=><Pressable key={name} accessibilityRole="tab" accessibilityLabel={name} accessibilityState={{selected:tab===name}} aria-selected={tab===name} onPress={()=>changeTab(name)} style={[s.tab,tab===name&&s.tabActive]}><View style={s.tabIcon}><Icon size={23} strokeWidth={tab===name?2.2:1.6} color={tab===name?c.mint:c.muted} accessible={false}/>{name==='Avisos'&&unread>0&&<View style={s.tabDot}/>}</View><Text style={[s.tabLabel,tab===name&&{color:c.mint}]}>{name}</Text></Pressable>)}</View>}
- </View></SafeAreaView></SafeAreaProvider>;
+ </View></SafeAreaView></SafeAreaProvider></AppUpdatesProvider>;
 }
 const s=StyleSheet.create({
  root:{flex:1,backgroundColor:c.bg},shell:{flex:1,width:'100%',maxWidth:620,alignSelf:'center'},header:{paddingHorizontal:16,paddingVertical:8,minHeight:65,borderBottomColor:'#052e49',borderBottomWidth:1,flexDirection:'row',alignItems:'center',justifyContent:'space-between',gap:8,zIndex:10},headerLabel:{fontFamily:font.medium,fontSize:9,letterSpacing:1.4,color:c.muted},content:{padding:16,paddingTop:18,paddingBottom:28,flexGrow:1},
