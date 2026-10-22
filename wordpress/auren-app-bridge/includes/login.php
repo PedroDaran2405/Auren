@@ -45,12 +45,13 @@ add_action('login_enqueue_scripts',function(){
     if(auren_app_login_context()){wp_enqueue_style('auren-app-login',plugins_url('assets/login.css',dirname(__DIR__).'/auren-app-bridge.php'),array(),(string)filemtime(dirname(__DIR__).'/assets/login.css'));}
 });
 add_filter('login_headerurl',function($url){return auren_app_login_context()?add_query_arg('auren_app','1',home_url('/')):$url;});
-add_filter('login_headertext',function($text){return auren_app_login_context()?'auren.':$text;});
+add_filter('login_headertext',function($text){return auren_app_login_context()?'Auren FX':$text;});
 add_filter('lostpassword_url',function($url){return auren_app_login_context()?add_query_arg(array('auren_app_auth'=>'1','redirect_to'=>add_query_arg('auren_app','1',home_url('/'))),$url):$url;});
 add_filter('login_message',function($message){
     if(!auren_app_login_context()){return $message;}
     $action=isset($_REQUEST['action']) && is_string($_REQUEST['action'])?$_REQUEST['action']:'login';
-    $brand='<div class="auren-login-brand"><a href="'.esc_url(add_query_arg('auren_app','1',home_url('/'))).'">auren<span>.</span></a></div>';
+    $logo=auren_app_branding()['logo_url']?:'https://www.aurenfx.com/wp-content/uploads/2026/07/ChatGPT-Image-9-jul-2026-10_53_16-p.m-e1783659259666.png';
+    $brand='<div class="auren-login-brand"><a href="'.esc_url(add_query_arg('auren_app','1',home_url('/'))).'"><img src="'.esc_url($logo).'" width="224" height="32" alt="Auren FX"></a></div>';
     if(!in_array($action,array('login',''),true)){return $brand.$message;}
     return $brand.'<div class="auren-login-intro"><p class="auren-login-kicker">TU ACADEMIA, CONTIGO</p><h2>Qué gusto verte<br>de nuevo.</h2><p>Entra con tu cuenta de Auren y continúa donde te quedaste.</p></div>'.$message;
 });

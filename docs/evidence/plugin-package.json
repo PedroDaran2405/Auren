@@ -1,6 +1,6 @@
 {
-  "version": "0.4.0",
-  "sha256": "ebccc358fb92ee5c5cb4f29f08ebdf038f72f2ad7a0a06d2856c6685f0934f9c",
-  "bytes": 491525,
+  "version": "0.5.0",
+  "sha256": "07c56152be34f49b2dffc644393d1b26d5469414372d83d2ecc75137ba430596",
+  "bytes": 565811,
   "contains": "Auren bridge and generated Expo web; no fixtures, credentials or third-party server plugins"
 }

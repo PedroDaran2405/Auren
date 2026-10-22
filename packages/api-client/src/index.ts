@@ -16,6 +16,7 @@ export type ProfileField = {id:number;group_id:number;group:string;label:string;
 export type Profile = {fields:ProfileField[]};
 export type Member = {id:number;name:string;avatar_url:string|null;joined:string;fields?:{label:string;value:string}[]};
 export type Page<T> = {items:T[];next_page:number|null};
+export type Startup = {identity:Identity;catalog:Page<Course>|null;profile:Profile|null;notifications:(Page<Notification>&{unread_count:number})|null;community:Page<Activity>|null};
 export type Session = { access_token: string; expires_at: number; token_type: 'Bearer' };
 export type Bootstrap = { api_url: string; site_url: string; nonce: string | null; login_url: string; register_url: string; lost_password_url: string; environment: string; release?: { version:string; build_id:string }; release_url?:string };
 export class ApiError extends Error {
@@ -36,9 +37,34 @@ export class AurenApi {
   private base: string;
   private controllers = new Set<AbortController>();
   private disposed = false;
+  private readEpoch = 0;
+  private reads = new Map<string,{data:unknown;at:number}>();
+  private pending = new Map<string,{epoch:number;promise:Promise<unknown>}>();
+  /** Session-only memory: no browser cache, disk, password or cross-account reuse. */
+  peek<T>(path:string):T|undefined {
+    const entry=this.reads.get(path);
+    return !this.disposed&&entry&&Date.now()-entry.at<120000?entry.data as T:undefined;
+  }
+  private invalidateReads(){this.readEpoch++;this.reads.clear();this.pending.clear();}
+  request<T>(path:string,method='GET',body?:unknown,fresh=false):Promise<T>{
+    if(this.disposed)return Promise.reject(new ApiError('session_closed','La sesión está cerrada.',401));
+    if(method!=='GET'){this.invalidateReads();return this.send<T>(path,method,body);}
+    const cacheable=/^\/(profile|community|notifications|members|blocked|reports)(\?|\/|$)/.test(path);
+    const entry=this.reads.get(path);
+    if(cacheable&&!fresh&&entry&&Date.now()-entry.at<30000)return Promise.resolve(entry.data as T);
+    const running=this.pending.get(path);
+    if(running&&running.epoch===this.readEpoch)return running.promise as Promise<T>;
+    const epoch=this.readEpoch;
+    const promise=this.send<T>(path,method,body).then(data=>{
+      if(epoch!==this.readEpoch)throw new ApiError('request_superseded','Los datos cambiaron. Actualiza para consultar el estado actual.',0);
+      if(cacheable){if(this.reads.size>=40)this.reads.delete(this.reads.keys().next().value!);this.reads.set(path,{data,at:Date.now()});}
+      return data;
+    }).finally(()=>{if(this.pending.get(path)?.promise===promise)this.pending.delete(path);});
+    this.pending.set(path,{epoch,promise});return promise;
+  }
   constructor(private options: Options) { this.base = validateBaseUrl(options.baseUrl,options.allowLocal); }
-  dispose() { this.disposed = true; this.controllers.forEach(c=>c.abort()); this.controllers.clear(); this.options.token = undefined; this.options.nonce = null; }
-  async request<T>(path: string, method = 'GET', body?: unknown): Promise<T> {
+  dispose() { this.disposed = true; this.invalidateReads(); this.controllers.forEach(c=>c.abort()); this.controllers.clear(); this.options.token = undefined; this.options.nonce = null; }
+  private async send<T>(path: string, method = 'GET', body?: unknown): Promise<T> {
     if (this.disposed) throw new ApiError('session_closed','La sesión está cerrada.',401);
     const rawPath=path.split('?')[0]??'';if(!/^\/[a-z0-9][a-z0-9/_-]*$/.test(rawPath))throw new Error('Ruta no válida');
     const route=new URL(path,'https://route.invalid');
@@ -61,6 +87,7 @@ export class AurenApi {
       });
       const isJson = response.headers.get('content-type')?.includes('application/json');
       const data = isJson ? await response.json() : null;
+      if (response.status === 401 || response.status === 403) this.invalidateReads();
       if (response.status === 401 || (response.status === 403 && data?.code === 'rest_cookie_invalid_nonce')) {
         this.options.onExpired?.();
       }
@@ -74,6 +101,21 @@ export class AurenApi {
       throw new ApiError('network_error','No pudimos conectar con tu academia. Revisa tu conexión e intenta de nuevo.',0);
     } finally { clearTimeout(timeout); this.controllers.delete(controller); }
   }
+  async startup():Promise<Startup>{
+    const epoch=this.readEpoch;let data:Startup;
+    try{data=await this.request<Startup>('/startup');}
+    catch(error){
+      // Existing binaries remain compatible with bridges deployed before this batch.
+      if(!(error instanceof ApiError)||error.status!==404)throw error;
+      const [identity,catalog]=await Promise.all([this.me(),this.courses()]);
+      return {identity,catalog,profile:null,notifications:null,community:null};
+    }
+    if(this.disposed||epoch!==this.readEpoch)throw new ApiError('request_superseded','La sesión cambió. Actualiza para continuar.',0);
+    for(const [path,value] of [['/profile',data.profile],['/notifications?page=1&filter=unread',data.notifications],['/community?page=1&filter=all&search=',data.community]] as const){
+      if(value)this.reads.set(path,{data:value,at:Date.now()});
+    }
+    return data;
+  }
   me() { return this.request<Identity>('/me'); }
   gamification() { return this.request<Gamification>('/gamification'); }
   courses(page=1) { return this.request<{items:Course[];next_page:number|null}>(`/courses?page=${page}`); }
@@ -81,12 +123,12 @@ export class AurenApi {
   lesson(course:number,lesson:number) { return this.request<Lesson>(`/courses/${positiveId(course)}/lessons/${positiveId(lesson)}`); }
   complete(course:number,lesson:number) { return this.request<{lesson:Lesson;progress:Progress}>(`/courses/${positiveId(course)}/lessons/${positiveId(lesson)}/complete`,'POST',{}); }
   logout() { return this.request<{logged_out:boolean}>('/logout','POST',{}); }
-  community(page=1,filter='all',search='') { return this.request<Page<Activity>>(`/community?${new URLSearchParams({page:String(positiveId(page)),filter,search:search.slice(0,80)})}`); }
+  community(page=1,filter='all',search='',fresh=false) { return this.request<Page<Activity>>(`/community?${new URLSearchParams({page:String(positiveId(page)),filter,search:search.slice(0,80)})}`,'GET',undefined,fresh); }
   activity(id:number) { return this.request<Activity>(`/community/${positiveId(id)}`); }
-  notifications(page=1,filter='unread') { return this.request<Page<Notification>&{unread_count:number}>(`/notifications?page=${positiveId(page)}&filter=${filter}`); }
+  notifications(page=1,filter='unread',fresh=false) { return this.request<Page<Notification>&{unread_count:number}>(`/notifications?page=${positiveId(page)}&filter=${filter}`,'GET',undefined,fresh); }
   readVisibleNotifications(ids:number[]) { return this.request<{changed:number;unread_count:number}>('/notifications/read','PUT',{ids}); }
   readNotification(id:number) { return this.request<{id:number;unread:false;unread_count:number}>(`/notifications/${positiveId(id)}/read`,'PUT',{}); }
-  profile() { return this.request<Profile>('/profile'); }
+  profile(fresh=false) { return this.request<Profile>('/profile','GET',undefined,fresh); }
   saveProfile(fields:{id:number;value:string|string[]}[]) { return this.request<Profile>('/profile','PATCH',{fields}); }
   createActivity(content:string,privacy:string,request_key:string,title='') { return this.request<Activity>('/community','POST',{content,privacy,request_key,title}); }
   editActivity(id:number,content:string) { return this.request<Activity>(`/community/${positiveId(id)}`,'PATCH',{content}); }
@@ -95,7 +137,7 @@ export class AurenApi {
   like(id:number,liked:boolean) { return this.request<Activity>(`/community/${positiveId(id)}/like`,'PUT',{liked}); }
   reportForm() { return this.request<{categories:{id:string;label:string}[]}>('/reports'); }
   report(id:number,category:string,note:string) { return this.request<{reported:true}>(`/community/${positiveId(id)}/report`,'POST',{category,note}); }
-  members(page=1,search='') { return this.request<Page<Member>>(`/members?${new URLSearchParams({page:String(positiveId(page)),search:search.slice(0,80)})}`); }
+  members(page=1,search='',fresh=false) { return this.request<Page<Member>>(`/members?${new URLSearchParams({page:String(positiveId(page)),search:search.slice(0,80)})}`,'GET',undefined,fresh); }
   blocked(page=1) { return this.request<Page<Member>>(`/blocked?page=${positiveId(page)}`); }
   blockMember(id:number,blocked:boolean) { return this.request<{id:number;blocked:boolean}>(`/members/${positiveId(id)}/block`,'PUT',{blocked}); }
   member(id:number) { return this.request<Member>(`/members/${positiveId(id)}`); }

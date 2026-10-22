@@ -1,6 +1,10 @@
 # Estado y continuidad
 
-Versión **0.4.0**, en **https://www.aurenfx.com/?auren_app=1**. La entrega añade el diseño inspirado en los conceptos, marca original y gamificación nativa compartida con el encabezado web. Ver [GAMIFICATION](GAMIFICATION.md) para edición de niveles, auditoría y límites de contenido.
+Versión **0.5.0**, en **https://www.aurenfx.com/?auren_app=1**. La entrega añade el diseño inspirado en los conceptos, marca original y gamificación nativa compartida con el encabezado web. Ver [GAMIFICATION](GAMIFICATION.md) para edición de niveles, auditoría y límites de contenido.
+
+## Revisión de video y navegación · 0.5.0
+
+Arranque sin bienvenida transitoria y una sola petición autenticada para preparar identidad, catálogo, perfil, avisos y comunidad; cada fragmento conserva los permisos de su ruta nativa. Perfil/avisos/feed preparados y reutilizados en memoria privada de sesión, con invalidación de escrituras y refresco explícito. Logo original en login, protección de cambios del perfil y ajustes de viewport/fondo para iOS. Ver [VIDEO_REVIEW_2026-10-22](VIDEO_REVIEW_2026-10-22.md) para pruebas, límites y pendientes físicos. El token nativo sigue durando una hora; este cambio no modifica la política de sesiones.
 
 ## Icono de instalación · bridge 0.4.2
 

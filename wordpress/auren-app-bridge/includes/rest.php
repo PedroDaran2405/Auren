@@ -10,6 +10,7 @@ add_action('rest_api_init',function() {
     register_rest_route('auren/v1','/logout',array('methods'=>'POST','callback'=>'auren_app_logout','permission_callback'=>function(){
         return auren_app_secure_transport() && is_user_logged_in()?true:auren_app_error('login_required','Inicia sesión para continuar.',401);
     }));
+    $route('/startup','GET','auren_app_startup');
     $route('/me','GET',function() {
         $u = wp_get_current_user();
         $community=auren_app_has_buddyboss_route('/buddyboss/v1/activity');

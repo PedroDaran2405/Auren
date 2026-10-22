@@ -47,3 +47,11 @@ body.login.auren-app-login #login label[for=user_login],body.login.auren-app-log
 body.login.auren-app-login #login label[for=user_login]:before,body.login.auren-app-login #login label[for=user_pass]:before,body.login.auren-app-login #login label[for=user_login]:after,body.login.auren-app-login #login label[for=user_pass]:after{display:none!important;content:none!important}
 body.login.auren-app-login #login .label-switch{display:none!important}
 body.login.auren-app-login #loginform > p:after{content:none!important;display:none!important}
+
+/* Match the app brand and the iPhone's safe areas without touching other logins. */
+body.login.auren-app-login{color-scheme:dark;background-color:#00101e!important;min-height:100dvh;padding-bottom:env(safe-area-inset-bottom,0px)!important;box-sizing:border-box}
+body.login.auren-app-login #login .auren-login-brand a{display:inline-flex;align-items:center;min-height:44px}
+body.login.auren-app-login #login .auren-login-brand img{display:block;width:224px;max-width:100%;height:32px;object-fit:contain;object-position:left center}
+body.login.auren-app-login #login .button-primary{background:#1657ff!important;color:#f3f7ff!important}
+body.login.auren-app-login #login .input:-webkit-autofill{-webkit-text-fill-color:#f3f7ff!important;box-shadow:0 0 0 1000px #0b101d inset!important;caret-color:#16d9ed}
+html:has(body.auren-app-login){background:#00101e;color-scheme:dark}

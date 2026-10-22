@@ -24,7 +24,8 @@
     "package:plugin": "python3 scripts/package-plugin.py",
     "test:gamification": "docker compose -f compose.test.yml exec -T wp php /opt/auren-tests/gamification.php",
     "local:gamipress": "python3 scripts/local-gamipress.py",
-    "test:header": "bash scripts/test-header.sh"
+    "test:header": "bash scripts/test-header.sh",
+    "test:startup": "docker compose -f compose.test.yml exec -T wp php /opt/auren-tests/startup.php"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

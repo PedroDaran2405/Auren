@@ -36,38 +36,42 @@ export default function App() {
  const [gamificationOpen,setGamificationOpen]=useState(false),[achievement,setAchievement]=useState<GamiAchievement|null>(null);
  const [editProfile,setEditProfile]=useState(false),[courseSearch,setCourseSearch]=useState('');
  const [filter,setFilter]=useState<'all'|'started'|'done'>('all');
+ const [starting,setStarting]=useState(true);
  const [busy,setBusy]=useState(true),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const apiRef=useRef<AurenApi|null>(null),generation=useRef(0),requestId=useRef(0),identityId=useRef(0),mounted=useRef(true),leaving=useRef(false);
  const scroll=useRef<React.ComponentRef<typeof ScrollView>>(null),b=bootstrap();
  const top=()=>scroll.current?.scrollTo({y:0,animated:false});
  const clear=useCallback(()=>{
   generation.current++;requestId.current++;apiRef.current?.dispose();apiRef.current=null;
-  setUser(null);setCourses([]);setPosts([]);setCourse(null);setLesson(null);setPost(null);setCoursesPage(null);setCommunityError('');setTab('Inicio');setFilter('all');setEditProfile(false);setBlockedOpen(false);setGamificationOpen(false);setAchievement(null);setCourseSearch('');setBusy(false);
+  setUser(null);setCourses([]);setPosts([]);setCourse(null);setLesson(null);setPost(null);setCoursesPage(null);setCommunityError('');setTab('Inicio');setFilter('all');setEditProfile(false);setBlockedOpen(false);setGamificationOpen(false);setAchievement(null);setCourseSearch('');setBusy(false);setStarting(false);
   void clearSession().catch(()=>setError('No pudimos borrar la sesión del dispositivo. Intenta cerrar sesión de nuevo.'));
  },[]);
  const expire=useCallback(()=>{clear();setNotice('');setError('Tu sesión terminó. Vuelve a entrar para continuar.');},[clear]);
  const connect=useCallback(async(session:Session|null)=>{
-  const base=apiBase();if(!base){setBusy(false);return;}
+  const base=apiBase();if(!base){setBusy(false);setStarting(false);return;}
   apiRef.current?.dispose();const epoch=++generation.current;
   const api=new AurenApi({baseUrl:base,nonce:bootstrap()?.nonce,token:session?.access_token,allowLocal:bootstrap()?.environment==='local',onExpired:expire});
-  apiRef.current=api;setBusy(true);setError('');
+  apiRef.current=api;setBusy(true);setStarting(true);setError('');
   try {
-   const identity=await api.me();if(epoch!==generation.current||!mounted.current)return;setUser(identity);
-   const [catalog,feed]=await Promise.allSettled([api.courses(),identity.capabilities.community?api.community():Promise.resolve(null)]);
+   // Fixed server-side batch avoids booting WordPress for each initial screen.
+   const data=await api.startup();
    if(epoch!==generation.current||!mounted.current)return;
-   if(catalog.status==='fulfilled'){setCourses(catalog.value.items);setCoursesPage(catalog.value.next_page);}else setError(catalog.reason instanceof Error?catalog.reason.message:'No pudimos consultar tus cursos.');
-   if(feed.status==='fulfilled'&&feed.value){setPosts(feed.value.items);setCommunityError('');}
-   else if(feed.status==='rejected')setCommunityError('No pudimos consultar la comunidad. Actualiza para intentar de nuevo.');
+   const identity=data.identity;setUser(identity);
+   if(data.catalog){setCourses(data.catalog.items);setCoursesPage(data.catalog.next_page);}else setError('No pudimos consultar tus cursos. Actualiza para intentar de nuevo.');
+   if(data.community){setPosts(data.community.items);setCommunityError('');}
+   else if(identity.capabilities.community)void api.community().then(feed=>{if(epoch===generation.current&&mounted.current){setPosts(feed.items);setCommunityError('');}}).catch(()=>{if(epoch===generation.current&&mounted.current)setCommunityError('No pudimos consultar la comunidad. Actualiza para intentar de nuevo.');});
+   if(identity.capabilities.profile&&!data.profile)void api.profile().catch(()=>{});
+   if(identity.capabilities.notifications&&!data.notifications)void api.notifications().catch(()=>{});
   }catch(e){if(epoch===generation.current&&mounted.current)setError(e instanceof Error?e.message:'No pudimos conectar con la academia.');}
-  finally{if(epoch===generation.current&&mounted.current)setBusy(false);}
+  finally{if(epoch===generation.current&&mounted.current){setBusy(false);setStarting(false);}}
  },[expire]);
  useEffect(()=>{
   mounted.current=true;
   void restoreSession().then(session=>{
    if(!mounted.current)return;
-   if((Platform.OS!=='web'&&!session)||(Platform.OS==='web'&&!bootstrap()?.nonce)){setBusy(false);return;}
+   if((Platform.OS!=='web'&&!session)||(Platform.OS==='web'&&!bootstrap()?.nonce)){setBusy(false);setStarting(false);return;}
    void connect(session);
-  }).catch(()=>{setBusy(false);setError('No pudimos recuperar tu sesión. Vuelve a entrar.');});
+  }).catch(()=>{setBusy(false);setStarting(false);setError('No pudimos recuperar tu sesión. Vuelve a entrar.');});
   return()=>{mounted.current=false;apiRef.current?.dispose();};
  },[connect]);
  const refreshIdentity=useCallback(()=>{const api=apiRef.current,id=++identityId.current;if(api&&!leaving.current)void api.me().then(identity=>{if(id===identityId.current&&api===apiRef.current&&mounted.current)setUser(current=>current?.id===identity.id?identity:current);}).catch(()=>{});},[]);
@@ -94,9 +98,9 @@ export default function App() {
   const identityRequest=++identityId.current,identity=await api.me();if(!current())return;if(identityRequest===identityId.current)setUser(identity);
   if(course){const data=await api.course(course.id),step=lesson?await api.lesson(course.id,lesson.id):null;if(current()){setCourse(data);setLesson(step);setCourses(old=>old.map(x=>x.id===data.id?data:x));}}
   else if(post){const data=await api.activity(post.id);if(current())setPost(data);}
-  else if(tab==='Comunidad'){const data=await api.community();if(current()){setPosts(data.items);setCommunityError('');}}
+  else if(tab==='Comunidad'){const data=await api.community(1,'all','',true);if(current()){setPosts(data.items);setCommunityError('');}}
 
-  else {const data=await api.courses();if(current()){setCourses(data.items);setCoursesPage(data.next_page);}if(tab==='Inicio'&&identity.capabilities.community){const feed=await api.community();if(current()){setPosts(feed.items);setCommunityError('');}}}
+  else {const data=await api.courses();if(current()){setCourses(data.items);setCoursesPage(data.next_page);}if(tab==='Inicio'&&identity.capabilities.community){const feed=await api.community(1,'all','',true);if(current()){setPosts(feed.items);setCommunityError('');}}}
  });}
  async function login(){setBusy(true);setError('');setNotice('');try{const session=await signIn();if(session)await connect(session);}catch(e){setError(e instanceof Error?e.message:'No pudimos iniciar sesión.');}finally{setBusy(false);}}
  async function leave(){const api=apiRef.current;leaving.current=true;setBusy(true);setError('');try{await api?.logout();setNotice('Sesión cerrada. Nos vemos pronto.');}catch{setNotice('Se borró la sesión de este dispositivo. No pudimos confirmar el cierre en la academia.');}finally{clear();leaving.current=false;top();}}
@@ -115,12 +119,13 @@ export default function App() {
  return <AppUpdatesProvider><SafeAreaProvider><SafeAreaView style={s.root}><StatusBar style="light"/><View style={s.shell}>
   <View style={s.header}><Pressable accessibilityRole="button" accessibilityLabel="Ir al inicio" onPress={()=>user&&changeTab('Inicio')} style={{minHeight:44,justifyContent:'center'}}><Brand url={user?.branding?.logo_url}/></Pressable>{user?<View style={[u.row,{gap:9}]}><CreditBadge data={user.gamification} onPress={showLevel}/><Pressable accessibilityRole="button" accessibilityLabel="Ver mi perfil" onPress={()=>changeTab('Perfil')} style={{padding:3}}><Avatar url={user.avatar_url} name={user.name} size={35}/></Pressable></View>:<Text style={s.headerLabel}>TU ACADEMIA</Text>}</View>
   <ReleaseBanner busy={busy}/>
+  {!starting&&busy&&<View pointerEvents="none" style={{position:'absolute',top:67,right:16,zIndex:20,padding:10,borderRadius:12,backgroundColor:c.raised}}><ActivityIndicator color={c.mint} accessibilityLabel="Actualizando datos"/></View>}
   {(b?.environment==='local'||user?.environment==='local')&&<Text style={s.testBanner}>PRUEBAS LOCALES · CONTENIDO DE INTEGRACIÓN</Text>}
   <ScrollView ref={scroll} contentContainerStyle={s.content} keyboardShouldPersistTaps="handled" refreshControl={user&&tab!=='Comunidad'&&tab!=='Avisos'?<RefreshControl refreshing={false} onRefresh={refresh} tintColor={c.mint} enabled={!busy}/>:undefined}>
    {!!error&&<View accessibilityRole="alert" style={s.error}><Text style={s.errorText}>{error}</Text>{user&&<Pressable accessibilityRole="button" onPress={refresh}><Text style={u.link}>Volver a intentar</Text></Pressable>}</View>}
    {!!notice&&<Text accessibilityLiveRegion="polite" style={s.notice}>{notice}</Text>}
-   {busy&&<View style={[u.row,{gap:10,paddingBottom:18}]}><ActivityIndicator size="small" color={c.mint}/><Text style={u.caption}>Conectando con tu academia…</Text></View>}
-   {!user?<View style={s.welcome}><View style={s.welcomeArt}><View style={s.welcomeAccent}/><Brand large/><Text style={[u.eyebrow,{letterSpacing:3}]}>ACADEMIA & COMUNIDAD</Text></View><Text style={u.eyebrow}>APRENDE. CONECTA. AVANZA.</Text><Text accessibilityRole="header" style={s.hero}>Tu camino{`\n`}<Text style={{color:c.mint}}>empieza aquí.</Text></Text><Text style={s.lead}>Tus cursos, tu comunidad y tu progreso. Sigue aprendiendo con Auren, estés donde estés.</Text><Button disabled={busy} onPress={()=>void login()}>Entrar a mi academia →</Button>{b&&<View style={[u.between,{flexWrap:'wrap'}]}><Pressable accessibilityRole="link" onPress={()=>visit(b.register_url)}><Text style={u.link}>Crear una cuenta</Text></Pressable><Pressable accessibilityRole="link" onPress={()=>visit(b.lost_password_url)}><Text style={u.caption}>Recuperar acceso</Text></Pressable></View>}{b?.nonce&&!!apiRef.current&&<Pressable accessibilityRole="button" onPress={()=>void leave()}><Text style={[u.caption,{textAlign:'center'}]}>Cambiar de cuenta</Text></Pressable>}<View style={[u.row,{gap:8,justifyContent:'center'}]}><ShieldCheck size={15} color={c.muted}/><Text style={u.caption}>Tu misma cuenta de Auren. Tu aprendizaje conectado.</Text></View><Text style={[u.caption,{textAlign:'center'}]}>El trading implica riesgo de pérdida. Aprender también es aprender a gestionar el riesgo.</Text><WebInstallHelp/></View>
+
+   {starting?<View accessibilityRole="progressbar" accessibilityLabel="Cargando tu academia" style={{paddingVertical:70,alignItems:'center',gap:24}}><Brand large/><ActivityIndicator color={c.mint}/><Text style={u.body}>Preparando tu academia…</Text></View>:!user?<View style={s.welcome}><View style={s.welcomeArt}><View style={s.welcomeAccent}/><Brand large/><Text style={[u.eyebrow,{letterSpacing:3}]}>ACADEMIA & COMUNIDAD</Text></View><Text style={u.eyebrow}>APRENDE. CONECTA. AVANZA.</Text><Text accessibilityRole="header" style={s.hero}>Tu camino{`\n`}<Text style={{color:c.mint}}>empieza aquí.</Text></Text><Text style={s.lead}>Tus cursos, tu comunidad y tu progreso. Sigue aprendiendo con Auren, estés donde estés.</Text><Button disabled={busy} onPress={()=>void login()}>Entrar a mi academia →</Button>{b&&<View style={[u.between,{flexWrap:'wrap'}]}><Pressable accessibilityRole="link" onPress={()=>visit(b.register_url)}><Text style={u.link}>Crear una cuenta</Text></Pressable><Pressable accessibilityRole="link" onPress={()=>visit(b.lost_password_url)}><Text style={u.caption}>Recuperar acceso</Text></Pressable></View>}{b?.nonce&&!!apiRef.current&&<Pressable accessibilityRole="button" onPress={()=>void leave()}><Text style={[u.caption,{textAlign:'center'}]}>Cambiar de cuenta</Text></Pressable>}<View style={[u.row,{gap:8,justifyContent:'center'}]}><ShieldCheck size={15} color={c.muted}/><Text style={u.caption}>Tu misma cuenta de Auren. Tu aprendizaje conectado.</Text></View><Text style={[u.caption,{textAlign:'center'}]}>El trading implica riesgo de pérdida. Aprender también es aprender a gestionar el riesgo.</Text><WebInstallHelp/></View>
    :lesson&&course?<LessonScreen course={course} lesson={lesson} busy={busy} onBack={back} onLesson={openLesson} onComplete={complete} onRefresh={refresh} onVisit={()=>visit(lesson.url)}/>
    :course?<CourseScreen course={course} busy={busy} onBack={back} onLesson={openLesson} onResume={()=>resumeCourse(course.id)} onRefresh={refresh}/>
    :post?social

@@ -6,8 +6,8 @@ test('installation metadata is public, private pages stay uncached, release noti
  await expect(page.getByRole('button',{name:/Entrar a mi academia/})).toBeVisible();
  await expect(page.locator('link[rel=manifest]')).toHaveAttribute('href',/auren_app_manifest=1/);
  await expect(page.locator('meta[name=apple-mobile-web-app-capable]')).toHaveAttribute('content','yes');
- await expect(page.locator('link[rel=apple-touch-icon]')).toHaveAttribute('href',/auren_app_icon=180.*v=0\.4\.2/);
- await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content',/auren_app_icon=512.*v=0\.4\.2/);
+ await expect(page.locator('link[rel=apple-touch-icon]')).toHaveAttribute('href',/auren_app_icon=180.*v=0\.5\.0/);
+ await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content',/auren_app_icon=512.*v=0\.5\.0/);
  await expect(page.locator('link[rel=icon]')).toHaveAttribute('href',/auren_app_icon=192/);
  const metadata=await page.request.get('/?auren_app_manifest=1');expect(metadata.status()).toBe(200);expect(metadata.headers()['content-type']).toContain('application/manifest+json');
  const manifest=await metadata.json();expect(manifest.display).toBe('standalone');expect(manifest.start_url).toContain('auren_app=1');expect(manifest.id).toBe(manifest.start_url);
@@ -17,7 +17,7 @@ test('installation metadata is public, private pages stay uncached, release noti
  }
  expect((await page.request.get('/?auren_app_icon=../wp-config.php')).status()).toBe(404);
  const r=await page.request.get('/?auren_app_release=1');expect(r.status()).toBe(200);expect(r.headers()['cache-control']).toContain('no-store');
- const release=await r.json();expect(Object.keys(release).sort()).toEqual(['build_id','version']);expect(release.build_id).toMatch(/^[a-f0-9]{64}$/);expect(release.version).toBe('0.4.2');
+ const release=await r.json();expect(Object.keys(release).sort()).toEqual(['build_id','version']);expect(release.build_id).toMatch(/^[a-f0-9]{64}$/);expect(release.version).toBe('0.5.0');
  await page.getByRole('button',{name:'Instalar Auren en mi celular'}).click();await expect(page.getByText(/iPhone: abre esta página en Safari/)).toBeVisible();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  expect(await page.evaluate(async()=>({registrations:(await navigator.serviceWorker.getRegistrations()).length,caches:(await caches.keys()).length}))).toEqual({registrations:0,caches:0});

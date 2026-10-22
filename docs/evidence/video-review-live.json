@@ -1,0 +1,74 @@
+{
+  "checked_at": "2026-10-22T19:54:55.597636+00:00",
+  "version": "0.5.0",
+  "public_bundle_sha256": "95a1e05cf5eb6982d223290c93e4e4cc1fe3776214c4bc003a1e808efa4303cb",
+  "public_bundle_matches_local": true,
+  "viewport_css_in_head": true,
+  "dark_theme_color": true,
+  "login_has_original_logo": true,
+  "login_uses_real_captcha_and_hidden_fields": true,
+  "authenticated_read_only_content_checks": [
+    {
+      "route": "/startup",
+      "status": 200,
+      "duration_ms": 2940,
+      "bytes": 30383
+    },
+    {
+      "route": "/me",
+      "status": 200,
+      "duration_ms": 2053,
+      "bytes": 2365
+    },
+    {
+      "route": "/courses?page=1",
+      "status": 200,
+      "duration_ms": 1962,
+      "bytes": 516
+    },
+    {
+      "route": "/profile",
+      "status": 200,
+      "duration_ms": 2016,
+      "bytes": 12672
+    },
+    {
+      "route": "/notifications?page=1&filter=unread",
+      "status": 200,
+      "duration_ms": 2153,
+      "bytes": 7051
+    },
+    {
+      "route": "/community?page=1&filter=all&search=",
+      "status": 200,
+      "duration_ms": 2409,
+      "bytes": 7714
+    }
+  ],
+  "content_mutations": false,
+  "test_session_logged_out": true,
+  "physical_iphone_verified": false,
+  "browser_navigation_checks": {
+    "initial_http_requests": 1,
+    "startup_batch_matches_native_routes": true,
+    "additional_profile_request_on_prepared_open": 0,
+    "additional_notifications_request_on_prepared_open": 0,
+    "additional_community_request_on_prepared_open": 0,
+    "explicit_refresh_requests_server": true,
+    "unsaved_edits_protected": true,
+    "late_response_preserves_typed_text": true
+  },
+  "validation": {
+    "client_tests": 17,
+    "startup_wordpress_checks": 11,
+    "wordpress_checks": 84,
+    "gamipress_checks": 15,
+    "browser_journeys": 11,
+    "typecheck": true,
+    "exports": [
+      "web",
+      "android-hermes",
+      "ios-hermes"
+    ]
+  }
+}
