@@ -28,6 +28,25 @@ Estos comandos no instalan ni reinician servicios. Una respuesta `inactive`, `un
 
 Si Redis no está instalado, se requerirá un usuario administrativo del VPS para configurarlo. No abrir el puerto Redis a Internet ni instalar/activar el plugin WordPress antes de validar el servicio y respaldar únicamente la configuración afectada. El tamaño inicial de su caché se decidirá con la memoria disponible y las mediciones, no a partir de los 24 GB contratados solamente.
 
-El propietario pospuso la optimización del hosting/WordPress mientras avanzan grupos y foros. No se han instalado servicios, cambiado workers/PHP ni activado caché para esta investigación.
+El propietario pospuso inicialmente la optimización para avanzar grupos/foros y después aportó capturas de diagnóstico; todavía no autorizó ni ejecutó una instalación mediante esta terminal de Codex. No se han instalado servicios, cambiado workers/PHP ni activado caché para esta investigación.
 
 Expo es independiente del VPS: genera/distribuye binarios de prueba y permite actualizaciones compatibles de JavaScript mediante EAS Update. La PWA servida por WordPress se actualiza con el despliegue web. Último estado registrado: proyecto Expo vinculado; exportaciones Hermes verificadas; subida de fuentes para APK bloqueada por la política de red del almacenamiento de EAS. No hay APK/IPA firmado ni TestFlight confirmado. Una cuenta Apple gratuita no permite TestFlight. Ver DEVICE_TESTING.md.
+
+## Capturas de terminal y Plesk recibidas · 23 de octubre
+
+Observación aportada por el propietario, no comandos ejecutados desde Codex:
+
+- Ejecución final: 23 GiB totales, 2,4 GiB usados, 19 GiB de buffers/caché y **21 GiB disponibles**. Swap 0. La caché de archivos de Linux no es memoria perdida; no se recomienda vaciarla.
+- Carga 0,20 / 0,16 / 0,11 con 12 vCore contratados, uptime 51 días. No indica saturación en esa muestra; no descarta picos ni demuestra ausencia de esperas en PHP/DB.
+- `command -v redis-server` y `redis-cli` sin salida; `systemctl is-active redis-server` final informa inactive. Sugiere servicio ausente/inactivo, pero aún falta confirmar paquetes y extensión PHP. Los caracteres de pegado y tilde de la primera ejecución no forman parte del diagnóstico final.
+- Plesk para Auren: PHP **8.3.36**, FPM servido por Apache; memory_limit 512M; OPcache habilitado. `opcache_get_status` está deshabilitada como función; eso no significa que OPcache esté apagado.
+- FPM: pm=ondemand, pm.max_children=10, pm.max_requests=500. Los diez children limitan concurrencia PHP, no son prueba de la causa de una petición lenta. Ondemand puede introducir arranque de workers tras inactividad: hipótesis que requiere comparación frío/caliente y memoria de procesos. Los valores start_servers/min_spare/max_spare no se utilizan en ondemand.
+
+Siguiente lectura propuesta, sin instalar ni reiniciar:
+
+```sh
+apt-cache policy redis-server redis-tools
+/opt/plesk/php/8.3/bin/php --ri redis
+```
+
+La segunda orden usa el PHP de Plesk, no `/usr/bin/php`. Su CLI orienta el diagnóstico; la extensión efectiva del handler FPM del dominio también debe verificarse al configurar el servicio. Si faltan paquetes o extensión, no activar todavía el object-cache de WordPress. No subir memory_limit/children ni cambiar a dynamic sin medir.
