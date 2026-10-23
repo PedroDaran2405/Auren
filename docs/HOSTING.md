@@ -28,7 +28,7 @@ Estos comandos no instalan ni reinician servicios. Una respuesta `inactive`, `un
 
 Si Redis no está instalado, se requerirá un usuario administrativo del VPS para configurarlo. No abrir el puerto Redis a Internet ni instalar/activar el plugin WordPress antes de validar el servicio y respaldar únicamente la configuración afectada. El tamaño inicial de su caché se decidirá con la memoria disponible y las mediciones, no a partir de los 24 GB contratados solamente.
 
-El propietario pospuso inicialmente la optimización para avanzar grupos/foros y después aportó capturas de diagnóstico; todavía no autorizó ni ejecutó una instalación mediante esta terminal de Codex. No se han instalado servicios, cambiado workers/PHP ni activado caché para esta investigación.
+El propietario pospuso inicialmente la optimización para avanzar grupos/foros y después aportó capturas de diagnóstico; no se ha instalado Redis ni se han modificado servicios del VPS a partir de este diagnóstico. No se han instalado servicios, cambiado workers/PHP ni activado caché para esta investigación.
 
 Expo es independiente del VPS: genera/distribuye binarios de prueba y permite actualizaciones compatibles de JavaScript mediante EAS Update. La PWA servida por WordPress se actualiza con el despliegue web. Último estado registrado: proyecto Expo vinculado; exportaciones Hermes verificadas; subida de fuentes para APK bloqueada por la política de red del almacenamiento de EAS. No hay APK/IPA firmado ni TestFlight confirmado. Una cuenta Apple gratuita no permite TestFlight. Ver DEVICE_TESTING.md.
 
