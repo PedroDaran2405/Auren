@@ -50,3 +50,11 @@ apt-cache policy redis-server redis-tools
 ```
 
 La segunda orden usa el PHP de Plesk, no `/usr/bin/php`. Su CLI orienta el diagnóstico; la extensión efectiva del handler FPM del dominio también debe verificarse al configurar el servicio. Si faltan paquetes o extensión, no activar todavía el object-cache de WordPress. No subir memory_limit/children ni cambiar a dynamic sin medir.
+
+## Paquetes y cliente confirmados por nuevas capturas
+
+- `apt-cache policy`: **redis-server y redis-tools no instalados** (`Installed: (none)`). Candidato en los índices mostrados: `5:7.0.15-1ubuntu0.24.04.5`, desde Ubuntu noble-updates/noble-security. La versión disponible puede cambiar al refrescar índices.
+- `/opt/plesk/php/8.3/bin/php --ri redis`: extensión **PhpRedis 6.3.0 habilitada**, serializadores php/json y compresión zstd. Ese 6.3.0 corresponde al cliente PHP, no a un servidor Redis instalado. No hace falta instalar otra extensión para esa CLI de Plesk.
+- Aún no hay evidencia de servidor instalado, PONG ni conexión PHP al servicio. Tampoco se activó caché de objetos en WordPress.
+
+Siguiente paso entregado al propietario para su terminal root: actualizar índices e instalar únicamente redis-server/redis-tools, habilitar/iniciar el servicio, y comprobar PONG, bind/protected-mode y conexión desde el PHP de Plesk. Conservar loopback como interfaz de escucha; no publicar 6379. Antes de conectar WordPress: respaldar la configuración nueva, fijar un límite inicial de memoria para el uso de caché y su política de expulsión, verificar el handler PHP efectivo y preparar reversión de su drop-in. Esta secuencia no equivale a una instalación ya ejecutada.
