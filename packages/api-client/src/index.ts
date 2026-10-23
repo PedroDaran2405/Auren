@@ -7,7 +7,7 @@ export type GamiProgress = {percent:number|null;requirements:GamiRequirement[]};
 export type GamiRank = {type:string;current:{id:number;name:string;number:number;image_url:string|null};next:{id:number;name:string;number:number;image_url:string|null}|null;progress:GamiProgress};
 export type GamiAchievement = {id:number;name:string;description:string;earned:boolean;image_url:string|null;progress:GamiProgress;reward:number|null};
 export type Gamification = {available:boolean;credits:{type:string;label:string;balance:number;image_url:string|null}|null;rank:GamiRank|null;achievements:GamiAchievement[];achievement_total:number;achievement_earned:number};
-export type Identity = { id: number; name: string; avatar_url: string; site_url: string; environment: string; profile_url?:string|null; community_url?:string|null; cover_url?:string|null; branding?:{name:string;logo_url:string|null}; gamification?:Gamification; joined?:string; unread_notifications?:number; capabilities: { academy: boolean; community: boolean; notifications?:boolean; checkout: boolean; profile?:boolean;members?:boolean;report?:boolean;block?:boolean;post_title?:boolean } };
+export type Identity = { id: number; name: string; avatar_url: string; site_url: string; environment: string; profile_url?:string|null; community_url?:string|null; cover_url?:string|null; branding?:{name:string;logo_url:string|null}; gamification?:Gamification; joined?:string; unread_notifications?:number; capabilities: { academy: boolean; community: boolean; notifications?:boolean; checkout: boolean; profile?:boolean;members?:boolean;report?:boolean;block?:boolean;post_title?:boolean;groups?:boolean;forums?:boolean } };
 export type Author = {id?:number;name:string;avatar_url:string|null};
 export type ActivityComment = {id:number;author:Author;text:string;date:string;replies:ActivityComment[]};
 export type Activity = {id:number;author:Author;text:string;date:string;type:string;image_url:string|null;url:string|null;group_name:string;reaction_count:number;comment_count:number;comments?:ActivityComment[];liked?:boolean;privacy?:string;title?:string;permissions?:{like:boolean;comment:boolean;edit:boolean;delete:boolean}};
@@ -16,6 +16,15 @@ export type ProfileField = {id:number;group_id:number;group:string;label:string;
 export type Profile = {fields:ProfileField[]};
 export type Member = {id:number;name:string;avatar_url:string|null;joined:string;fields?:{label:string;value:string}[]};
 export type Page<T> = {items:T[];next_page:number|null};
+export type Group={id:number;name:string;description:string;status:string;member_count:number;avatar_url:string|null;cover_url:string|null;is_member:boolean;pending:boolean;can_read:boolean;can_join:boolean;has_forum:boolean};
+export type Forum={id:number;title:string;description:string;parent:number;topic_count:number;reply_count:number;closed:boolean;category:boolean;can_read:boolean;can_create:boolean};
+export type Topic={id:number;forum_id:number;title:string;text:string;author:Author;date:string;reply_count:number;sticky:boolean;closed:boolean;can_reply:boolean};
+export type ForumReply={id:number;text:string;author:Author;date:string;reply_to:number};
+export type GroupDetail={group:Group;forums:Forum[];activity:Page<Activity>|null};
+export type ForumDetail={forum:Forum;forums:Page<Forum>;topics:Page<Topic>};
+export type TopicDetail={topic:Topic;replies:Page<ForumReply>};
+export type Spaces={groups:Page<Group>|null;forums:Page<Forum>|null};
+export type SpaceSaved={saved:true;id?:number;pending:boolean};
 export type RegistrationField={id:string;label:string;type:string;required:boolean;options:{value:string;label:string}[]};
 export type RegistrationConfig={enabled:boolean;native_form_only:boolean;url:string;fields:RegistrationField[];challenge:string|null;privacy_url:string;terms_url:string|false};
 export type Startup = {identity:Identity;catalog:Page<Course>|null;profile:Profile|null;notifications:(Page<Notification>&{unread_count:number})|null;community:Page<Activity>|null};
@@ -51,7 +60,7 @@ export class AurenApi {
   request<T>(path:string,method='GET',body?:unknown,fresh=false):Promise<T>{
     if(this.disposed)return Promise.reject(new ApiError('session_closed','La sesión está cerrada.',401));
     if(method!=='GET'){this.invalidateReads();return this.send<T>(path,method,body);}
-    const cacheable=/^\/(profile|community|notifications|members|blocked|reports)(\?|\/|$)/.test(path);
+    const cacheable=/^\/(profile|community|notifications|members|blocked|reports)(\?|\/|$)/.test(path)||/^\/(spaces|groups|forums)(\?|$)/.test(path);
     const entry=this.reads.get(path);
     if(cacheable&&!fresh&&entry&&Date.now()-entry.at<30000)return Promise.resolve(entry.data as T);
     const running=this.pending.get(path);
@@ -118,6 +127,22 @@ export class AurenApi {
     }
     return data;
   }
+  async spaces(fresh=false){
+    const epoch=this.readEpoch,data=await this.request<Spaces>('/spaces','GET',undefined,fresh);
+    if(this.disposed||epoch!==this.readEpoch)throw new ApiError('request_superseded','La sesión cambió.',0);
+    for(const [path,value] of [['/groups?page=1&filter=mine&search=',data.groups],['/forums?page=1&search=',data.forums]] as const){if(value)this.reads.set(path,{data:value,at:Date.now()});}
+    return data;
+  }
+  groups(page=1,filter='mine',search='',fresh=false){return this.request<Page<Group>>(`/groups?${new URLSearchParams({page:String(positiveId(page)),filter,search:search.slice(0,80)})}`,'GET',undefined,fresh);}
+  group(id:number){return this.request<GroupDetail>(`/groups/${positiveId(id)}`);}
+  groupMembers(id:number,page=1){return this.request<Page<Member>>(`/groups/${positiveId(id)}/members?page=${positiveId(page)}`);}
+  groupActivity(id:number,page=1){return this.request<Page<Activity>>(`/groups/${positiveId(id)}/activity?page=${positiveId(page)}`);}
+  joinGroup(id:number,request_key:string){return this.request<SpaceSaved>(`/groups/${positiveId(id)}/join`,'POST',{request_key});}
+  forums(page=1,search='',fresh=false){return this.request<Page<Forum>>(`/forums?${new URLSearchParams({page:String(positiveId(page)),search:search.slice(0,80)})}`,'GET',undefined,fresh);}
+  forum(id:number,page=1,search=''){return this.request<ForumDetail>(`/forums/${positiveId(id)}?${new URLSearchParams({page:String(positiveId(page)),search:search.slice(0,80)})}`);}
+  topic(id:number,page=1){return this.request<TopicDetail>(`/topics/${positiveId(id)}?page=${positiveId(page)}`);}
+  createTopic(id:number,title:string,content:string,request_key:string){return this.request<SpaceSaved>(`/forums/${positiveId(id)}/topics`,'POST',{title,content,request_key});}
+  replyTopic(id:number,content:string,request_key:string){return this.request<SpaceSaved>(`/topics/${positiveId(id)}/replies`,'POST',{content,request_key});}
   registrationConfig(){return this.request<RegistrationConfig>('/registration');}
   registerAccount(data:{fields:Record<string,string|string[]>;challenge:string;website:string}){return this.request<{submitted:true;message:string}>('/registration','POST',data);}
   me() { return this.request<Identity>('/me'); }
@@ -153,6 +178,8 @@ function publicMessage(code:string,status:number) {
   if(code==='registration_expired')return 'El formulario venció. Lo renovaremos; revisa los campos y vuelve a enviar.';
   if(code==='registration_disabled')return 'El registro no está disponible por ahora.';
   if(code==='registration_web_required')return 'Completa el registro protegido en la academia.';
+  if(code==='space_forbidden')return 'Este espacio es privado o ya no está disponible para tu cuenta.';
+  if(code==='spaces_unavailable')return 'No pudimos consultar este espacio. Intenta actualizar.';
   if (code === 'course_forbidden') return 'Este curso no está incluido en tu acceso actual.';
   if (code === 'lesson_locked' || code === 'prerequisites') return 'Completa las actividades anteriores para continuar.';
   if (code === 'lesson_scheduled') return 'Esta lección todavía no está disponible.';

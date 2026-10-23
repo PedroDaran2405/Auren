@@ -1,6 +1,10 @@
 # Estado y continuidad
 
-Versión **0.6.0**, en **https://www.aurenfx.com/?auren_app=1**. La entrega añade el diseño inspirado en los conceptos, marca original y gamificación nativa compartida con el encabezado web. Ver [GAMIFICATION](GAMIFICATION.md) para edición de niveles, auditoría y límites de contenido.
+Versión **0.7.0**, en **https://www.aurenfx.com/?auren_app=1**. La entrega añade el diseño inspirado en los conceptos, marca original y gamificación nativa compartida con el encabezado web. Ver [GAMIFICATION](GAMIFICATION.md) para edición de niveles, auditoría y límites de contenido.
+
+## Grupos y foros · 0.7.0
+
+Actividad / Grupos / Foros dentro de Comunidad, accesos desde Inicio, detalle de grupos con foros/actividad/miembros, categorías y discusiones, envío de temas/respuestas y solicitudes de membresía. Navegación de regreso fija y listas preparadas en memoria privada, con detalles sujetos a autorización actual. Se retira Tu Academia y la marca repetida de bienvenida. Lecturas remotas verificadas con cuenta de alumno: siete grupos y ocho foros raíz, grupo/miembros/tema/respuestas originales; sin publicaciones o solicitudes de prueba en el sitio. Ver [GROUPS_AND_FORUMS](GROUPS_AND_FORUMS.md) para cobertura y funciones pendientes; no se declara equivalencia completa con BuddyBoss.
 
 ## Registro y diagnóstico · 0.6.0
 

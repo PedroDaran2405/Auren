@@ -1,0 +1,36 @@
+{
+  "checked_at": "20261023T162016Z",
+  "version": "0.7.0",
+  "files": [
+    {
+      "path": "plugins/auren-app-bridge/includes/spaces.php",
+      "before_sha256": null,
+      "after_sha256": "b9e2a9890691c1048ec0c76a7af5d382f402b26a1cb63cf9e91c785ded5d22a3"
+    },
+    {
+      "path": "plugins/auren-app-bridge/auren-app-bridge.php",
+      "before_sha256": "049e3a90363b9dfe9d002e73188fbf6c616d44494157160b68f5e0839335a0bd",
+      "after_sha256": "7a485906cba69de0fbbde6fe4a123e364cd0f61cfdbb0fb3f9b51a8eb72053eb"
+    },
+    {
+      "path": "plugins/auren-app-bridge/includes/rest.php",
+      "before_sha256": "15d6bc6da50828dc41bd7b0e8acd5079755c4faf52c6c26215edfa951c811054",
+      "after_sha256": "a979bfa9da6a390a6efbf283a1d35b1fd62c3c485509812e6211dee660765d9e"
+    },
+    {
+      "path": "plugins/auren-app-bridge/web/_expo/static/js/web/index-2c75c38a27b78881d8a9c7b44b9bbb57.js",
+      "before_sha256": null,
+      "after_sha256": "e5dc39830d0fe1ef1c1c6c10046cccb0843ba6ccc985059158874f53c4e59c08"
+    },
+    {
+      "path": "plugins/auren-app-bridge/web/index.html",
+      "before_sha256": "8a6ae27600b67cf7a9a7b49cce29b2de9030d6fbf80fe00e1ea6ffc000fd9474",
+      "after_sha256": "b2c78130297b903566e334112be73cea5b3dccbf75f9018e90be16ada47cfcf7"
+    }
+  ],
+  "html_last": true,
+  "previous_bundles_preserved": true,
+  "backup_directory": ".local/deploy-backups/spaces-20261023T162016Z",
+  "read_back_sha256_verified": true,
+  "scope": "Own bridge and web app only. Native group/forum data and membership configuration unchanged; no external test posts created by deployment."
+}

@@ -18,6 +18,7 @@ npm run local:up
 npm test
 npm run typecheck
 npm run test:wordpress
+npm run test:spaces
 npm run test:browser
 ```
 
@@ -35,10 +36,12 @@ App conectada a Auren: https://www.aurenfx.com/?auren_app=1 (alumnos registrados
 
 En Ajustes → Auren App se configura la versión de LearnDash verificada, la escritura de progreso y una restricción de piloto opcional. Por defecto los alumnos registrados pueden entrar; cada curso y publicación conserva sus permisos. El login de la app reutiliza WordPress, con presentación propia y retorno corregido para BuddyBoss. La escritura de progreso se habilita por separado.
 
-La interfaz 0.4.0 incluye Inicio, Cursos, Comunidad, Avisos y Perfil. El logo original y el diseño azul/cian siguen los conceptos del propietario. [Gamificación compartida y configuración de niveles](docs/GAMIFICATION.md): Auren Credits, niveles y logros nativos de GamiPress, también en el encabezado web. El feed y los avisos se consultan desde BuddyBoss con el usuario real. Publicaciones, comentarios y Me gusta ya se gestionan dentro de la app y se guardan en BuddyBoss. Perfil ampliado, avisos leídos, búsqueda de miembros, reportes y bloqueos usan los mismos registros de WordPress.
+La interfaz incluye Inicio, Cursos, Comunidad, Avisos y Perfil. El logo original y el diseño azul/cian siguen los conceptos del propietario. [Gamificación compartida y configuración de niveles](docs/GAMIFICATION.md): Auren Credits, niveles y logros nativos de GamiPress, también en el encabezado web. El feed y los avisos se consultan desde BuddyBoss con el usuario real. Publicaciones, comentarios y Me gusta ya se gestionan dentro de la app y se guardan en BuddyBoss. Perfil ampliado, avisos leídos, búsqueda de miembros, reportes y bloqueos usan los mismos registros de WordPress.
 
 [Auditoría](docs/AUDIT.md) · [Revisión BuddyBoss](docs/BUDDYBOSS_REVIEW.md) · [Arquitectura](docs/ARCHITECTURE.md) · [API](docs/API.md) · [Cobertura](docs/COVERAGE.md) · [Pruebas](docs/TESTING.md) · [Despliegue y reversión](docs/DEPLOYMENT.md) · [Distribución y costos](docs/DISTRIBUTION.md).
 
 Para instalar la versión web de prueba en iPhone/Android y conocer cómo se reciben cambios: [DEVICE_TESTING](docs/DEVICE_TESTING.md). La instalación web no requiere cuentas de Expo/Apple; APK/TestFlight y EAS Update siguen pendientes de vincular cuentas y generar binarios.
 
 La revisión de BuddyBoss y las diferencias entre comprobaciones locales, reales y pendientes están en [BUDDYBOSS_REVIEW](docs/BUDDYBOSS_REVIEW.md). No se declara equivalencia total ni entrega nativa por implementar recorridos web.
+
+Grupos y foros: [experiencia, integración, pruebas y límites de 0.7.0](docs/GROUPS_AND_FORUMS.md). Actividad, Grupos y Foros se abren dentro de Comunidad; discusiones/respuestas y solicitudes usan los datos originales de BuddyBoss.

@@ -13,6 +13,18 @@ add_action('rest_api_init',function() {
     $route('/registration','GET','auren_app_registration_config',true);
     $route('/registration','POST','auren_app_register',true);
     $route('/startup','GET','auren_app_startup');
+    $route('/spaces','GET',function($r){$q=auren_app_space_query($r);return is_wp_error($q)?$q:auren_app_spaces();});
+    $route('/groups','GET',function($r){$q=auren_app_space_query($r,array('mine','all'));return is_wp_error($q)?$q:auren_app_groups($q[0],$q[2],$q[1]);});
+    $route('/groups/(?P<id>[1-9][0-9]*)','GET',function($r){$q=auren_app_space_query($r);return is_wp_error($q)?$q:auren_app_group_detail((int)$r['id']);});
+    $route('/groups/(?P<id>[1-9][0-9]*)/members','GET',function($r){$q=auren_app_space_query($r);return is_wp_error($q)?$q:auren_app_group_members((int)$r['id'],$q[0]);});
+    $route('/groups/(?P<id>[1-9][0-9]*)/activity','GET',function($r){$q=auren_app_space_query($r);return is_wp_error($q)?$q:auren_app_group_activity((int)$r['id'],$q[0]);});
+    $route('/groups/(?P<id>[1-9][0-9]*)/join','POST','auren_app_join_group');
+    $route('/forums','GET',function($r){$q=auren_app_space_query($r);return is_wp_error($q)?$q:auren_app_forums($q[0],0,$q[1]);});
+    $route('/forums/(?P<id>[1-9][0-9]*)','GET',function($r){$q=auren_app_space_query($r);return is_wp_error($q)?$q:auren_app_forum_detail((int)$r['id'],$q[0],$q[1]);});
+    $route('/forums/(?P<id>[1-9][0-9]*)/topics','POST','auren_app_create_topic');
+    $route('/topics/(?P<id>[1-9][0-9]*)','GET',function($r){$q=auren_app_space_query($r);return is_wp_error($q)?$q:auren_app_topic_detail((int)$r['id'],$q[0]);});
+    $route('/topics/(?P<id>[1-9][0-9]*)/replies','POST','auren_app_create_reply');
+
     $route('/me','GET',function() {
         $u = wp_get_current_user();
         $community=auren_app_has_buddyboss_route('/buddyboss/v1/activity');
@@ -22,6 +34,7 @@ add_action('rest_api_init',function() {
             'community_url'=>function_exists('bp_get_activity_directory_permalink')?auren_app_safe_url(bp_get_activity_directory_permalink(),true):null,
             'joined'=>substr($u->user_registered,0,10),'unread_notifications'=>$notifications?auren_app_unread_count():0,
             'capabilities'=>array('academy'=>auren_app_lms_ready() === true,'community'=>$community,'notifications'=>$notifications,'checkout'=>false,
+                'groups'=>auren_app_has_buddyboss_route('/buddyboss/v1/groups'),'forums'=>auren_app_has_buddyboss_route('/buddyboss/v1/forums'),
                 'post_title'=>function_exists('bb_is_activity_post_title_enabled')&&bb_is_activity_post_title_enabled(),
                 'profile'=>auren_app_has_buddyboss_route('/buddyboss/v1/xprofile/groups'),'members'=>auren_app_has_buddyboss_route('/buddyboss/v1/members'),
                 'block'=>auren_app_has_buddyboss_route('/buddyboss/v1/moderation'),

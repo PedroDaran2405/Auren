@@ -26,7 +26,8 @@
     "local:gamipress": "python3 scripts/local-gamipress.py",
     "test:header": "bash scripts/test-header.sh",
     "test:startup": "docker compose -f compose.test.yml exec -T wp php /opt/auren-tests/startup.php",
-    "test:registration": "docker compose -f compose.test.yml exec -T wp php /opt/auren-tests/registration.php"
+    "test:registration": "docker compose -f compose.test.yml exec -T wp php /opt/auren-tests/registration.php",
+    "test:spaces": "docker compose -f compose.test.yml exec -T wp php /opt/auren-tests/spaces.php"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

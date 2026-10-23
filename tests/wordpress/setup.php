@@ -32,4 +32,5 @@ for($i=1;$i<=2;$i++){
 foreach(array('alumno-a','alumno-b') as $name){update_user_meta($ids[$name],'fixture_courses',array($ids['free']));}
 update_option('auren_app_pilot_users',$ids['alumno-a'].','.$ids['alumno-b']);
 update_option('auren_app_pilot_restricted',false);
+auren_fixture_space_seed();
 echo wp_json_encode($ids);
