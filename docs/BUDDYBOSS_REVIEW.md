@@ -55,3 +55,7 @@ La evidencia distingue fixture local, API real y recorrido físico. No se public
 ## Diseño y gamificación 0.4.0
 
 Se aplican los conceptos visuales entregados por el propietario a las acciones ya conectadas. Se conserva Avisos y no se incluye una pestaña de mensajes. El adaptador GamiPress consulta el plugin nativo; la moneda, niveles y logros coinciden con el encabezado web. [GAMIFICATION](GAMIFICATION.md) registra objetos/configuración, fuentes, pruebas y contenido que falta antes de implementar los bloques restantes del concepto. Las cantidades, cursos y recompensas de las imágenes no se usan como datos de alumno.
+
+## Investigación pública posterior · 23 de octubre de 2026
+
+Ver [PUBLIC_REFERENCE_REVIEW_2026-10-23](PUBLIC_REFERENCE_REVIEW_2026-10-23.md): lectura efectiva del template público actual, intentos bloqueados y comparación visual pendiente. El template público actual indica React Native 0.85.1+; no extrapolar la descripción de una demo NextGen de otra fecha a todos los productos/versiones. Las rutas comerciales bloqueadas no se presentan como documentación íntegramente leída.
