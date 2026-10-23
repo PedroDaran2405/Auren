@@ -62,3 +62,7 @@ add_action('login_footer',function(){
     if(!auren_app_login_context()){return;}
     echo '<script>(function(){function prepare(){var form=document.getElementById("loginform"),login=document.getElementById("user_login"),password=document.getElementById("user_pass");if(login){if(login.placeholder!=="Tu correo o usuario")login.placeholder="Tu correo o usuario";var label=document.querySelector("label[for=user_login]");if(label&&(label.textContent!=="Correo o usuario"||label.children.length))label.textContent="Correo o usuario";}if(form&&password){if(password.placeholder!=="Tu contraseña")password.placeholder="Tu contraseña";var label=document.querySelector("label[for=user_pass]");if(label&&(label.textContent!=="Contraseña"||label.children.length))label.textContent="Contraseña";var submit=document.getElementById("wp-submit");if(submit)submit.value="Entrar a mi academia";}document.querySelectorAll("a[href*=lostpassword]").forEach(function(a){if(a.textContent!=="¿Olvidaste tu contraseña?")a.textContent="¿Olvidaste tu contraseña?";});}prepare();document.addEventListener("DOMContentLoaded",prepare,{once:true});var target=document.getElementById("login");if(target)new MutationObserver(prepare).observe(target,{subtree:true,childList:true,attributes:true,attributeFilter:["placeholder"]});})();</script>';
 },1000);
+
+add_action('login_head',function(){
+    if(auren_app_login_context()){echo '<meta name="theme-color" content="#00101e"><style>html{background:#00101e;color-scheme:dark}body.login.auren-app-login{padding-top:0!important}</style>';}
+});

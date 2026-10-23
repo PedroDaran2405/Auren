@@ -13,6 +13,7 @@ import { apiBase, bootstrap, clearSession, restoreSession, signIn } from './auth
 import { Avatar, Button, colors as c, font, u } from './ui';
 import { WebInstallHelp } from './WebInstall';
 import { AppUpdatesProvider, ReleaseBanner } from './AppUpdates';
+import RegistrationScreen from './RegistrationScreen';
 import SocialScreen from './SocialScreen';
 import NotificationsScreen from './NotificationsScreen';
 import ProfileEditor from './ProfileEditor';
@@ -36,6 +37,7 @@ export default function App() {
  const [gamificationOpen,setGamificationOpen]=useState(false),[achievement,setAchievement]=useState<GamiAchievement|null>(null);
  const [editProfile,setEditProfile]=useState(false),[courseSearch,setCourseSearch]=useState('');
  const [filter,setFilter]=useState<'all'|'started'|'done'>('all');
+ const [registrationOpen,setRegistrationOpen]=useState(false);
  const [starting,setStarting]=useState(true);
  const [busy,setBusy]=useState(true),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const apiRef=useRef<AurenApi|null>(null),generation=useRef(0),requestId=useRef(0),identityId=useRef(0),mounted=useRef(true),leaving=useRef(false);
@@ -43,7 +45,7 @@ export default function App() {
  const top=()=>scroll.current?.scrollTo({y:0,animated:false});
  const clear=useCallback(()=>{
   generation.current++;requestId.current++;apiRef.current?.dispose();apiRef.current=null;
-  setUser(null);setCourses([]);setPosts([]);setCourse(null);setLesson(null);setPost(null);setCoursesPage(null);setCommunityError('');setTab('Inicio');setFilter('all');setEditProfile(false);setBlockedOpen(false);setGamificationOpen(false);setAchievement(null);setCourseSearch('');setBusy(false);setStarting(false);
+  setRegistrationOpen(false);setUser(null);setCourses([]);setPosts([]);setCourse(null);setLesson(null);setPost(null);setCoursesPage(null);setCommunityError('');setTab('Inicio');setFilter('all');setEditProfile(false);setBlockedOpen(false);setGamificationOpen(false);setAchievement(null);setCourseSearch('');setBusy(false);setStarting(false);
   void clearSession().catch(()=>setError('No pudimos borrar la sesión del dispositivo. Intenta cerrar sesión de nuevo.'));
  },[]);
  const expire=useCallback(()=>{clear();setNotice('');setError('Tu sesión terminó. Vuelve a entrar para continuar.');},[clear]);
@@ -125,7 +127,7 @@ export default function App() {
    {!!error&&<View accessibilityRole="alert" style={s.error}><Text style={s.errorText}>{error}</Text>{user&&<Pressable accessibilityRole="button" onPress={refresh}><Text style={u.link}>Volver a intentar</Text></Pressable>}</View>}
    {!!notice&&<Text accessibilityLiveRegion="polite" style={s.notice}>{notice}</Text>}
 
-   {starting?<View accessibilityRole="progressbar" accessibilityLabel="Cargando tu academia" style={{paddingVertical:70,alignItems:'center',gap:24}}><Brand large/><ActivityIndicator color={c.mint}/><Text style={u.body}>Preparando tu academia…</Text></View>:!user?<View style={s.welcome}><View style={s.welcomeArt}><View style={s.welcomeAccent}/><Brand large/><Text style={[u.eyebrow,{letterSpacing:3}]}>ACADEMIA & COMUNIDAD</Text></View><Text style={u.eyebrow}>APRENDE. CONECTA. AVANZA.</Text><Text accessibilityRole="header" style={s.hero}>Tu camino{`\n`}<Text style={{color:c.mint}}>empieza aquí.</Text></Text><Text style={s.lead}>Tus cursos, tu comunidad y tu progreso. Sigue aprendiendo con Auren, estés donde estés.</Text><Button disabled={busy} onPress={()=>void login()}>Entrar a mi academia →</Button>{b&&<View style={[u.between,{flexWrap:'wrap'}]}><Pressable accessibilityRole="link" onPress={()=>visit(b.register_url)}><Text style={u.link}>Crear una cuenta</Text></Pressable><Pressable accessibilityRole="link" onPress={()=>visit(b.lost_password_url)}><Text style={u.caption}>Recuperar acceso</Text></Pressable></View>}{b?.nonce&&!!apiRef.current&&<Pressable accessibilityRole="button" onPress={()=>void leave()}><Text style={[u.caption,{textAlign:'center'}]}>Cambiar de cuenta</Text></Pressable>}<View style={[u.row,{gap:8,justifyContent:'center'}]}><ShieldCheck size={15} color={c.muted}/><Text style={u.caption}>Tu misma cuenta de Auren. Tu aprendizaje conectado.</Text></View><Text style={[u.caption,{textAlign:'center'}]}>El trading implica riesgo de pérdida. Aprender también es aprender a gestionar el riesgo.</Text><WebInstallHelp/></View>
+   {starting?<View accessibilityRole="progressbar" accessibilityLabel="Cargando tu academia" style={{paddingVertical:70,alignItems:'center',gap:24}}><Brand large/><ActivityIndicator color={c.mint}/><Text style={u.body}>Preparando tu academia…</Text></View>:!user&&registrationOpen?<RegistrationScreen onBack={()=>setRegistrationOpen(false)} onLogin={()=>{setRegistrationOpen(false);void login();}}/>:!user?<View style={s.welcome}><View style={s.welcomeArt}><View style={s.welcomeAccent}/><Brand large/><Text style={[u.eyebrow,{letterSpacing:3}]}>ACADEMIA & COMUNIDAD</Text></View><Text style={u.eyebrow}>APRENDE. CONECTA. AVANZA.</Text><Text accessibilityRole="header" style={s.hero}>Tu camino{`\n`}<Text style={{color:c.mint}}>empieza aquí.</Text></Text><Text style={s.lead}>Tus cursos, tu comunidad y tu progreso. Sigue aprendiendo con Auren, estés donde estés.</Text><Button disabled={busy} onPress={()=>void login()}>Entrar a mi academia →</Button>{<View style={[u.between,{flexWrap:'wrap'}]}><Pressable accessibilityRole="button" accessibilityLabel="Crear una cuenta" onPress={()=>{setRegistrationOpen(true);top();}}><Text style={u.link}>Crear una cuenta</Text></Pressable><Pressable accessibilityRole="link" onPress={()=>visit(b?.lost_password_url??((process.env.EXPO_PUBLIC_WORDPRESS_URL??'https://www.aurenfx.com')+'/wp-login.php?action=lostpassword'))}><Text style={u.caption}>Recuperar acceso</Text></Pressable></View>}{b?.nonce&&!!apiRef.current&&<Pressable accessibilityRole="button" onPress={()=>void leave()}><Text style={[u.caption,{textAlign:'center'}]}>Cambiar de cuenta</Text></Pressable>}<View style={[u.row,{gap:8,justifyContent:'center'}]}><ShieldCheck size={15} color={c.muted}/><Text style={u.caption}>Tu misma cuenta de Auren. Tu aprendizaje conectado.</Text></View><Text style={[u.caption,{textAlign:'center'}]}>El trading implica riesgo de pérdida. Aprender también es aprender a gestionar el riesgo.</Text><WebInstallHelp/></View>
    :lesson&&course?<LessonScreen course={course} lesson={lesson} busy={busy} onBack={back} onLesson={openLesson} onComplete={complete} onRefresh={refresh} onVisit={()=>visit(lesson.url)}/>
    :course?<CourseScreen course={course} busy={busy} onBack={back} onLesson={openLesson} onResume={()=>resumeCourse(course.id)} onRefresh={refresh}/>
    :post?social

@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 // BuddyBoss private REST mode must allow the two public authorization steps.
 // Exact routes only: consent still requires WordPress login and exchange requires PKCE.
 add_filter('bb_exclude_endpoints_from_restriction', function ($routes) {
-    return array_values(array_unique(array_merge((array)$routes, array('/auren/v1/auth/start','/auren/v1/auth/exchange'))));
+    return array_values(array_unique(array_merge((array)$routes, array('/auren/v1/auth/start','/auren/v1/auth/exchange','/auren/v1/registration'))));
 });
 
 function auren_app_secure_transport() {

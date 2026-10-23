@@ -55,3 +55,6 @@ body.login.auren-app-login #login .auren-login-brand img{display:block;width:224
 body.login.auren-app-login #login .button-primary{background:#1657ff!important;color:#f3f7ff!important}
 body.login.auren-app-login #login .input:-webkit-autofill{-webkit-text-fill-color:#f3f7ff!important;box-shadow:0 0 0 1000px #0b101d inset!important;caret-color:#16d9ed}
 html:has(body.auren-app-login){background:#00101e;color-scheme:dark}
+
+/* Standalone iPhone: reserve the status-bar inset before the brand. */
+body.login.auren-app-login #login{padding-top:max(64px,calc(40px + env(safe-area-inset-top,0px)))!important;padding-left:max(24px,env(safe-area-inset-left,0px))!important;padding-right:max(24px,env(safe-area-inset-right,0px))!important}

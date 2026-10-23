@@ -40,7 +40,9 @@ add_action('template_redirect',function() {
     auren_app_private_headers();
     $file = dirname(__DIR__) . '/web/index.html';
     if (!is_readable($file)) { wp_die('La app está en preparación. Vuelve a la academia para continuar.', 'Auren', array('response'=>503)); }
-    $bootstrap = array('api_url'=>rest_url('auren/v1/'),'site_url'=>home_url('/'),
+    $registration=is_user_logged_in()?null:auren_app_registration_config();
+    if(is_wp_error($registration)){$registration=null;}
+    $bootstrap = array('registration'=>$registration,'api_url'=>rest_url('auren/v1/'),'site_url'=>home_url('/'),
         'nonce'=>is_user_logged_in() ? wp_create_nonce('wp_rest') : null,
         'login_url'=>wp_login_url(add_query_arg('auren_app','1',home_url('/'))),
         'register_url'=>wp_registration_url(),'lost_password_url'=>add_query_arg(array('auren_app_auth'=>'1','redirect_to'=>add_query_arg('auren_app','1',home_url('/'))),wp_lostpassword_url()),

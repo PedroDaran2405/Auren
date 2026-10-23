@@ -10,6 +10,8 @@ add_action('rest_api_init',function() {
     register_rest_route('auren/v1','/logout',array('methods'=>'POST','callback'=>'auren_app_logout','permission_callback'=>function(){
         return auren_app_secure_transport() && is_user_logged_in()?true:auren_app_error('login_required','Inicia sesión para continuar.',401);
     }));
+    $route('/registration','GET','auren_app_registration_config',true);
+    $route('/registration','POST','auren_app_register',true);
     $route('/startup','GET','auren_app_startup');
     $route('/me','GET',function() {
         $u = wp_get_current_user();
@@ -79,6 +81,9 @@ add_filter('rest_post_dispatch',function($response,$server,$request) {
         $response = rest_ensure_response($response);
         $response->header('Cache-Control','private, no-store, max-age=0');
         $response->header('Vary','Cookie, Authorization, Origin');
+        $elapsed=max(0,(microtime(true)-(float)($_SERVER['REQUEST_TIME_FLOAT']??microtime(true)))*1000);
+        $timing=$response->get_headers()['Server-Timing']??'';
+        $response->header('Server-Timing',($timing?$timing.', ':'').'auren_php;dur='.round($elapsed,1));
         $response->header('X-Robots-Tag','noindex, nofollow');
     }
     return $response;

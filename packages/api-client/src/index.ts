@@ -16,9 +16,11 @@ export type ProfileField = {id:number;group_id:number;group:string;label:string;
 export type Profile = {fields:ProfileField[]};
 export type Member = {id:number;name:string;avatar_url:string|null;joined:string;fields?:{label:string;value:string}[]};
 export type Page<T> = {items:T[];next_page:number|null};
+export type RegistrationField={id:string;label:string;type:string;required:boolean;options:{value:string;label:string}[]};
+export type RegistrationConfig={enabled:boolean;native_form_only:boolean;url:string;fields:RegistrationField[];challenge:string|null;privacy_url:string;terms_url:string|false};
 export type Startup = {identity:Identity;catalog:Page<Course>|null;profile:Profile|null;notifications:(Page<Notification>&{unread_count:number})|null;community:Page<Activity>|null};
 export type Session = { access_token: string; expires_at: number; token_type: 'Bearer' };
-export type Bootstrap = { api_url: string; site_url: string; nonce: string | null; login_url: string; register_url: string; lost_password_url: string; environment: string; release?: { version:string; build_id:string }; release_url?:string };
+export type Bootstrap = { api_url: string; site_url: string; nonce: string | null; login_url: string; register_url: string; lost_password_url: string; environment: string; registration?:RegistrationConfig|null; release?: { version:string; build_id:string }; release_url?:string };
 export class ApiError extends Error {
   constructor(public code: string, message: string, public status: number) { super(message); }
 }
@@ -116,6 +118,8 @@ export class AurenApi {
     }
     return data;
   }
+  registrationConfig(){return this.request<RegistrationConfig>('/registration');}
+  registerAccount(data:{fields:Record<string,string|string[]>;challenge:string;website:string}){return this.request<{submitted:true;message:string}>('/registration','POST',data);}
   me() { return this.request<Identity>('/me'); }
   gamification() { return this.request<Gamification>('/gamification'); }
   courses(page=1) { return this.request<{items:Course[];next_page:number|null}>(`/courses?page=${page}`); }
@@ -145,6 +149,10 @@ export class AurenApi {
 function positiveId(id:number) { if (!Number.isSafeInteger(id) || id < 1) throw new Error('ID inválido'); return id; }
 function publicMessage(code:string,status:number) {
   if (['login_required','session_expired','rest_cookie_invalid_nonce','invalid_grant'].includes(code)) return 'Tu sesión terminó. Vuelve a entrar para continuar.';
+  if(code==='registration_validation'||code==='invalid_registration')return 'Revisa los campos requeridos y usa una contraseña de al menos 12 caracteres. Si ya tienes cuenta, inicia sesión o recupera tu acceso.';
+  if(code==='registration_expired')return 'El formulario venció. Lo renovaremos; revisa los campos y vuelve a enviar.';
+  if(code==='registration_disabled')return 'El registro no está disponible por ahora.';
+  if(code==='registration_web_required')return 'Completa el registro protegido en la academia.';
   if (code === 'course_forbidden') return 'Este curso no está incluido en tu acceso actual.';
   if (code === 'lesson_locked' || code === 'prerequisites') return 'Completa las actividades anteriores para continuar.';
   if (code === 'lesson_scheduled') return 'Esta lección todavía no está disponible.';

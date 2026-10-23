@@ -96,3 +96,24 @@ add_action('rest_api_init',function(){
  }),true);
  register_rest_route('buddyboss/v1','/moderation/(?P<id>[0-9]+)',array('methods'=>'DELETE','permission_callback'=>function($r){return in_array((int)$r['id'],auren_fixture_blocks(),true);},'callback'=>function($r){$uid=get_current_user_id();$all=auren_fixture_blocks($uid);$key=array_search((int)$r['id'],$all,true);unset($all[$key]);update_user_meta($uid,'fixture_blocks',$all);return array('deleted'=>true);}),true);
 },30);
+
+// Registration TEST DOUBLE: native WordPress users, BuddyBoss signup/mail simulated.
+function bp_core_signup_user($login,$password,$email,$meta=array()){
+    return wp_insert_user(array('user_login'=>$login,'user_pass'=>$password,'user_email'=>$email,'role'=>get_option('default_role','subscriber')));
+}
+function bb_recaptcha_is_enabled($key){return $key==='bb_register'&&(bool)get_option('auren_fixture_signup_captcha',false);}
+add_action('rest_api_init',function(){
+    register_rest_route('buddyboss/v1','/signup/form',array('methods'=>'GET','permission_callback'=>'__return_true','callback'=>static fn()=>array(
+        array('id'=>'signup_email','label'=>'Correo electrónico','type'=>'email','required'=>true,'options'=>array()),
+        array('id'=>'signup_password','label'=>'Contraseña','type'=>'password','required'=>true,'options'=>array()),
+        array('id'=>'field_1','label'=>'Nombre','type'=>'textbox','required'=>true,'options'=>array()),
+        array('id'=>'field_111','label'=>'¿Cómo nos conociste?','type'=>'checkbox','required'=>true,'options'=>array(array('name'=>'Youtube'),array('name'=>'Facebook'))),
+        array('id'=>'legal_agreement','label'=>'Acepto los términos y la privacidad','type'=>'checkbox','required'=>true,'options'=>array()),
+    )));
+    register_rest_route('buddyboss/v1','/signup',array('methods'=>'POST','permission_callback'=>'__return_true','callback'=>function($r){
+        $email=$r->get_param('signup_email');$user=bp_core_signup_user(sanitize_user(strstr($email,'@',true)),$r->get_param('signup_password'),$email);
+        if(is_wp_error($user))return $user;
+        update_user_meta($user,'fixture_pending_activation',true);
+        return array('success'=>true,'data'=>array('id'=>$user,'user_email'=>$email,'activation_key'=>'private-fixture-key'));
+    }));
+});

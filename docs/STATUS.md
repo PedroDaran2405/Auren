@@ -1,6 +1,10 @@
 # Estado y continuidad
 
-Versión **0.5.0**, en **https://www.aurenfx.com/?auren_app=1**. La entrega añade el diseño inspirado en los conceptos, marca original y gamificación nativa compartida con el encabezado web. Ver [GAMIFICATION](GAMIFICATION.md) para edición de niveles, auditoría y límites de contenido.
+Versión **0.6.0**, en **https://www.aurenfx.com/?auren_app=1**. La entrega añade el diseño inspirado en los conceptos, marca original y gamificación nativa compartida con el encabezado web. Ver [GAMIFICATION](GAMIFICATION.md) para edición de niveles, auditoría y límites de contenido.
+
+## Registro y diagnóstico · 0.6.0
+
+Registro dentro de la app con campos y creación originales de BuddyBoss, cuenta compartida WordPress, validaciones y límites de intentos. Preparación del formulario público en web y reserva de área segura superior en el login. El CAPTCHA del login se conserva; el registro delega al formulario original si su protección lo exige. Medición Server-Timing propia para diagnosticar la demora antes de cambios de infraestructura. Ver [REGISTRATION_AND_PERFORMANCE](REGISTRATION_AND_PERFORMANCE.md). Correo/activación reales y aspecto final en iPhone pendientes de confirmación física.
 
 ## Revisión de video y navegación · 0.5.0
 
@@ -90,3 +94,5 @@ Para continuar: leer AUDIT, BUDDYBOSS_REVIEW, ARCHITECTURE, API y ENVIRONMENT. `
 `CONTEXTO-PARA-OTRA-IA.md` resume objetivos, implementación, aceptación, accesos, restricciones y siguientes hitos. El exportador conserva código, pruebas, documentación, recursos generados y, opcionalmente, los cinco adjuntos originales. El ZIP completo del checkpoint 879ba4e se verificó por hashes, sin claves ni sesiones.
 
 Los enlaces de archivo del entorno no resultaron descargables para el propietario. Se preparó una [descarga protegida en Auren](PROJECT_DOWNLOAD.md), en una carpeta auxiliar independiente que no se activa como plugin ni modifica app/tema. Aceptación real: administrador 200, alumno 403, visitante enviado al login; el ZIP descargado coincide con sus 54 368 093 bytes y SHA-256 original. Ambas sesiones temporales se cerraron. Como GitHub es público, no se publicaron allí los adjuntos y el respaldo completos.
+
+Validación remota 0.6.0: `native_form_only=true` por CAPTCHA de BuddyBoss; Crear una cuenta abre por ahora su formulario protegido. El formulario integrado tiene pruebas locales; la entrega/activación real del correo queda pendiente. Medición con alumno: startup 2639 ms (PHP 2513 ms), identidad 1939 ms (PHP 1808 ms). No se modificaron usuarios, progreso ni claves CAPTCHA. Ver `REGISTRATION_AND_PERFORMANCE.md`.

@@ -68,7 +68,7 @@ add_filter('rest_request_before_callbacks',$private_rest,100,3);wp_set_current_u
 $r=new WP_REST_Request('POST','/auren/v1/auth/start');$r->set_param('challenge',str_repeat('a',43));$r->set_param('state',str_repeat('b',64));$response=rest_do_request($r);check($response->get_status()===200,'anonymous PKCE start works with BuddyBoss private REST policy');
 $r=new WP_REST_Request('POST','/auren/v1/auth/exchange');$response=rest_do_request($r);check($response->get_status()===401&&$response->get_data()['code']==='invalid_grant','public exchange still requires valid PKCE grant');
 $r=new WP_REST_Request('GET','/auren/v1/courses');check(rest_do_request($r)->get_status()===401,'public auth exceptions do not expose courses');
-check(apply_filters('bb_exclude_endpoints_from_restriction',array('/existing/public/route'))===array('/existing/public/route','/auren/v1/auth/start','/auren/v1/auth/exchange'),'existing exclusions preserved and only exact auth routes added');
+check(apply_filters('bb_exclude_endpoints_from_restriction',array('/existing/public/route'))===array('/existing/public/route','/auren/v1/auth/start','/auren/v1/auth/exchange','/auren/v1/registration'),'existing exclusions preserved and only exact auth/registration routes added');
 remove_filter('rest_request_before_callbacks',$private_rest,100);wp_set_current_user($a);
 foreach(array($a,$b) as $u){foreach(array($l1,$l2) as $l){delete_user_meta($u,'fixture_done_'.$course.'_'.$l);}}
 // Write-through contracts: WordPress persists state, original platform handlers remain authoritative.

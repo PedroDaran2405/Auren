@@ -1,0 +1,61 @@
+{
+  "checked_at": "20261023T010304Z",
+  "version": "0.6.0",
+  "files": [
+    {
+      "path": "plugins/auren-app-bridge/includes/registration.php",
+      "before_sha256": null,
+      "after_sha256": "55b55df435b39115c71646337b057a08d546ab6fab5b0ed1d134e09cc402aca5"
+    },
+    {
+      "path": "plugins/auren-app-bridge/auren-app-bridge.php",
+      "before_sha256": "d901fdc4f271206673012d4b785bb3795bc9b660bce40ccab44cfbdda9109a4a",
+      "after_sha256": "049e3a90363b9dfe9d002e73188fbf6c616d44494157160b68f5e0839335a0bd"
+    },
+    {
+      "path": "plugins/auren-app-bridge/includes/rest.php",
+      "before_sha256": "dcbc94ae1a37527792e5f5360de1bd05523f18c12ce6dc2525771d3e0de4c040",
+      "after_sha256": "15d6bc6da50828dc41bd7b0e8acd5079755c4faf52c6c26215edfa951c811054"
+    },
+    {
+      "path": "plugins/auren-app-bridge/includes/auth.php",
+      "before_sha256": "106a5b06b6510bbf55ac6123a478f760be4cd66bb9ad952e53e8a08a14947d5e",
+      "after_sha256": "8910eba8e6ac339c197b37733f32aa998513206dd22ae465065971217042aebf"
+    },
+    {
+      "path": "plugins/auren-app-bridge/includes/startup.php",
+      "before_sha256": "b21637112313ffa4933e34fc149caa0cc7883356deb42c0aa19330d346f5629e",
+      "after_sha256": "23caeb89b5515ee28e0f125ae18d1f1e331890fb6a78e8d78a1b2f6867a7bc64"
+    },
+    {
+      "path": "plugins/auren-app-bridge/includes/login.php",
+      "before_sha256": "4a9827c57d1002c2132fa4e461b11b9d2818207a2ce23ff3bf39f6ba05466ff7",
+      "after_sha256": "749367ff35cdeeb7219f1cbec0962806f1f6ae126f4a5843d9fe7acc7e22325d"
+    },
+    {
+      "path": "plugins/auren-app-bridge/assets/login.css",
+      "before_sha256": "cfcf7d674c2a63cdd261c17444579b87710174d31f7b8c1ce1da59ed66ee2bd9",
+      "after_sha256": "97c1da43603036cf42846b503c8a6370783d14d43c805966c5618957d533759f"
+    },
+    {
+      "path": "plugins/auren-app-bridge/includes/web.php",
+      "before_sha256": "7456364ca48e760d004d2cc0fb4169f3d4cf32566d2db4aece289fe9127f65f2",
+      "after_sha256": "4980182489007a64bf82f7ee294397266e77b7ab6d1d3e09fcb81306c06b8146"
+    },
+    {
+      "path": "plugins/auren-app-bridge/web/_expo/static/js/web/index-f7764408b978653ad9e263fe4069de96.js",
+      "before_sha256": null,
+      "after_sha256": "3629eedc8fd7e3c6908949b4fc91cf3e84f93f92daddb16d58a94ee715eab728"
+    },
+    {
+      "path": "plugins/auren-app-bridge/web/index.html",
+      "before_sha256": "3626462aa6d59973f574e6acf9bf374989892284b9f1b5fbf0dd995b028dbedc",
+      "after_sha256": "8a6ae27600b67cf7a9a7b49cce29b2de9030d6fbf80fe00e1ea6ffc000fd9474"
+    }
+  ],
+  "html_last": true,
+  "previous_bundles_preserved": true,
+  "backup_directory": ".local/deploy-backups/registration-20261023T010304Z",
+  "read_back_sha256_verified": true,
+  "scope": "Own bridge and web app only. Existing user accounts, registration settings and CAPTCHA configuration unchanged."
+}

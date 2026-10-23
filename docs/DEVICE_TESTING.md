@@ -95,3 +95,9 @@ Se usa la imagen original de la biblioteca, adjunto 56 (`FAVICON-AUREN-1.png`), 
 En iPhone, abrir la URL de Auren en Safari, recargar y elegir Compartir → Agregar a inicio (puede estar en Ver más/Editar acciones). Si ya se añadió antes, quitar únicamente ese acceso directo y añadirlo de nuevo: iOS puede conservar su imagen anterior. La vista de compartir también puede conservar una miniatura en caché; el cambio de URL del icono incluye versión para evitar reutilizar el recurso anterior. Falta confirmación visual en el iPhone del propietario. El nuevo icono nativo se incluirá al generar el siguiente APK/IPA; no cambia un binario ya instalado.
 
 Evidencias: `app-icon-deployment.json` y `app-icon-live.json`. El sitio conserva su biblioteca, logo horizontal y ajustes generales; el despliegue afecta únicamente al bridge de la app.
+
+## Registro · bridge 0.6.0
+
+Recargar la app y pulsar Crear una cuenta. La configuración real de BuddyBoss exige CAPTCHA de registro; actualmente se abre el formulario protegido original. El adaptador de campos dentro de la app está probado localmente y se usa únicamente cuando la configuración nativa lo permite. No se desactivaron protecciones ni se introdujo el bypass privado.
+
+Pendiente con un correo propio del propietario: completar registro, recibir/activar correo y entrar con la misma cuenta en web/app; comprobar que no recibe acceso a cursos de pago sin autorización. No se han creado cuentas ni enviado correos remotos para simular esa prueba. Confirmar también que el logo del login queda debajo del reloj del iPhone; el padding de área segura está desplegado.

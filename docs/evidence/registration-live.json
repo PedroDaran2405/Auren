@@ -1,0 +1,149 @@
+{
+  "checked_at": "2026-10-23T01:09:16.562427+00:00",
+  "version": "0.6.0",
+  "public_bundle_matches_local": true,
+  "public_bundle_sha256": "3629eedc8fd7e3c6908949b4fc91cf3e84f93f92daddb16d58a94ee715eab728",
+  "registration_enabled": true,
+  "native_form_only": true,
+  "fields": [
+    {
+      "id": "signup_email",
+      "type": "email",
+      "required": true,
+      "option_count": 0
+    },
+    {
+      "id": "signup_password",
+      "type": "password",
+      "required": true,
+      "option_count": 0
+    },
+    {
+      "id": "field_1",
+      "type": "textbox",
+      "required": true,
+      "option_count": 0
+    },
+    {
+      "id": "field_2",
+      "type": "textbox",
+      "required": true,
+      "option_count": 0
+    },
+    {
+      "id": "field_3",
+      "type": "textbox",
+      "required": true,
+      "option_count": 0
+    },
+    {
+      "id": "field_111",
+      "type": "checkbox",
+      "required": true,
+      "option_count": 7
+    },
+    {
+      "id": "legal_agreement",
+      "type": "checkbox",
+      "required": true,
+      "option_count": 0
+    }
+  ],
+  "native_captcha_registration_guard_rejected_without_creation": true,
+  "protected_startup_still_requires_authentication": true,
+  "login_original_logo": true,
+  "login_captcha_preserved": true,
+  "safe_area_css_deployed": true,
+  "public_read_timings": [
+    {
+      "route": "registration",
+      "status": 200,
+      "duration_ms": 1900,
+      "server_timing": [
+        "auren_php;dur=1760.5",
+        "cfCacheStatus;desc=\"DYNAMIC\"",
+        "cfEdge;dur=32,cfOrigin;dur=1798"
+      ]
+    },
+    {
+      "route": "startup_unauthenticated",
+      "status": 401,
+      "duration_ms": 1843,
+      "server_timing": [
+        "auren_php;dur=1742.8",
+        "cfCacheStatus;desc=\"DYNAMIC\"",
+        "cfEdge;dur=4,cfOrigin;dur=1781"
+      ]
+    }
+  ],
+  "external_users_created": 0,
+  "real_mailbox_activation_verified": false,
+  "physical_iphone_verified": false,
+  "validation": {
+    "registration_checks": 18,
+    "wordpress_checks": 84,
+    "gamipress_checks": 15,
+    "startup_checks": 11,
+    "client_tests": 17,
+    "browser_journeys": 12,
+    "native_hermes_exports": [
+      "android",
+      "ios"
+    ]
+  },
+  "registration_native_form_loaded": true,
+  "authenticated_read_timings": [
+    {
+      "route": "/startup",
+      "status": 200,
+      "duration_ms": 2639,
+      "bytes": 30383,
+      "php_duration_ms": 2513.3
+    },
+    {
+      "route": "/me",
+      "status": 200,
+      "duration_ms": 1939,
+      "bytes": 2365,
+      "php_duration_ms": 1807.6
+    },
+    {
+      "route": "/courses?page=1",
+      "status": 200,
+      "duration_ms": 1850,
+      "bytes": 516,
+      "php_duration_ms": 1704.3
+    },
+    {
+      "route": "/profile",
+      "status": 200,
+      "duration_ms": 1930,
+      "bytes": 12672,
+      "php_duration_ms": 1799.5
+    },
+    {
+      "route": "/notifications?page=1&filter=unread",
+      "status": 200,
+      "duration_ms": 2051,
+      "bytes": 7051,
+      "php_duration_ms": 1928.9
+    },
+    {
+      "route": "/community?page=1&filter=all&search=",
+      "status": 200,
+      "duration_ms": 2386,
+      "bytes": 7714,
+      "php_duration_ms": 2253.2
+    }
+  ],
+  "startup_fragment_ms": {
+    "me": 45.7,
+    "courses": 10.7,
+    "profile": 59.4,
+    "notifications": 161,
+    "community": 492.8
+  },
+  "test_session_logged_out": true,
+  "authenticated_content_unchanged": true,
+  "timing_sample_note": "Single sequential real-student read-only run; timings transcribed from verified response headers/tool output. Not a load test. Test session logged out before evidence write."
+}
